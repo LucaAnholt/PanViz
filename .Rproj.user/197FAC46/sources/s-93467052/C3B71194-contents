@@ -1,0 +1,5 @@
+library(PanViz)
+
+testthat::test_that("tests that Get_Kegg_Data updates internal data and throws correct errors on bad inputs", {
+
+})

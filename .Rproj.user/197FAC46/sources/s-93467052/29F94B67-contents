@@ -1,0 +1,84 @@
+get_new_KEGG_data <- function(){
+  # ##get compound name list from KEGG:
+  # compounds_raw_IDs <- KEGGREST::keggList("compound")
+  # ##cleaning up raw data:
+  # clean_compounds <- gsub(pattern = "cpd:", replacement = "", x = attr(compounds_raw_IDs, "names"))
+  # ##get the compounds currently in the database
+  # current_compound_database <- unique(unlist(unname(adjl_RP_C)))
+  # ##find if any new compounds are missing from internal database:
+  # new_compounds <- setdiff(clean_compounds, current_compound_database)
+  # ##using new compound IDs to query KEGG:
+  # Query_Compound_Data <- c()
+  # ##splitting data into chunks of 10 (max KEGG API search)
+  # split_data <- split(new_compounds, ceiling(seq_along(new_compounds)/10))
+  # ##Making parallel requests to KEGGREST API:
+  # cluster = parallel::makeCluster(2) #creating clusters
+  # doSNOW::registerDoSNOW(cluster)
+  # pb <- tcltk::tkProgressBar(title = "Querying compound data from KEGG", min = 0, max = length(split_data), width = 400)
+  # progress <- function(n) tcltk::setTkProgressBar(pb, n, label=paste(round(n/length(split_data)*100,1),"% dowloaded"))
+  # opts <- list(progress = progress)
+  # Query_Compound_Data <- foreach::foreach(i = 1:length(split_data), .combine = 'c', .packages = c("tcltk", "PanViz"),.export = c("retry"),.options.snow = opts) %dopar% {
+  #   library(KEGGREST)
+  #   library(futile.logger)
+  #   library(utils)
+  #   PanViz:::retry(KEGGREST::keggGet(split_data[[i]]), maxErrors = 5, sleep = sleep)
+  # }
+  # parallel::stopCluster(cluster)
+  # close(pb)
+  # ##define function for cleaning KEGG data
+  # cleaner <- function(recursive_list){
+  #   return(recursive_list$NAME[[1]])
+  # }
+  # ##preinitialise hash map (recursive list) with associated KEGG metabolite/compound id with associated name
+  # names_list <- c()
+  # for(i in seq_along(Query_Compound_Data)){
+  #   names_list[[i]] <- cleaner(Query_Compound_Data[[i]])
+  # }
+  # ##get cleaned KEGG metabolite/compound IDs:
+  # compounds_names <- unlist(stringr::str_extract_all(new_compounds, "C\\d{5}"))
+  # ##name hash map/recursive list
+  # names(names_list) <- compounds_names
+
+
+  ##get compound name list from KEGG:
+  genes_raw_IDs <- KEGGREST::keggList("hsa")
+  ##cleaning up raw data:
+  clean_genes <- gsub("hsa:", "hsa: ", attr(genes_raw_IDs, "names"))
+  ##get the genes currently in the database
+  current_gene_database <- unique(names(adjl_G_E))
+  ##find if any new genes are missing from internal database:
+  new_genes <- setdiff(clean_genes, current_gene_database)
+  ##using new gene IDs to query KEGG:
+  ##splitting data into chunks of 10 (max KEGG API search)
+  split_data <- split(new_genes, ceiling(seq_along(new_genes)/10))
+  ##Querying all data from KEGG using the gene IDs:
+  ##Making parallel requests to KEGGREST API:
+  cluster = parallel::makeCluster(2) #creating clusters
+  doSNOW::registerDoSNOW(cluster)
+  pb <- tcltk::tkProgressBar(title = "Querying gene data from KEGG", min = 0, max = length(split_data), width = 400)
+  progress <- function(n) tcltk::setTkProgressBar(pb, n, label=paste(round(n/length(split_data)*100,1),"% dowloaded"))
+  opts <- list(progress = progress)
+  Query_Genes_Data <- foreach::foreach(i = 1:length(split_data), .combine = 'c', .packages = c("tcltk"), .export = c("retry"),.options.snow = opts) %dopar% {
+    Output <- c()
+    library(KEGGREST)
+    library(futile.logger)
+    library(utils)
+    PanViz:::retry(KEGGREST::keggGet(split_data[[i]]), maxErrors = 5, sleep = sleep)
+  }
+  parallel::stopCluster(cluster)
+  close(pb)
+  ##cleaning up this queried gene data from KEGG + filtering genes that have adjacent enzymes:
+  Query_Genes_Data <- lapply(Query_Genes_Data, PanViz:::gene_cleanup)
+  Query_Genes_Data <-  Query_Genes_Data[!is.na(Query_Genes_Data)]
+  ##creating adjacency list for genes and enzymes:
+  adjl_G_E <- lapply(Query_Genes_Data, PanViz:::adj_G_E)
+  ##getting gene names:
+  gene_ID <- unlist(lapply(Query_Genes_Data, get_name <- function(queried_data){return(paste0("hsa: ", queried_data$ENTRY[[1]]))}))
+  ##adding gene names to adjacency list:
+  names(adjl_G_E) <- gene_ID
+  ##Finding the genomic locations of these genes:
+  ##removing "hsa:" string:
+  gene_ID <- gsub("hsa: ", "", gene_ID)
+  ##Getting gene locations:
+  Gene_Locations <- PanViz:::NCBI_Gene_Locations(Gene_Enterez_IDs = gene_ID)
+}

@@ -1,0 +1,17 @@
+##algorithm to decompose non-connected IMONs
+#' IMON decomposer
+#'
+#' @param G - igraph object containing non-fully connected IMON
+#'
+#' @return - list of igraph objects containing fully connected IMONs
+decompose_IMON <- function(G){
+  d = decompose(G) #decompose graph
+  for(i in seq_along(d)){
+    len = length(V(d[[i]])[grepl("SNP", V(d[[i]])$type)]$name) #remove any decomposed subgraph that doesn't contains snps
+    if(len == 0){
+      d[[i]] <- NA
+    }
+  }
+  d = d[!is.na(d)]
+  return(d)
+}

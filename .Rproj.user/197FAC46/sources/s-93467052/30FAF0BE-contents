@@ -1,0 +1,43 @@
+Package: PanViz
+Type: Package
+Title: Integrating Multi-Omic Network Data With Summay-Level GWAS Data
+Version: 0.99.0
+Author: Luca Anholt <la1317@ic.ac.uk>
+Maintainer: Luca Anholt <la1317@ic.ac.uk>
+Description: This pacakge integrates data from the Kyoto Encyclopedia of Genes and Genomes (KEGG) 
+    with summary-level genome-wide association (GWAS) data from the GWAS Catalog 
+License: Artistic-2.0
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.2
+biocViews: Software, ExperimentData
+BugReports: https://github.com/LucaAnholt/PanViz/issues
+URL: https://github.com/LucaAnholt/PanViz
+BiocType: Software
+Imports: 
+    KEGGREST,
+    tidyverse,
+    devtools,
+    svMisc,
+    stringi,
+    futile.logger,
+    utils,
+    foreach,
+    doSNOW,
+    parallel,
+    tcltk,
+    easycsv,
+    rentrez,
+    igraph,
+    RColorBrewer,
+    hash,
+    data.table,
+    colorspace,
+    grDevices,
+Depends: 
+    igraph,
+    foreach,
+    R (>= 2.10)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
