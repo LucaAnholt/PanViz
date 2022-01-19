@@ -20,13 +20,10 @@ Reactions_Get_All <- function(CPU = c(2,1), sleep = 5){
   ##Making parallel requests to KEGGREST API:
   cluster = parallel::makeCluster(CPU) #creating clusters
   doSNOW::registerDoSNOW(cluster)
-  pb <- tcltk::tkProgressBar(title = "Querying metabolite, reaction and enzyme data from KEGG", min = 0, max = length(split_data), width = 400)
-  progress <- function(n) tcltk::setTkProgressBar(pb, n, label=paste(round(n/length(split_data)*100,1),"% dowloaded"))
+  pb <- utils::txtProgressBar(max = length(split_data), style = 3)
+  progress <- function(n) utils::setTxtProgressBar(pb, n)
   opts <- list(progress = progress)
-  Query_Reaction_Data <- foreach::foreach(i = 1:length(split_data), .combine = 'c', .packages = c("tcltk"),.export = c("retry"),.options.snow = opts) %dopar% {
-    library(KEGGREST)
-    library(futile.logger)
-    library(utils)
+  Query_Reaction_Data <- foreach::foreach(i = 1:length(split_data), .combine = 'c',.export = c("retry"),.options.snow = opts) %dopar% {
     PanViz:::retry(KEGGREST::keggGet(split_data[[i]]), maxErrors = 5, sleep = sleep)
   }
   parallel::stopCluster(cluster)
@@ -46,7 +43,7 @@ Reactions_Get_All <- function(CPU = c(2,1), sleep = 5){
   ##applying reaction names to adjl:
   names(adjl_RP_R) <- reaction_names
   ##removing any reactions with no associated reaction pairs:
-  adjl_RP_R <-  adjl_RP_R[!sapply(adjl_RP_R, function(x) all(is.na(x)))]
+  adjl_RP_R <- adjl_RP_R[!sapply(adjl_RP_R, function(x) all(is.na(x)))]
   ##creating adjacency list for enzymes -> reactions:
   adjl_R_E <- lapply(Query_Reaction_Data, PanViz:::adj_R_E)
   ##applying reaction names to adjl:
@@ -54,9 +51,9 @@ Reactions_Get_All <- function(CPU = c(2,1), sleep = 5){
   ##removing any reactions with no associated enzymes:
   adjl_R_E <-  adjl_R_E[!sapply(adjl_R_E, function(x) all(is.na(x)))]
   ##saving adjacency lists to selected directory:
-  return(list(adjl_R_E, adjl_RP_C, adjl_RP_R))
   cat("Metabolite, reaction and enzyme adjacencies successfully queried - time elsapsed: ", (proc.time() - time)[[3]]/60, " minutes")
   cat("\n")
+  return(list(adjl_R_E, adjl_RP_C, adjl_RP_R))
 }
 
 
