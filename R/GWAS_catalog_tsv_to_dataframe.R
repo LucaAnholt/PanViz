@@ -16,14 +16,14 @@ GWAS_catalog_tsv_to_dataframe <- function(file){
   if(is.null(file)){ ##check that file was properly read, if not send error
     stop(".tsv file is empty - please check the file provided")
   }
-  df <- tidyr::separate_rows(file, SNPS, sep = ";\\s+") #separate aggregated snps into separate rows
-  df <- tidyr::separate_rows(df, SNPS, sep = " x ") #separate aggregated snps into separate rows
-  snps <- df$SNPS[stringr::str_detect(df$SNPS, "rs")] #only take snps in standard dbSNP accession number naming convention
-  studies <- df[stringr::str_detect(df$SNPS, "rs"),]$STUDY #get studies for these rows
-  traits <- df[stringr::str_detect(df$SNPS, "rs"),]$`DISEASE/TRAIT` #get traits for these rows
-  results <- data.frame(snps = snps, studies = studies, traits = traits) #create new dataframe
-  results$snps <- as.character(results$snps) #convert data to strings isntead of factors
-  results$studies <- as.character(results$studies)
-  results$traits <- as.character(results$traits)
+  results <- file %>%
+    tidyr::separate_rows(data = ., SNPS, sep = ";\\s+") %>% #separate aggregated snps into separate rows
+    tidyr::separate_rows(data = ., SNPS, sep = " x ") %>% #separate aggregated snps into separate rows
+    ##only take snps in standard dbSNP accession number naming convention
+    dplyr::filter(.data = ., stringr::str_detect(.data$SNPS, "rs")) %>%
+    ##select SNPs, STUDY and DISEASE/TRAIT columns:
+    dplyr::select(.data = ., SNPS, STUDY, `DISEASE/TRAIT`) %>%
+    ##Rename these columns:
+    dplyr::rename(.data = ., snps = SNPS, studies = STUDY, traits = `DISEASE/TRAIT`)
   return(results)
 }
