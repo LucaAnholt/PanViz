@@ -10,7 +10,7 @@ colour_IMON <- function(G){
   reaction_index <- which(igraph::V(G)$type %in% c("REACTION"))
   ##find index of first layer of RPs i.e. those directly connected to reactions:
   reaction_RP_edges <- igraph::E(G)[from(igraph::V(G)[reaction_index])]
-  RPs <- unique(head_of(G, reaction_RP_edges)$name)
+  RPs <- unique(igraph::head_of(G, reaction_RP_edges)$name)
   RPs_index <- as.numeric(igraph::V(G)[RPs])
   directed_index <- which(igraph::V(G)$type %in% c("GENE", "ENZYME", "REACTION")) #get index of directed
   ##add indexes of first layer of RPs (directly connected to reactions):
@@ -41,7 +41,7 @@ colour_IMON <- function(G){
     }
   }
   #if a node has multiple connections to different coloured snps, merge these colours at this node:
-  for(i in as.numeric(V(G)[directed_index])){
+  for(i in as.numeric(igraph::V(G)[directed_index])){
     if(length(colour_list[[i]]) > 1){
       colour_list[[i]] <- PanViz:::multi_hex_col_mix(colour_list[[i]])
     }
@@ -62,7 +62,7 @@ colour_IMON <- function(G){
     cols1 <- as(cols1, "HLS")
     #multiplicative decrease of lightness
     cols1@coords[, "L"] <- as.vector(cols1@coords[, "L"]) * as.vector(node_distances)
-    return(hex(cols1))
+    return(colorspace::hex(cols1))
   }
   cat("Colouring metabolome - this might take a few momoments\n")
   ##get colours of first layer of RPs (directly connected to reactions/snps):
@@ -81,12 +81,7 @@ colour_IMON <- function(G){
       colour_list[[index]] <- c(colour_list[[index]], colour_edit)
     }
   }
-  pb <- tcltk::tkProgressBar(title = "Colouring metabolome",# initializing progress bar
-                      label = "Percentage completed",
-                      min = 0,
-                      max = length(metabolome_index),
-                      initial = 0,
-                      width = 400)
+  pb <- utils::txtProgressBar(max = length(metabolome_index), style = 3)
   ##merge all colours at every node in the metabolome:
   for(i in seq_along(as.numeric(igraph::V(G)[metabolome_index]))){
     index <- as.numeric(igraph::V(G)[metabolome_index])[i]
@@ -94,7 +89,7 @@ colour_IMON <- function(G){
       colour_list[[index]] <- PanViz:::multi_hex_col_mix(colour_list[[index]])
     }
     pctg <- paste(round(i/length(metabolome_index) *100, 0), "% completed")
-    tcltk::setTkProgressBar(pb, i, label = pctg)
+    utils::setTxtProgressBar(pb, i, label = pctg)
   }
   close(pb)
   ##set node colour attributes:
@@ -102,17 +97,12 @@ colour_IMON <- function(G){
   igraph::V(G)$col <- colour_vector
   cat("Colouring all network edges\n")
   ##get out incident edge for nodes and colour by node colour:
-  pb <- tcltk::tkProgressBar(title = "Colouring edges",# initializing progress bar
-                      label = "Percentage completed",
-                      min = 0,
-                      max = length(igraph::V(G)),
-                      initial = 0,
-                      width = 400)
+  pb <- utils::txtProgressBar(max = length(igraph::V(G)), style = 3)
   for(i in seq_along(igraph::V(G))){
     node_colour <- igraph::V(G)[i]$col
     igraph::E(G)[from(igraph::V(G)[i])]$col <- node_colour
     pctg <- paste(round(i/length(igraph::V(G)) *100, 0), "% completed")
-    tcltk::setTkProgressBar(pb, i, label = pctg)
+    utils::setTxtProgressBar(pb, i, label = pctg)
   }
   close(pb)
   return(G) #return network with coloured attributes
