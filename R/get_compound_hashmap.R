@@ -12,13 +12,10 @@ get_compound_hashmap <- function(CPU = c(2,1), sleep = 5){
   ##Making parallel requests to KEGGREST API:
   cluster = parallel::makeCluster(CPU) #creating clusters
   doSNOW::registerDoSNOW(cluster)
-  pb <- tcltk::tkProgressBar(title = "Querying compound data from KEGG", min = 0, max = length(split_data), width = 400)
-  progress <- function(n) tcltk::setTkProgressBar(pb, n, label=paste(round(n/length(split_data)*100,1),"% dowloaded"))
+  pb <- utils::txtProgressBar(max = length(split_data), style = 3)
+  progress <- function(n) utils::setTxtProgressBar(pb, n)
   opts <- list(progress = progress)
-  Query_Compound_Data <- foreach::foreach(i = 1:length(split_data), .combine = 'c', .packages = c("tcltk"),.export = c("retry"),.options.snow = opts) %dopar% {
-    library(KEGGREST)
-    library(futile.logger)
-    library(utils)
+  Query_Compound_Data <- foreach::foreach(i = 1:length(split_data), .combine = 'c', .export = c("retry"),.options.snow = opts) %dopar% {
     PanViz:::retry(KEGGREST::keggGet(split_data[[i]]), maxErrors = 5, sleep = sleep)
   }
   parallel::stopCluster(cluster)
@@ -37,6 +34,5 @@ get_compound_hashmap <- function(CPU = c(2,1), sleep = 5){
   ##name hash map/recursive list
   names(names_list) <- compounds_names
   ##save as RDS
-  # saveRDS(names_list, "compound_names_hash.Rds")
   return(names_list)
 }
