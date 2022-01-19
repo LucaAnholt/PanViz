@@ -18,14 +18,11 @@ Genes_Get_All <- function(CPU = c(2,1), sleep = 5){
   ##Making parallel requests to KEGGREST API:
   cluster = parallel::makeCluster(CPU) #creating clusters
   doSNOW::registerDoSNOW(cluster)
-  pb <- tcltk::tkProgressBar(title = "Querying gene data from KEGG", min = 0, max = length(split_data), width = 400)
-  progress <- function(n) tcltk::setTkProgressBar(pb, n, label=paste(round(n/length(split_data)*100,1),"% dowloaded"))
+  pb <- utils::txtProgressBar(max = length(split_data), style = 3)
+  progress <- function(n) utils::setTxtProgressBar(pb, n)
   opts <- list(progress = progress)
-  Query_Genes_Data <- foreach::foreach(i = 1:length(split_data), .combine = 'c', .packages = c("tcltk"), .export = c("retry"),.options.snow = opts) %dopar% {
+  Query_Genes_Data <- foreach::foreach(i = 1:length(split_data), .combine = 'c', .export = c("retry"),.options.snow = opts) %dopar% {
     Output <- c()
-    library(KEGGREST)
-    library(futile.logger)
-    library(utils)
     PanViz:::retry(KEGGREST::keggGet(split_data[[i]]), maxErrors = 5, sleep = sleep)
   }
   parallel::stopCluster(cluster)
@@ -44,10 +41,7 @@ Genes_Get_All <- function(CPU = c(2,1), sleep = 5){
   gene_ID <- gsub("hsa: ", "", gene_ID)
   ##Getting gene locations:
   Gene_Locations <- PanViz:::NCBI_Gene_Locations(Gene_Enterez_IDs = gene_ID)
-  ##saving adjacency lists to selected directory:
-  # saveRDS(object = adjl_G_E, file = paste0(getwd(), "\\adjl_G_E.Rds"))
-  # saveRDS(object = Gene_Locations, file = paste0(getwd(), "\\Gene_Locations.Rds"))
-  return(list(adjl_G_E, Gene_Locations))
   cat("gene adjacencies and locations successfully queried - time elsapsed: ", (proc.time() - time)[[3]]/60, " minutes")
   cat("\n")
+  return(list(adjl_G_E, Gene_Locations))
 }
