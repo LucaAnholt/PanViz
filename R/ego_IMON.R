@@ -10,7 +10,7 @@ ego_IMON <- function(G, ego){
   snp_in = igraph::V(G)[which(igraph::V(G)$type %in% "SNP")]$name
   G <- igraph::make_ego_graph(graph = G, order = ego, nodes = igraph::V(G)[snp_in], mode = "out")
   ##merging list of egos into one single graph:
-  subgraph_list_df <- lapply(G, as_data_frame) #create list of subgraph dataframes
+  subgraph_list_df <- lapply(G, igraph::as_data_frame) #create list of subgraph dataframes
   subgraph_df <- do.call(rbind, subgraph_list_df) #combine list of subgraph dataframes
   subgraph_df <- unique(subgraph_df) #ensure there are now duplicate edges
   G <- igraph::graph_from_data_frame(subgraph_df , directed = TRUE) #combine back into one single network
