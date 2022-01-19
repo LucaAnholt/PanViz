@@ -16,7 +16,7 @@ retry <- function(expr, isError=function(x) "try-error" %in% class(x), maxErrors
       stop(msg)
     } else {
       msg = sprintf("retry: error in attempt %i/%i [[%s]]", attempts, maxErrors,
-                    capture.output(str(retval)))
+                    utils::capture.output(str(retval)))
       futile.logger::flog.error(msg)
       warning(msg)
     }

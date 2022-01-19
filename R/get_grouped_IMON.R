@@ -121,13 +121,13 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
       saveRDS(G, file = paste0(directory, "/", filename, ".Rds"))
     }
     if(export_type == "edge_list"){
-      write_graph(G, file = paste0(directory, "/", filename, ".txt"), format = "edgelist")
+      igraph::write_graph(G, file = paste0(directory, "/", filename, ".txt"), format = "edgelist")
     }
     if(export_type == "graphml"){
-      write_graph(G, file = paste0(directory, "/", filename, ".graphml"), format = "graphml")
+      igraph::write_graph(G, file = paste0(directory, "/", filename, ".graphml"), format = "graphml")
     }
     if(export_type == "gml"){
-      write_graph(G, file = paste0(directory, "/", filename, ".gml"), format = "gml")
+      igraph::write_graph(G, file = paste0(directory, "/", filename, ".gml"), format = "gml")
     }
     cat(paste0("Done! IMON saved in ", directory, " as ", "'",filename,".",export_type,"'","\n"))
   }
