@@ -8,18 +8,13 @@ NCBI_Gene_Locations <- function(Gene_Enterez_IDs){
   split_data <- split(Gene_Enterez_IDs, ceiling(seq_along(Gene_Enterez_IDs)/100))
   #Getting gene locations:
   cat("Querying gene locations from NCBI\n")
-  pb <- tcltk::tkProgressBar(title = "Getting Gene Locations from NCBI",# Window title
-                      label = "Percentage completed", # Window label
-                      min = 0,      # Minimum value of the bar
-                      max = length(split_data), # Maximum value of the bar
-                      initial = 0,  # Initial value of the bar
-                      width = 400)  # Width of the window
+  pb <- utils::txtProgressBar(max = length(split_data), style = 3)
   raw_data_list <- list()
   genomic_data <- list()
   for(i in 1:length(split_data)){
     raw_data_list[[i]] <- rentrez::entrez_summary(db = "gene", id = split_data[[i]])
     pctg <- paste(round(i/length(split_data) *100, 0), "% completed")
-    tcltk::setTkProgressBar(pb, i, label = pctg)
+    utils::setTxtProgressBar(pb, i, label = pctg)
   }
   close(pb)
   ##removing recursion in list:
