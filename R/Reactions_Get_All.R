@@ -3,7 +3,7 @@
 #' @param directory Directory in which to save network data: "wd" (working directory - default), "choose" (manually choose directory)
 #' @param CPU The number of cores to use when making KEGGREST API Get requests (default = 2). If CPU > 1, parallel requests will be made.
 #' @param sleep The amount of sleep between a potential caught API error and the next attempt (default = 5)
-#'
+#' @importFrom foreach %dopar%
 #' @return Rds files for all relevant adjacency lists
 #'
 Reactions_Get_All <- function(CPU = c(2,1), sleep = 5){
@@ -23,29 +23,30 @@ Reactions_Get_All <- function(CPU = c(2,1), sleep = 5){
   pb <- utils::txtProgressBar(max = length(split_data), style = 3)
   progress <- function(n) utils::setTxtProgressBar(pb, n)
   opts <- list(progress = progress)
+  i <- NULL
   Query_Reaction_Data <- foreach::foreach(i = 1:length(split_data), .combine = 'c',.export = c("retry"),.options.snow = opts) %dopar% {
-    PanViz:::retry(KEGGREST::keggGet(split_data[[i]]), maxErrors = 5, sleep = sleep)
+    retry(KEGGREST::keggGet(split_data[[i]]), maxErrors = 5, sleep = sleep)
   }
   parallel::stopCluster(cluster)
   close(pb)
   ##Cleaning up queried data and separating reaction pair data from compound data::
-  Query_Reaction_Data <- lapply(Query_Reaction_Data, PanViz:::reaction_cleanup)
+  Query_Reaction_Data <- lapply(Query_Reaction_Data, reaction_cleanup)
   ##Unlisting reaction pair IDs:
   name_list <- unique(unlist(lapply(Query_Reaction_Data, get_entry <- function(queried_data){if(all(!is.na(queried_data$RP))){return(queried_data$RP)}})))
   ##Creating adjacency list with reaction pairs and their related compounds
-  adjl_RP_C <- lapply(name_list, PanViz:::adj_RP_C)
+  adjl_RP_C <- lapply(name_list, adj_RP_C)
   names(adjl_RP_C) <- name_list
   ##making adjacency list with reactions and their related enzymes:
   ##getting vector of reaction names:
   reaction_names <- unique(unlist(lapply(Query_Reaction_Data, get_entry <- function(queried_data){return(queried_data$ENTRY)})))
   ##creating adjacency list for reactions -> reaction pairs (RP):
-  adjl_RP_R <- lapply(Query_Reaction_Data, PanViz:::adj_RP_R)
+  adjl_RP_R <- lapply(Query_Reaction_Data, adj_RP_R)
   ##applying reaction names to adjl:
   names(adjl_RP_R) <- reaction_names
   ##removing any reactions with no associated reaction pairs:
   adjl_RP_R <- adjl_RP_R[!sapply(adjl_RP_R, function(x) all(is.na(x)))]
   ##creating adjacency list for enzymes -> reactions:
-  adjl_R_E <- lapply(Query_Reaction_Data, PanViz:::adj_R_E)
+  adjl_R_E <- lapply(Query_Reaction_Data, adj_R_E)
   ##applying reaction names to adjl:
   names(adjl_R_E) <- reaction_names
   ##removing any reactions with no associated enzymes:

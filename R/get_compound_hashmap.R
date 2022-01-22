@@ -16,7 +16,7 @@ get_compound_hashmap <- function(CPU = c(2,1), sleep = 5){
   progress <- function(n) utils::setTxtProgressBar(pb, n)
   opts <- list(progress = progress)
   Query_Compound_Data <- foreach::foreach(i = 1:length(split_data), .combine = 'c', .export = c("retry"),.options.snow = opts) %dopar% {
-    PanViz:::retry(KEGGREST::keggGet(split_data[[i]]), maxErrors = 5, sleep = sleep)
+    retry(KEGGREST::keggGet(split_data[[i]]), maxErrors = 5, sleep = sleep)
   }
   parallel::stopCluster(cluster)
   close(pb)

@@ -89,32 +89,32 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
   names(group_snps) <- unique_group_names
   ##get overall list of snps to query via NCBI dbSNP:
   snp_list <- dataframe$snps
-  raw_data <- PanViz:::NCBI_dbSNP_query(snp_list)
+  raw_data <- NCBI_dbSNP_query(snp_list)
   ##checking if all SNPs have been successfully queried:
   if(length(snp_list) > 1){ ##deal with vectorised input
-    errors <- unname(unlist(lapply(raw_data, PanViz:::dbSNP_query_check)))
+    errors <- unname(unlist(lapply(raw_data, dbSNP_query_check)))
   }
   if(length(snp_list) == 1){ ##deal with non-vectorised input
-    errors <- PanViz:::dbSNP_query_check(query = raw_data)
+    errors <- dbSNP_query_check(query = raw_data)
   }
   if(all(is.na(errors))){
     stop("None of the supplied SNPs could be queried via dbSNP")
   }
   ##clean up queried dbSNP data and return as dataframe with chromosome number, location and SNP ID
-  snp_loc <- lapply(raw_data, PanViz:::dbSNP_query_clean)
+  snp_loc <- lapply(raw_data, dbSNP_query_clean)
   snp_loc <- do.call("rbind", snp_loc) #concatenate list of dataframes
-  snp_loc <- na.omit(snp_loc) #remove any rows with NAs
+  snp_loc <- stats::na.omit(snp_loc) #remove any rows with NAs
   snp_loc$chr_pos <- as.numeric(as.character(snp_loc$chr_pos))
   ##retrieving KEGG gene locations from sys data:
   row.names(Gene_Locations) <- NULL #remove indexing in row names
   cat("Mapping inputted SNPs to KEGG genes\n")
   ##finding matches between chromosome numbers (in SNPs and genes) and creating adjacency list:
-  adjl_G_S <- PanViz:::snp_gene_map(Gene_Locations, snp_loc)
+  adjl_G_S <- snp_gene_map(Gene_Locations, snp_loc)
   if(length(adjl_G_S) == 0){ ##catch if no snps can be mapped to genes in database
     stop("None of the provided SNPs could be mapped to genes provided by the Kyoto Encyclopedia of Genes and Genomes")
   }
   ##creating IMON from all adjacency lists
-  G <- PanViz:::adjl_to_G_grouped(adjl_G_S, unique_group_names, unique_group_cols, group_snps, colour_groups, ego = ego)
+  G <- adjl_to_G_grouped(adjl_G_S, unique_group_names, unique_group_cols, group_snps, colour_groups, ego = ego)
   ##saving graphs to desired output
   if(save_file == TRUE){
     if(export_type == "igraph"){

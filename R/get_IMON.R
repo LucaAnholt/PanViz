@@ -50,36 +50,36 @@ get_IMON <- function(snp_list, ego = 5, save_file = c(FALSE, TRUE), export_type 
       filename <-  "Exported_IMON"
     }
   }
-  raw_data <- PanViz:::NCBI_dbSNP_query(snp_list)
+  raw_data <- NCBI_dbSNP_query(snp_list)
   ##checking if all SNPs have been successfully queried:
   if(length(snp_list) > 1){ ##deal with vectorised input
-    errors <- unname(unlist(lapply(raw_data, PanViz:::dbSNP_query_check)))
+    errors <- unname(unlist(lapply(raw_data, dbSNP_query_check)))
   }
   if(length(snp_list) == 1){ ##deal with non-vectorised input
-    errors <- PanViz:::dbSNP_query_check(query = raw_data)
+    errors <- dbSNP_query_check(query = raw_data)
   }
   if(all(is.na(errors))){
     stop("None of the supplied SNPs could be queried via dbSNP")
   }
   ##clean up queried dbSNP data and return as dataframe with chromosome number, location and SNP ID
-  snp_loc <- lapply(raw_data, PanViz:::dbSNP_query_clean)
+  snp_loc <- lapply(raw_data, dbSNP_query_clean)
   snp_loc <- do.call("rbind", snp_loc) #concatenate list of dataframes
-  snp_loc <- na.omit(snp_loc) #remove any rows with NAs
+  snp_loc <- stats::na.omit(snp_loc) #remove any rows with NAs
   snp_loc$chr_pos <- as.numeric(as.character(snp_loc$chr_pos))
   ##retrieving KEGG gene locations from sys data:
   gene_loc <- Gene_Locations
   row.names(gene_loc) <- NULL #remove indexing in row names
   cat("Mapping inputted SNPs to KEGG genes\n")
   ##finding matches between chromosome numbers (in SNPs and genes) and creating adjacency list:
-  adjl_G_S <- PanViz:::snp_gene_map(gene_loc, snp_loc)
+  adjl_G_S <- snp_gene_map(gene_loc, snp_loc)
   if(length(adjl_G_S) == 0){
     stop("None of the provided SNPs could be mapped to genes provided by the Kyoto Encyclopedia of Genes and Genomes")
   }
   ##creating IMON from all adjacency lists
-  G <- PanViz:::adjl_to_G(adjl_G_S)
+  G <- adjl_to_G(adjl_G_S)
   ##if user selects ego-centred network:
   if(ego != 0){
-    G <- PanViz:::ego_IMON(G, ego)
+    G <- ego_IMON(G, ego)
   }
   ##saving graphs to desired output
   if(save_file == TRUE){

@@ -6,7 +6,7 @@
 #' @return an adjacency list of SNPs with their relevant mapped genes to their genomic location
 snp_gene_map <- function(gene_loc, snp_loc){
   ##finding genes and snps that match in chromosome number
-  chr_matches <- lapply(snp_loc$chr_n, PanViz:::snp_gene_chr_match, gene_loc)
+  chr_matches <- lapply(snp_loc$chr_n, snp_gene_chr_match, gene_loc)
   ##finding matches in location for all chromosome matches (within a range of 1 million nucleotides):
   snp_gene_adj <- function(chr_matches, snp_loc, gene_loc, index){
     boolean_mask <- data.table::between(snp_loc[index, ]$chr_pos,

@@ -4,6 +4,7 @@
 #' @param CPU The number of cores to use when making KEGGREST API Get requests (default = 2). If CPU > 1, parallel requests will be made.
 #' @param sleep The amount of sleep between a potential caught API error and the next attempt (default = 5).
 #' @return Rds files for all relevant adjacency lists
+#' @importFrom foreach %dopar%
 #'
 Genes_Get_All <- function(CPU = c(2,1), sleep = 5){
   time = proc.time()
@@ -21,17 +22,18 @@ Genes_Get_All <- function(CPU = c(2,1), sleep = 5){
   pb <- utils::txtProgressBar(max = length(split_data), style = 3)
   progress <- function(n) utils::setTxtProgressBar(pb, n)
   opts <- list(progress = progress)
+  i <- NULL
   Query_Genes_Data <- foreach::foreach(i = 1:length(split_data), .combine = 'c', .export = c("retry"),.options.snow = opts) %dopar% {
     Output <- c()
-    PanViz:::retry(KEGGREST::keggGet(split_data[[i]]), maxErrors = 5, sleep = sleep)
+    retry(KEGGREST::keggGet(split_data[[i]]), maxErrors = 5, sleep = sleep)
   }
   parallel::stopCluster(cluster)
   close(pb)
   ##cleaning up this queried gene data from KEGG + filtering genes that have adjacent enzymes:
-  Query_Genes_Data <- lapply(Query_Genes_Data, PanViz:::gene_cleanup)
+  Query_Genes_Data <- lapply(Query_Genes_Data, gene_cleanup)
   Query_Genes_Data <-  Query_Genes_Data[!is.na(Query_Genes_Data)]
   ##creating adjacency list for genes and enzymes:
-  adjl_G_E <- lapply(Query_Genes_Data, PanViz:::adj_G_E)
+  adjl_G_E <- lapply(Query_Genes_Data, adj_G_E)
   ##getting gene names:
   gene_ID <- unlist(lapply(Query_Genes_Data, get_name <- function(queried_data){return(paste0("hsa: ", queried_data$ENTRY[[1]]))}))
   ##adding gene names to adjacency list:
@@ -40,7 +42,7 @@ Genes_Get_All <- function(CPU = c(2,1), sleep = 5){
   ##removing "hsa:" string:
   gene_ID <- gsub("hsa: ", "", gene_ID)
   ##Getting gene locations:
-  Gene_Locations <- PanViz:::NCBI_Gene_Locations(Gene_Enterez_IDs = gene_ID)
+  Gene_Locations <- NCBI_Gene_Locations(Gene_Enterez_IDs = gene_ID)
   cat("gene adjacencies and locations successfully queried - time elsapsed: ", (proc.time() - time)[[3]]/60, " minutes")
   cat("\n")
   return(list(adjl_G_E, Gene_Locations))

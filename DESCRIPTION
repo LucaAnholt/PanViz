@@ -5,7 +5,8 @@ Version: 0.99.0
 Author: Luca Anholt <la1317@ic.ac.uk>
 Maintainer: Luca Anholt <la1317@ic.ac.uk>
 Description: This pacakge integrates data from the Kyoto Encyclopedia of Genes and Genomes (KEGG) 
-    with summary-level genome-wide association (GWAS) data from the GWAS Catalog 
+    with summary-level genome-wide association (GWAS) data from the GWAS Catalog, in order to produce
+    biological networks, termed IMONs (Integrated Multi-Omic Networks).
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
@@ -16,7 +17,11 @@ URL: https://github.com/LucaAnholt/PanViz
 BiocType: Software
 Imports: 
     KEGGREST,
-    tidyverse,
+    tidyr,
+    stringr,
+    dplyr,
+    tibble,
+    magrittr,
     devtools,
     svMisc,
     stringi,
@@ -32,9 +37,13 @@ Imports:
     data.table,
     colorspace,
     grDevices,
-Depends: 
     foreach,
-    R (>= 2.10)
+    rlang, 
+    S4Vectors, 
+    methods,
+    usethis
+Depends: 
+    R (>= 3.5.0)
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

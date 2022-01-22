@@ -20,10 +20,10 @@ NCBI_Gene_Locations <- function(Gene_Enterez_IDs){
   ##removing recursion in list:
   raw_data <- unlist(raw_data_list, recursive = FALSE)
   ##removing any genes that are not listed in the NCBI database
-  raw_data <- lapply(raw_data, PanViz:::NCBI_clean)
+  raw_data <- lapply(raw_data, NCBI_clean)
   raw_data <- raw_data[!sapply(raw_data, function(x) all(is.na(x)))]
   ##accessing the genomic location data:
-  raw_data <- lapply(raw_data, PanViz:::NCBI_clean_2)
+  raw_data <- lapply(raw_data, NCBI_clean_2)
   ##organising genomic information as dataframe:
   gene_loc <- as.data.frame(do.call(rbind, raw_data))
   ##add in gene IDs:
@@ -31,7 +31,7 @@ NCBI_Gene_Locations <- function(Gene_Enterez_IDs){
   ##rename columns:
   colnames(gene_loc) <- c("chr_n", "chr_start", "chr_stop", "gene_id")
   ##remove any rows with NA:
-  gene_loc <- na.omit(gene_loc)
+  gene_loc <- stats::na.omit(gene_loc)
   return(gene_loc)
 }
 

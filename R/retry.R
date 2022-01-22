@@ -11,12 +11,12 @@ retry <- function(expr, isError=function(x) "try-error" %in% class(x), maxErrors
   while (isError(retval)) {
     attempts = attempts + 1
     if (attempts >= maxErrors) {
-      msg = sprintf("retry: KEGGREST API might have recieved too many GET requests - try again with a lower core count or larger sleep time [[%s]]", capture.output(str(retval)))
+      msg = sprintf("retry: KEGGREST API might have recieved too many GET requests - try again with a lower core count or larger sleep time [[%s]]", utils::capture.output(utils::str(retval)))
       futile.logger::flog.fatal(msg)
       stop(msg)
     } else {
       msg = sprintf("retry: error in attempt %i/%i [[%s]]", attempts, maxErrors,
-                    utils::capture.output(str(retval)))
+                    utils::capture.output(utils::str(retval)))
       futile.logger::flog.error(msg)
       warning(msg)
     }

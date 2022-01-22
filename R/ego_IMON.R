@@ -22,7 +22,6 @@ ego_IMON <- function(G, ego){
   #metabolite attributes:
   igraph::V(G)[grepl("C\\d{5}", igraph::V(G)$name)]$color <- pal[2]
   igraph::V(G)[grepl("C\\d{5}", igraph::V(G)$name)]$type <- "METABOLITE"
-  ##TEST
   #reaction attributes:
   igraph::V(G)[grepl("R\\d{5}", igraph::V(G)$name)]$color <- pal[3]
   igraph::V(G)[grepl("R\\d{5}", igraph::V(G)$name)]$type <- "REACTION"
