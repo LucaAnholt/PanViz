@@ -22,10 +22,8 @@ Imports:
     stringi,
     futile.logger,
     utils,
-    foreach,
     doSNOW,
     parallel,
-    tcltk,
     easycsv,
     rentrez,
     igraph,
@@ -35,7 +33,6 @@ Imports:
     colorspace,
     grDevices,
 Depends: 
-    igraph,
     foreach,
     R (>= 2.10)
 Suggests: 
