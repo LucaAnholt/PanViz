@@ -3,28 +3,28 @@ adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, g
   cat("Generating IMON - this might take a few moments \n")
   ##creating IMON network by building up networks from SNP IMON level downwards
   ##creating edgelist dataframe for G_S (SNP -> gene):
-  G_S <- stack(adjl_G_S)
+  G_S <- utils::stack(adjl_G_S)
   G_S$values <- paste0("hsa: ", G_S$values) #adding "hsa:" identifier:
   G_S <- G_S[ , c(2,1)] #flipping columns
   ##creating edgelist dataframe for G_E (gene -> enzyme):
-  G_E <- stack(adjl_G_E)
+  G_E <- utils::stack(adjl_G_E)
   G_E <- G_E[, c(2,1)] #swap columns
   G_E$values = gsub("\\[|\\]","",G_E$values) #ensure naming conventions match between levels
   ##find which genes that are mapped to snps are also mapped to enzymes
   G_E_clean <- G_E[which(G_E$ind %in% G_S$values),]
   ##creating edgelist dataframe for R_E (enzyme -> reaction):
-  R_E <- stack(adjl_R_E)
+  R_E <- utils::stack(adjl_R_E)
   R_E$values <- gsub("EC", "EC:", R_E$values) #ensuring naming conventions match between levels
   R_E$values <- gsub(" ", "", R_E$values) #ensuring naming conventions match between levels
   ##find which enzymes that are mapped to genes are also mapped to reactions
   R_E_clean <- R_E[which(R_E$values %in% G_E_clean$values),]
   ##creating edgelist dataframe for RP_R (reaction -> KEGG reaction pair):
-  RP_R <- stack(adjl_RP_R)
+  RP_R <- utils::stack(adjl_RP_R)
   ##find which reactions that are mapped to enzymes are also mapped to RPs
   RP_R_clean <- RP_R[which(RP_R$ind %in% R_E_clean$ind),]
   RP_R_clean <- RP_R_clean[ , c(2,1)] #flipping dataframe columns
   ##creating edgelist dataframe for RP_C (KEGG reaction pair <-> compound/metabolite):
-  RP_C <- stack(adjl_RP_C)
+  RP_C <- utils::stack(adjl_RP_C)
   ##find which RPs that are mapped to reactions are also mapped to compounds
   #RP_C_clean <- RP_C[which(RP_C$L1 %in% RP_R_clean$RP),]
   ##create igraph object for reaction pairs and compounds:
@@ -63,7 +63,11 @@ adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, g
   ##KEGG reaction pair attributes
   igraph::V(G)[grepl("C\\d{5}_C\\d{5}", igraph::V(G)$name)]$type <- "RP"
   ##set IDs of nodes:
-  compound_names <- unname(compound_names_hash[igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$name])
+  # compound_names <- unname(compound_names_hash[igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$name])
+  # igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$ID <- compound_names
+  index <- which(names(compound_names_hash) %in% igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$name)
+  index <- index[order(match(names(compound_names_hash[index]),igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$name))]
+  compound_names <- unname(unlist(compound_names_hash[index]))
   igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$ID <- compound_names
   igraph::V(G)[grepl("SNP", igraph::V(G)$type)]$ID <- igraph::V(G)[grepl("SNP", igraph::V(G)$type)]$name
   igraph::V(G)[grepl("GENE", igraph::V(G)$type)]$ID <- igraph::V(G)[grepl("GENE", igraph::V(G)$type)]$name
@@ -71,7 +75,7 @@ adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, g
   igraph::V(G)[grepl("REACTION", igraph::V(G)$type)]$ID <- igraph::V(G)[grepl("REACTION", igraph::V(G)$type)]$name
   igraph::V(G)[grepl("RP", igraph::V(G)$type)]$ID <- igraph::V(G)[grepl("RP", igraph::V(G)$type)]$name
   ##create ego-centred IMON to required path length selected by user
-  G <- PanViz:::ego_IMON(G, ego)
+  G <- ego_IMON(G, ego)
   ##check if network length is reasonable for colouring:
   if(length(igraph::V(G)) > 2000){
     cat("IMON is too large to colour whole network by categorical levels\n")
@@ -84,11 +88,11 @@ adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, g
   }
   ##colour graph by user selection
   if(colour_groups == TRUE){
-    G <- PanViz:::set_snp_grouping(G, unique_group_names, unique_group_cols, group_snps) #if is fully connected colour IMON
-    G <- suppressWarnings(PanViz:::colour_IMON(G))
+    G <- set_snp_grouping(G, unique_group_names, unique_group_cols, group_snps) #if is fully connected colour IMON
+    G <- suppressWarnings(colour_IMON(G))
   }
   else{
-    G <- PanViz:::set_snp_grouping(G, unique_group_names, unique_group_cols, group_snps) #if is fully connected colour IMON
+    G <- set_snp_grouping(G, unique_group_names, unique_group_cols, group_snps) #if is fully connected colour IMON
     pal <- RColorBrewer::brewer.pal(n = 8, "Dark2") #getting colour palette for node colouring
     igraph::V(G)[grepl("SNP", igraph::V(G)$type)]$col <- pal[1]
     igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$col <- pal[2]

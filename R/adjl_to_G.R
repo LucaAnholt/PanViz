@@ -8,31 +8,29 @@ adjl_to_G <- function(adjl_G_S){
   cat("Generating IMON - this might take a few moments \n")
   ##creating IMON network by building up networks from SNP IMON level downwards
   ##creating edgelist dataframe for G_S (SNP -> gene):
-  G_S <- stack(adjl_G_S)
+  G_S <- utils::stack(adjl_G_S)
   G_S$values <- paste0("hsa: ", G_S$values) #adding "hsa:" identifier:
   G_S <- G_S[ , c(2,1)] #flipping columns
   ##creating edgelist dataframe for G_E (gene -> enzyme):
-  G_E <- stack(adjl_G_E)
+  G_E <- utils::stack(adjl_G_E)
   G_E <- G_E[, c(2,1)] #swap columns
   G_E$values = gsub("\\[|\\]","",G_E$values) #ensure naming conventions match between levels
   ##find which genes that are mapped to snps are also mapped to enzymes
   G_E_clean <- G_E[which(G_E$ind %in% G_S$values),]
   ##creating edgelist dataframe for R_E (enzyme -> reaction):
-  R_E <- stack(adjl_R_E)
+  R_E <- utils::stack(adjl_R_E)
   R_E$values <- gsub("EC", "EC:", R_E$values) #ensuring naming conventions match between levels
   R_E$values <- gsub(" ", "", R_E$values) #ensuring naming conventions match between levels
   ##find which enzymes that are mapped to genes are also mapped to reactions
   R_E_clean <- R_E[which(R_E$values %in% G_E_clean$values),]
   ##creating edgelist dataframe for RP_R (reaction -> KEGG reaction pair):
-  RP_R <- stack(adjl_RP_R)
+  RP_R <- utils::stack(adjl_RP_R)
   ##find which reactions that are mapped to enzymes are also mapped to RPs
   RP_R_clean <- RP_R[which(RP_R$ind %in% R_E_clean$ind),]
   RP_R_clean <- RP_R_clean[ , c(2,1)] #flipping dataframe columns
   ##creating edgelist dataframe for RP_C (KEGG reaction pair <-> compound/metabolite):
-  #RP_C <- reshape2::melt(adjl_RP_C, value.name = "Compounds")
-  RP_C <- stack(adjl_RP_C)
+  RP_C <- utils::stack(adjl_RP_C)
   ##find which RPs that are mapped to reactions are also mapped to compounds
-  #RP_C_clean <- RP_C[which(RP_C$L1 %in% RP_R_clean$RP),]
   ##create igraph object for reaction pairs and compounds:
   g1 <- igraph::graph_from_data_frame(RP_C, directed = FALSE)
   g1 <- igraph::as.directed(g1, mode = "mutual") #add bidirection within the network
@@ -76,7 +74,9 @@ adjl_to_G <- function(adjl_G_S){
   igraph::V(G)[grepl("C\\d{5}_C\\d{5}", igraph::V(G)$name)]$col = pal[8]
   igraph::V(G)[grepl("C\\d{5}_C\\d{5}", igraph::V(G)$name)]$type = "RP"
   ##set IDs of nodes:
-  compound_names <- unname(compound_names_hash[igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$name])
+  index <- which(names(compound_names_hash) %in% igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$name)
+  index <- index[order(match(names(compound_names_hash[index]),igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$name))]
+  compound_names <- unname(unlist(compound_names_hash[index]))
   igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$ID <- compound_names
   igraph::V(G)[grepl("SNP", igraph::V(G)$type)]$ID <- igraph::V(G)[grepl("SNP", igraph::V(G)$type)]$name
   igraph::V(G)[grepl("GENE", igraph::V(G)$type)]$ID <- igraph::V(G)[grepl("GENE", igraph::V(G)$type)]$name
