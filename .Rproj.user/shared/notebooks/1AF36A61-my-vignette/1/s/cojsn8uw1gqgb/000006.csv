@@ -1,4 +1,0 @@
-"0","##creating an IMON again using the first 5 studies reported within the downloaded tsv file, grouping by studies and colouring the nodes/edges of the graph based on these groups:"
-"0","IMON <- PanViz::get_grouped_IMON(dataframe = snp_df, groupby = ""studies"", ego = 5, save_file = FALSE, colour_groups = TRUE)"
-"1","Querying SNP locations from NCBI dbSNP 
-"

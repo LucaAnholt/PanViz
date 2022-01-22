@@ -1,5 +1,0 @@
-"0","##getting tsv file directory path from package data directory - this will be replaced with the users own tsv file path "
-"0","path <- paste0(find.package(""PanViz"", lib.loc=NULL, quiet = TRUE), ""/data/gwas-association-downloaded_2021-09-13-EFO_1000649.tsv"")"
-"0","##parsing tsv file into dataframe object"
-"0","snp_df <- PanViz::GWAS_catalog_tsv_to_dataframe(path)"
-"0","head(snp_df)"
