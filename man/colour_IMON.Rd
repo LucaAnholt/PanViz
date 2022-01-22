@@ -4,10 +4,12 @@
 \alias{colour_IMON}
 \title{colour network by categorical group levels}
 \usage{
-colour_IMON(G)
+colour_IMON(G, progress_bar)
 }
 \arguments{
 \item{G}{- igraph object containing uncoloured IMON}
+
+\item{progress_bar}{Boolean (default = TRUE) argument that controls whether or not a progress bar for calculations/KEGGREST API GET requests should be printed to the console}
 }
 \value{
 - igraph object containing coloured IMON

@@ -118,7 +118,7 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
     stop("None of the provided SNPs could be mapped to genes provided by the Kyoto Encyclopedia of Genes and Genomes")
   }
   ##creating IMON from all adjacency lists
-  G <- adjl_to_G_grouped(adjl_G_S, unique_group_names, unique_group_cols, group_snps, colour_groups, ego = ego)
+  G <- adjl_to_G_grouped(adjl_G_S, unique_group_names, unique_group_cols, group_snps, colour_groups, ego = ego, progress_bar)
   ##saving graphs to desired output
   if(save_file == TRUE){
     if(export_type == "igraph"){

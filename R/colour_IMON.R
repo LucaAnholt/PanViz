@@ -3,8 +3,8 @@
 #' @param G - igraph object containing uncoloured IMON
 #'
 #' @return - igraph object containing coloured IMON
-#'
-colour_IMON <- function(G){
+#' @param progress_bar Boolean (default = TRUE) argument that controls whether or not a progress bar for calculations/KEGGREST API GET requests should be printed to the console
+colour_IMON <- function(G, progress_bar){
   snp_index <- igraph::V(G)[grepl("SNP", igraph::V(G)$type)] #get graph indexes for snps
   snp_colours <- igraph::V(G)[snp_index]$col #get colours for each snp (coloured by selected categorical variable)
   #get graph indexes for reactions:
@@ -82,29 +82,49 @@ colour_IMON <- function(G){
       colour_list[[index]] <- c(colour_list[[index]], colour_edit)
     }
   }
-  pb <- utils::txtProgressBar(max = length(metabolome_index), style = 3)
-  ##merge all colours at every node in the metabolome:
-  for(i in seq_along(as.numeric(igraph::V(G)[metabolome_index]))){
-    index <- as.numeric(igraph::V(G)[metabolome_index])[i]
-    if(length(colour_list[[index]]) > 1){
-      colour_list[[index]] <- multi_hex_col_mix(colour_list[[index]])
+  if(progress_bar == TRUE){
+    pb <- utils::txtProgressBar(max = length(metabolome_index), style = 3)
+    ##merge all colours at every node in the metabolome:
+    for(i in seq_along(as.numeric(igraph::V(G)[metabolome_index]))){
+      index <- as.numeric(igraph::V(G)[metabolome_index])[i]
+      if(length(colour_list[[index]]) > 1){
+        colour_list[[index]] <- multi_hex_col_mix(colour_list[[index]])
+      }
+      pctg <- paste(round(i/length(metabolome_index) *100, 0), "% completed")
+      utils::setTxtProgressBar(pb, i, label = pctg)
     }
-    pctg <- paste(round(i/length(metabolome_index) *100, 0), "% completed")
-    utils::setTxtProgressBar(pb, i, label = pctg)
+    close(pb)
   }
-  close(pb)
+  else if(progress_bar == FALSE){
+    ##merge all colours at every node in the metabolome:
+    for(i in seq_along(as.numeric(igraph::V(G)[metabolome_index]))){
+      index <- as.numeric(igraph::V(G)[metabolome_index])[i]
+      if(length(colour_list[[index]]) > 1){
+        colour_list[[index]] <- multi_hex_col_mix(colour_list[[index]])
+      }
+    }
+  }
   ##set node colour attributes:
   colour_vector <- unlist(colour_list)
   igraph::V(G)$col <- colour_vector
   cat("Colouring all network edges\n")
-  ##get out incident edge for nodes and colour by node colour:
-  pb <- utils::txtProgressBar(max = length(igraph::V(G)), style = 3)
-  for(i in seq_along(igraph::V(G))){
-    node_colour <- igraph::V(G)[i]$col
-    igraph::E(G)[from(igraph::V(G)[i])]$col <- node_colour
-    pctg <- paste(round(i/length(igraph::V(G)) *100, 0), "% completed")
-    utils::setTxtProgressBar(pb, i, label = pctg)
+  if(progress_bar == TRUE){
+    ##get out incident edge for nodes and colour by node colour:
+    pb <- utils::txtProgressBar(max = length(igraph::V(G)), style = 3)
+    for(i in seq_along(igraph::V(G))){
+      node_colour <- igraph::V(G)[i]$col
+      igraph::E(G)[from(igraph::V(G)[i])]$col <- node_colour
+      pctg <- paste(round(i/length(igraph::V(G)) *100, 0), "% completed")
+      utils::setTxtProgressBar(pb, i, label = pctg)
+    }
+    close(pb)
   }
-  close(pb)
+  else if(progress_bar == FALSE){
+    ##get out incident edge for nodes and colour by node colour:
+    for(i in seq_along(igraph::V(G))){
+      node_colour <- igraph::V(G)[i]$col
+      igraph::E(G)[from(igraph::V(G)[i])]$col <- node_colour
+    }
+  }
   return(G) #return network with coloured attributes
 }

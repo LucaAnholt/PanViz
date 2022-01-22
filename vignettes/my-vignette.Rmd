@@ -75,7 +75,7 @@ In the case where only a single vector of summary-level GWAS data is available f
 ##importing the estrogen receptor positive breast cancer example SNP vector 
 snps <- PanViz::er_snp_vector
 ##creating an IMON using this summary-level GWAS data
-IMON <- PanViz::get_IMON(snp_list = snps, ego = 5, save_file = FALSE)
+IMON <- PanViz::get_IMON(snp_list = snps, ego = 5, save_file = FALSE, progress_bar = FALSE)
 ```
 
 
@@ -110,7 +110,7 @@ Once the tsv file has been parsed to a dataframe object, the summary-level data 
 ```{r}
 ##creating IMON using the first 5 studies reported and creating a grouping variable based on studies
 snp_df <- dplyr::filter(snp_df, studies %in% unique(snp_df$studies)[1:5])
-IMON <- PanViz::get_grouped_IMON(dataframe = snp_df, groupby = "studies", ego = 5, save_file = FALSE)
+IMON <- PanViz::get_grouped_IMON(dataframe = snp_df, groupby = "studies", ego = 5, save_file = FALSE, progress_bar = FALSE)
 ```
 
 # Analysing an IMON:
@@ -119,7 +119,7 @@ The get_IMON() and get_grouped_IMON() functions return igraph objects that can b
 
 ```{r, fig.width=20, fig.height=24}
 ##creating an IMON again using the first 5 studies reported within the downloaded tsv file, grouping by studies and colouring the nodes/edges of the graph based on these groups:
-IMON <- PanViz::get_grouped_IMON(dataframe = snp_df, groupby = "studies", ego = 5, save_file = FALSE, colour_groups = TRUE)
+IMON <- PanViz::get_grouped_IMON(dataframe = snp_df, groupby = "studies", ego = 5, save_file = FALSE, colour_groups = TRUE, progress_bar = FALSE)
 ##creating custom igraph tree layout plotting from SNP downards to metabolite:
 myformat <- function(IMON) {
   layout.reingold.tilford(IMON, root = V(IMON)[grepl("SNP", V(IMON)$type)], flip.y = TRUE, circular = FALSE)

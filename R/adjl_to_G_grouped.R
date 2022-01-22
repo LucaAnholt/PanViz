@@ -1,4 +1,4 @@
-adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, group_snps, colour_groups, ego){
+adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, group_snps, colour_groups, ego, progress_bar){
   ##loading KEGG network data adjacency lists from working directory:
   cat("Generating IMON \n")
   ##creating IMON network by building up networks from SNP IMON level downwards
@@ -89,7 +89,7 @@ adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, g
   ##colour graph by user selection
   if(colour_groups == TRUE){
     G <- set_snp_grouping(G, unique_group_names, unique_group_cols, group_snps) #if is fully connected colour IMON
-    G <- suppressWarnings(colour_IMON(G))
+    G <- suppressWarnings(colour_IMON(G, progress_bar))
   }
   else{
     G <- set_snp_grouping(G, unique_group_names, unique_group_cols, group_snps) #if is fully connected colour IMON
