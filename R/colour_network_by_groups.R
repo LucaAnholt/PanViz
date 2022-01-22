@@ -11,11 +11,11 @@ colour_network_by_groups <- function(G){
   }
   cat("Setting node and edge colours at SNP/Gene level\n")
   ##get snp -> gene edges:
-  snp_gene_edges <- igraph::E(G)[S4Vectors::from(igraph::V(G)[grepl("rs", igraph::V(G)$name)])]
+  snp_gene_edges <- igraph::E(G)[from(igraph::V(G)[grepl("rs", igraph::V(G)$name)])]
   ##colouring snp -> gene edges based on snp vertex colours
   for(i in seq_along(snp_gene_edges)){
     colour <- igraph::tail_of(G, snp_gene_edges[[i]])$col
-    igraph::E(G)[S4Vectors::from(igraph::V(G)[grepl("rs", igraph::V(G)$name)])][i]$col <- colour
+    igraph::E(G)[from(igraph::V(G)[grepl("rs", igraph::V(G)$name)])][i]$col <- colour
   }
   ##colouring gene vertices based on incident edge colours
   genes <- igraph::V(G)[grepl("hsa:", igraph::V(G)$name)]$name
@@ -32,11 +32,11 @@ colour_network_by_groups <- function(G){
   }
   cat("Setting node and edge colours at Gene/Enzyme level\n")
   ##get gene -> enzyme edges:
-  gene_enzyme_edges <- igraph::E(G)[S4Vectors::from(igraph::V(G)[grepl("hsa:", igraph::V(G)$name)])]
+  gene_enzyme_edges <- igraph::E(G)[from(igraph::V(G)[grepl("hsa:", igraph::V(G)$name)])]
   ##colouring gene -> enzyme edges based on gene vertex colours
   for(i in seq_along(gene_enzyme_edges)){
     colour <- igraph::tail_of(G, gene_enzyme_edges[[i]])$col
-    igraph::E(G)[S4Vectors::from(igraph::V(G)[grepl("hsa:", igraph::V(G)$name)])][i]$col <- colour
+    igraph::E(G)[from(igraph::V(G)[grepl("hsa:", igraph::V(G)$name)])][i]$col <- colour
   }
   ##colouring enzyme vertices based on incident edge colours
   enzymes <- igraph::V(G)[grepl("EC:", igraph::V(G)$name)]$name
@@ -53,11 +53,11 @@ colour_network_by_groups <- function(G){
   }
   cat("Setting node and edge colours at Enzyme/Reaction level\n")
   ##get enzyme -> reaction edges:
-  enzyme_reaction_edges <- igraph::E(G)[S4Vectors::from(igraph::V(G)[grepl("EC:", igraph::V(G)$name)])]
+  enzyme_reaction_edges <- igraph::E(G)[from(igraph::V(G)[grepl("EC:", igraph::V(G)$name)])]
   ##colouring enzyme -> reaction edges based on enzyme vertex colours
   for(i in seq_along(enzyme_reaction_edges)){
     colour <- igraph::tail_of(G, enzyme_reaction_edges[[i]])$col
-    igraph::E(G)[S4Vectors::from(igraph::V(G)[grepl("EC:", igraph::V(G)$name)])][i]$col <- colour
+    igraph::E(G)[from(igraph::V(G)[grepl("EC:", igraph::V(G)$name)])][i]$col <- colour
   }
   ##colouring reaction vertices based on incident edge colours
   reactions <- igraph::V(G)[grepl("R\\d{5}",igraph::V(G)$name)]$name
@@ -74,11 +74,11 @@ colour_network_by_groups <- function(G){
   }
   cat("Setting node and edge colours at Reaction/Reaction Pair level\n")
   ##get reaction -> RP edges:
-  reaction_RP_edges <- igraph::E(G)[S4Vectors::from(igraph::V(G)[grepl("R\\d{5}", igraph::V(G)$name)])]
+  reaction_RP_edges <- igraph::E(G)[from(igraph::V(G)[grepl("R\\d{5}", igraph::V(G)$name)])]
   ##colouring reation -> RP edges based on reaction vertex colours
   for(i in seq_along(reaction_RP_edges)){
     colour <- igraph::tail_of(G, reaction_RP_edges[[i]])$col
-    igraph::E(G)[S4Vectors::from(igraph::V(G)[grepl("R\\d{5}", igraph::V(G)$name)])][i]$col <- colour
+    igraph::E(G)[from(igraph::V(G)[grepl("R\\d{5}", igraph::V(G)$name)])][i]$col <- colour
   }
   ##colouring RP vertices (only those directly connected to reactions) based on incident edge colours
   RPs <- igraph::head_of(G, reaction_RP_edges)$name
@@ -102,10 +102,10 @@ colour_network_by_groups <- function(G){
   ##find uncoloured RPs:
   uc_RPs <- igraph::V(G)[grepl("RP", igraph::V(G)$type)][which(is.na(igraph::V(G)[grepl("RP", igraph::V(G)$type)]$col))]
   igraph::V(G)[uc_RPs]$col <- mixed_colours #colour these with mixed colour
-  igraph::E(G)[S4Vectors::from(igraph::V(G)[uc_RPs])]$col <- mixed_colours
+  igraph::E(G)[from(igraph::V(G)[uc_RPs])]$col <- mixed_colours
   ##colour all metabolites as mixed network colours:
   igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$col <- mixed_colours
-  igraph::E(G)[S4Vectors::from(igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)])]$col <- mixed_colours
+  igraph::E(G)[from(igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)])]$col <- mixed_colours
   cat("Done setting node and edge colours\n")
   return(G)
 }

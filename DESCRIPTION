@@ -39,7 +39,6 @@ Imports:
     grDevices,
     foreach,
     rlang, 
-    S4Vectors, 
     methods,
     usethis
 Depends: 

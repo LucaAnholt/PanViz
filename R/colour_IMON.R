@@ -3,13 +3,14 @@
 #' @param G - igraph object containing uncoloured IMON
 #'
 #' @return - igraph object containing coloured IMON
+#'
 colour_IMON <- function(G){
   snp_index <- igraph::V(G)[grepl("SNP", igraph::V(G)$type)] #get graph indexes for snps
   snp_colours <- igraph::V(G)[snp_index]$col #get colours for each snp (coloured by selected categorical variable)
   #get graph indexes for reactions:
   reaction_index <- which(igraph::V(G)$type %in% c("REACTION"))
   ##find index of first layer of RPs i.e. those directly connected to reactions:
-  reaction_RP_edges <- igraph::E(G)[S4Vectors::from(igraph::V(G)[reaction_index])]
+  reaction_RP_edges <- igraph::E(G)[from(igraph::V(G)[reaction_index])]
   RPs <- unique(igraph::head_of(G, reaction_RP_edges)$name)
   RPs_index <- as.numeric(igraph::V(G)[RPs])
   directed_index <- which(igraph::V(G)$type %in% c("GENE", "ENZYME", "REACTION")) #get index of directed
@@ -100,7 +101,7 @@ colour_IMON <- function(G){
   pb <- utils::txtProgressBar(max = length(igraph::V(G)), style = 3)
   for(i in seq_along(igraph::V(G))){
     node_colour <- igraph::V(G)[i]$col
-    igraph::E(G)[S4Vectors::from(igraph::V(G)[i])]$col <- node_colour
+    igraph::E(G)[from(igraph::V(G)[i])]$col <- node_colour
     pctg <- paste(round(i/length(igraph::V(G)) *100, 0), "% completed")
     utils::setTxtProgressBar(pb, i, label = pctg)
   }
