@@ -7,11 +7,11 @@
 #' @param export_type  This dictates the network data structure saved in your working directory. By default this outputs an igraph object, however, you can choose to export and save an edge list, graphml or GML file.
 #' @param directory If set to "choose" this argument allows the user to interactively select the directory of their choice in which they wish to save the constructed IMON, else the file will be saved to the working directory "wd" by default
 #' @param colour_groups Boolean (default = FALSE) chooses whether or not to colour the whole network by grouping variables
-#'
+#' @param progress_bar Boolean (default = TRUE) argument that controls whether or not a progress bar for calculations/KEGGREST API GET requests should be printed to the console
 #' @return An igraph object containing the constructed IMON with coloured SNPs/and or whole network by selected grouping variable
 #' @export
 #'
-get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 5, save_file = c(FALSE, TRUE), export_type = c("igraph", "edge_list", "graphml", "gml"), directory = c("wd", "choose"), colour_groups = c(FALSE,TRUE)){
+get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 5, save_file = c(FALSE, TRUE), export_type = c("igraph", "edge_list", "graphml", "gml"), directory = c("wd", "choose"), colour_groups = c(FALSE,TRUE), progress_bar = c(TRUE,FALSE)){
   ##test dimensions of inputted dataframe:
   if(dim(dataframe)[2] != 3){
     stop("Unexpected number of columns in dataframe. Dataframe must only include 3 columns: snps, studies and traits (in that order and naming convention)")
@@ -33,6 +33,9 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
   }
   if(missing(export_type)){
     export_type <- "igraph"
+  }
+  if(missing(progress_bar)){
+    progress_bar <- TRUE
   }
   if(as.integer(groupby %in% c("studies", "trais")) == 0){
     stop("Unexpected groupby value. This should be either 'studies' or 'traits'")
@@ -90,7 +93,7 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
   names(group_snps) <- unique_group_names
   ##get overall list of snps to query via NCBI dbSNP:
   snp_list <- dataframe$snps
-  raw_data <- NCBI_dbSNP_query(snp_list)
+  raw_data <- NCBI_dbSNP_query(snp_list, progress_bar)
   ##checking if all SNPs have been successfully queried:
   if(length(snp_list) > 1){ ##deal with vectorised input
     errors <- unname(unlist(lapply(raw_data, dbSNP_query_check)))

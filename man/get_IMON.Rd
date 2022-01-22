@@ -9,7 +9,8 @@ get_IMON(
   ego = 5,
   save_file = c(FALSE, TRUE),
   export_type = c("igraph", "edge_list", "graphml", "gml"),
-  directory = c("wd", "choose")
+  directory = c("wd", "choose"),
+  progress_bar = c(TRUE, FALSE)
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ get_IMON(
 \item{export_type}{This dictates the network data structure saved in the chosen directory. By default this outputs an igraph object, however, you can choose to export and save an edge list, graphml or GML file.}
 
 \item{directory}{If set to "choose" this argument allows the user to interactively select the directory of their choice in which they wish to save the constructed IMON, else the file will be saved to the working directory "wd" by default}
+
+\item{progress_bar}{Boolean (default = TRUE) argument that controls whether or not a progress bar for calculations/KEGGREST API GET requests should be printed to the console}
 }
 \value{
 An igraph object containing the constructed IMON

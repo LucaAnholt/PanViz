@@ -11,7 +11,8 @@ get_grouped_IMON(
   save_file = c(FALSE, TRUE),
   export_type = c("igraph", "edge_list", "graphml", "gml"),
   directory = c("wd", "choose"),
-  colour_groups = c(FALSE, TRUE)
+  colour_groups = c(FALSE, TRUE),
+  progress_bar = c(TRUE, FALSE)
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ get_grouped_IMON(
 \item{directory}{If set to "choose" this argument allows the user to interactively select the directory of their choice in which they wish to save the constructed IMON, else the file will be saved to the working directory "wd" by default}
 
 \item{colour_groups}{Boolean (default = FALSE) chooses whether or not to colour the whole network by grouping variables}
+
+\item{progress_bar}{Boolean (default = TRUE) argument that controls whether or not a progress bar for calculations/KEGGREST API GET requests should be printed to the console}
 }
 \value{
 An igraph object containing the constructed IMON with coloured SNPs/and or whole network by selected grouping variable

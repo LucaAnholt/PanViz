@@ -4,10 +4,12 @@
 \alias{NCBI_dbSNP_query}
 \title{NCBI_dbSNP_query}
 \usage{
-NCBI_dbSNP_query(snp_list)
+NCBI_dbSNP_query(snp_list, progress_bar)
 }
 \arguments{
 \item{snp_list}{- list of SNPs to be queried via NCBI dbSNP API}
+
+\item{progress_bar}{Boolean (default = TRUE) argument that controls whether or not a progress bar for calculations/KEGGREST API GET requests should be printed to the console}
 }
 \value{
 - raw output from NCBI dbSNP API

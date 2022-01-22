@@ -5,10 +5,12 @@
 #' @param save_file Boolean (default = FALSE) argument that indicates whether or not the user wants to save the graph as an exported file in their current working directory
 #' @param export_type This dictates the network data structure saved in the chosen directory. By default this outputs an igraph object, however, you can choose to export and save an edge list, graphml or GML file.
 #' @param directory If set to "choose" this argument allows the user to interactively select the directory of their choice in which they wish to save the constructed IMON, else the file will be saved to the working directory "wd" by default
+#' @param progress_bar Boolean (default = TRUE) argument that controls whether or not a progress bar for calculations/KEGGREST API GET requests should be printed to the console
+#'
 #'
 #' @return An igraph object containing the constructed IMON
 #' @export
-get_IMON <- function(snp_list, ego = 5, save_file = c(FALSE, TRUE), export_type = c("igraph", "edge_list", "graphml", "gml"), directory = c("wd", "choose")){
+get_IMON <- function(snp_list, ego = 5, save_file = c(FALSE, TRUE), export_type = c("igraph", "edge_list", "graphml", "gml"), directory = c("wd", "choose"), progress_bar = c(TRUE, FALSE)){
   ##test if given snp vector is a vector of strings:
   if(sum(as.integer(as.vector(sapply(snp_list, class)) %in% "character")) != length(snp_list)){
     stop("Unexpected SNP vector. Inputted SNP vector must be supplied as character class")
@@ -26,6 +28,9 @@ get_IMON <- function(snp_list, ego = 5, save_file = c(FALSE, TRUE), export_type 
   }
   if(missing(export_type)){
     export_type <- "igraph"
+  }
+  if(missing(progress_bar)){
+    progress_bar <- TRUE
   }
   if(missing(snp_list)){
     stop("Please input a vector characters representing SNPs using the standard NCBI dbSNP accession naming convention, e.g. c('rs185345278', 'rs101')")
@@ -50,7 +55,7 @@ get_IMON <- function(snp_list, ego = 5, save_file = c(FALSE, TRUE), export_type 
       filename <-  "Exported_IMON"
     }
   }
-  raw_data <- NCBI_dbSNP_query(snp_list)
+  raw_data <- NCBI_dbSNP_query(snp_list, progress_bar)
   ##checking if all SNPs have been successfully queried:
   if(length(snp_list) > 1){ ##deal with vectorised input
     errors <- unname(unlist(lapply(raw_data, dbSNP_query_check)))
