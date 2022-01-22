@@ -7,7 +7,7 @@
 gene_cleanup(queried_data)
 }
 \arguments{
-\item{queried_data}{}
+\item{queried_data}{queried kegg data}
 }
 \value{
 This function helps to cleans up queried KEGG gene recursive lists + filters by genes with adjacent enzymes

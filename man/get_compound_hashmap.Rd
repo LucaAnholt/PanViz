@@ -6,9 +6,14 @@
 \usage{
 get_compound_hashmap(CPU = c(2, 1), sleep = 5)
 }
+\arguments{
+\item{CPU}{The number of cores to use when making KEGGREST API Get requests (default = 2). If CPU > 1, parallel requests will be made.}
+
+\item{sleep}{The amount of sleep (seconds) between a potential caught API error and the next attempt (default = 5)}
+}
 \value{
 hashmap/recursive list of associated KEGG IDs and compound/metabolite names
 }
 \description{
-Create hashmap of associated KEGG IDs and compound/metabolite names
+This function creates a hashmap of associated KEGG IDs and compound/metabolite names
 }

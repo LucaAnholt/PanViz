@@ -7,7 +7,7 @@
 NCBI_clean_2(queried_data)
 }
 \arguments{
-\item{queried_data}{}
+\item{queried_data}{- rentrez object queried from NCBI}
 }
 \value{
 return chromosome location, start and end position of gene from NCBI query

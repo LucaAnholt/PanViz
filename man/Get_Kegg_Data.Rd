@@ -10,8 +10,6 @@ Get_Kegg_Data(CPU = c(2, 1), sleep = 5)
 \item{CPU}{The number of cores to use when making KEGGREST API Get requests (default = 2). If CPU > 1, parallel requests will be made.}
 
 \item{sleep}{The amount of sleep (seconds) between a potential caught API error and the next attempt (default = 5)}
-
-\item{directory}{Directory in which to save network data: "wd" (working directory - default), "choose" (manually choose directory)}
 }
 \value{
 Rds files containing adjacency lists for all KEGG network data

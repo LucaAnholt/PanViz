@@ -7,7 +7,7 @@
 adj_G_E(queried_data)
 }
 \arguments{
-\item{queried_data}{}
+\item{queried_data}{- data queried from KEGG}
 }
 \value{
 vector containing relevant adjacent genes and enzymes

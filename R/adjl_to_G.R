@@ -1,7 +1,7 @@
 ##adjaceny lists to graph function:
 #' adj_to_G
 #'
-#' @param adjl_G_S
+#' @param adjl_G_S - recursive list containing genes/snps data
 #'
 #' @return igraph object representing total IMON for inputted SNPs
 adjl_to_G <- function(adjl_G_S){

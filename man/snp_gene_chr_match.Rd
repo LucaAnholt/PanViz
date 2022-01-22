@@ -7,6 +7,8 @@
 snp_gene_chr_match(snp_loc, gene_loc)
 }
 \arguments{
+\item{snp_loc}{- snp locations}
+
 \item{gene_loc}{- dataframe of genes and their chromosome numbers and start/stop positions}
 }
 \value{

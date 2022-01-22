@@ -1,7 +1,7 @@
 ##enzyme -> reactions (adjl_R_E) adjacency list helper function:
 #' Title
 #'
-#' @param queried_data
+#' @param queried_data - queried kegg data
 #'
 #' @return vector containing relevant adjacent enzymes and reactions
 #'

@@ -7,7 +7,7 @@
 adjl_to_G(adjl_G_S)
 }
 \arguments{
-\item{adjl_G_S}{}
+\item{adjl_G_S}{- recursive list containing genes/snps data}
 }
 \value{
 igraph object representing total IMON for inputted SNPs

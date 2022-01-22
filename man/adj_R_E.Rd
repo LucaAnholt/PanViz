@@ -7,7 +7,7 @@
 adj_R_E(queried_data)
 }
 \arguments{
-\item{queried_data}{}
+\item{queried_data}{- queried kegg data}
 }
 \value{
 vector containing relevant adjacent enzymes and reactions

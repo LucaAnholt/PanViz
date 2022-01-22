@@ -1,7 +1,7 @@
 ##function for cleaning up queried KEGG gene data:
 #' Title
 #'
-#' @param queried_data
+#' @param queried_data queried kegg data
 #'
 #' @return This function helps to cleans up queried KEGG gene recursive lists + filters by genes with adjacent enzymes
 #'

@@ -25,6 +25,8 @@ get_grouped_IMON(
 
 \item{export_type}{This dictates the network data structure saved in your working directory. By default this outputs an igraph object, however, you can choose to export and save an edge list, graphml or GML file.}
 
+\item{directory}{If set to "choose" this argument allows the user to interactively select the directory of their choice in which they wish to save the constructed IMON, else the file will be saved to the working directory "wd" by default}
+
 \item{colour_groups}{Boolean (default = FALSE) chooses whether or not to colour the whole network by grouping variables}
 }
 \value{

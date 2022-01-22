@@ -1,7 +1,7 @@
 ##NCBI gene clean function 2
 #' NCBI_clean_2
 #'
-#' @param queried_data
+#' @param queried_data - rentrez object queried from NCBI
 #'
 #' @return return chromosome location, start and end position of gene from NCBI query
 #'

@@ -10,9 +10,13 @@ set_snp_grouping(G, unique_group_names, unique_group_cols, group_snps)
 \item{G}{- igraph object containing IMON}
 
 \item{unique_group_names}{- vector containing unique grouping variable names}
+
+\item{unique_group_cols}{- vector containing unique grouping colours for each variable}
+
+\item{group_snps}{- snps split by each variable/group}
 }
 \value{
-- igraoh object containing IMON with labelled and coloured snps by grouping variable
+- igraph object containing IMON with labelled and coloured snps by grouping variable
 }
 \description{
 snp grouping by chosen categorical variable

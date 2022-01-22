@@ -1,7 +1,7 @@
 ##genes -> enzymes (adjl_G_E) adjacency list helper function:
 #' adj_G_E
 #'
-#' @param queried_data
+#' @param queried_data - data queried from KEGG
 #'
 #' @return vector containing relevant adjacent genes and enzymes
 #'
