@@ -1,6 +1,6 @@
 adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, group_snps, colour_groups, ego){
   ##loading KEGG network data adjacency lists from working directory:
-  cat("Generating IMON - this might take a few moments \n")
+  cat("Generating IMON \n")
   ##creating IMON network by building up networks from SNP IMON level downwards
   ##creating edgelist dataframe for G_S (SNP -> gene):
   G_S <- utils::stack(adjl_G_S)
@@ -100,6 +100,9 @@ adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, g
     igraph::V(G)[grepl("ENZYME", igraph::V(G)$type)]$col <- pal[4]
     igraph::V(G)[grepl("GENE", igraph::V(G)$type)]$col <- pal[7]
     igraph::V(G)[grepl("RP", igraph::V(G)$type)]$col <- pal[8]
+    index <- which(names(compound_names_hash) %in% igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$name)
+    index <- index[order(match(names(compound_names_hash[index]),igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$name))]
+    compound_names <- unname(unlist(compound_names_hash[index]))
     igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$ID <- compound_names
     igraph::V(G)[grepl("SNP", igraph::V(G)$type)]$ID <- igraph::V(G)[grepl("SNP", igraph::V(G)$type)]$name
     igraph::V(G)[grepl("GENE", igraph::V(G)$type)]$ID <- igraph::V(G)[grepl("GENE", igraph::V(G)$type)]$name

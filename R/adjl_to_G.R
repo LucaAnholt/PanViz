@@ -5,7 +5,7 @@
 #'
 #' @return igraph object representing total IMON for inputted SNPs
 adjl_to_G <- function(adjl_G_S){
-  cat("Generating IMON - this might take a few moments \n")
+  cat("Generating IMON\n")
   ##creating IMON network by building up networks from SNP IMON level downwards
   ##creating edgelist dataframe for G_S (SNP -> gene):
   G_S <- utils::stack(adjl_G_S)

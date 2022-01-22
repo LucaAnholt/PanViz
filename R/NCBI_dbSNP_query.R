@@ -11,7 +11,7 @@ NCBI_dbSNP_query <- function(snp_list){
   pb <- utils::txtProgressBar(max = length(split_data), style = 3)
   raw_data_list <- list() #pre-initialise vector to capture raw dbSNP summary output
   for(i in seq_along(split_data)){ #query NCBI dbSNP API ###api_key = "24f5a5e0cf387cfb54f726abc4458b62d109"
-    raw_data_list[[i]] <- rentrez::entrez_summary(db = "snp", id = split_data[[i]])
+    raw_data_list[[i]] <- suppressWarnings(rentrez::entrez_summary(db = "snp", id = split_data[[i]]))
     pctg <- paste(round(i/length(split_data) *100, 0), "% completed")
     utils::setTxtProgressBar(pb, i, label = pctg)
   }
