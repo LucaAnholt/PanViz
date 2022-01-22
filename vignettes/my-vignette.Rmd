@@ -60,6 +60,8 @@ Load the PanViz library into the _R_ session
 
 ```{r setup, message = FALSE}
 library(PanViz)
+library(igraph)
+library(networkD3)
 ```
 
 
@@ -74,8 +76,14 @@ In the case where only a single vector of summary-level GWAS data is available f
 snps <- PanViz::er_snp_vector
 ##creating an IMON using this summary-level GWAS data
 IMON <- PanViz::get_IMON(snp_list = snps, ego = 5, save_file = FALSE)
+```
+
+
+```{r}
+##inspecting IMON:
 print(IMON)
 ```
+
 
 The constructed IMON is returned as an igraph object that can be further manipulated or visualised within _R_ using the igraph library. Alternatively, the IMON can be saved and exported from _R_ by setting the argument save_file = TRUE and setting additional optional arguments export_type = c("igraph", "edge_list", "graphml", "gml") and directory = c("wd", "choose"). 
 
@@ -91,7 +99,7 @@ In the case that a summary-level associations tsv file was downloaded from the G
 
 ```{r}
 ##getting tsv file directory path from package data directory - this will be replaced with the users own tsv file path 
-path <- paste0(find.package("PanViz", lib.loc=NULL, quiet = TRUE), "/data/gwas-association-downloaded_2021-09-13-EFO_1000649.tsv")
+path <- system.file("extdata", "gwas-association-downloaded_2021-09-13-EFO_1000649.tsv", package="PanViz")
 ##parsing tsv file into dataframe object
 snp_df <- PanViz::GWAS_catalog_tsv_to_dataframe(path)
 head(snp_df)
@@ -108,10 +116,10 @@ IMON <- PanViz::get_grouped_IMON(dataframe = snp_df, groupby = "studies", ego = 
 # Analysing an IMON:
 The get_IMON() and get_grouped_IMON() functions return igraph objects that can be further manipulated and visualised. The get_grouped_IMON() further has an argument colour_groups which when set TRUE will colour the network by the respectively chosen grouping categorical variable (either studies or traits) for pretty visualisations of the respective IMON groups. We can demonstrate this by plotting a graph using a custom Reingold Tilford tree algorithm, where we can see how the selected studies intersect and relate to one another.   
 
+
 ```{r, fig.width=20, fig.height=24}
 ##creating an IMON again using the first 5 studies reported within the downloaded tsv file, grouping by studies and colouring the nodes/edges of the graph based on these groups:
 IMON <- PanViz::get_grouped_IMON(dataframe = snp_df, groupby = "studies", ego = 5, save_file = FALSE, colour_groups = TRUE)
-
 ##creating custom igraph tree layout plotting from SNP downards to metabolite:
 myformat <- function(IMON) {
   layout.reingold.tilford(IMON, root = V(IMON)[grepl("SNP", V(IMON)$type)], flip.y = TRUE, circular = FALSE)
@@ -142,6 +150,10 @@ legend('bottom',bty = "n",
        legend=levels(groupings),
        fill=unique_group_cols, border=NA, cex = 1.7)
 ```
+
+
+
+
 
 This plot can be further edited using the various plot options and arguments offered by igraph, which can be seen [here](https://www.rdocumentation.org/packages/igraph/versions/0.2.1/topics/plot.igraph). Furthermore, various standard and commonly used graph layouts are available from igraph, which can be viewed [here](https://igraph.org/r/doc/layout_.html).
 
