@@ -1,6 +1,8 @@
 #' snp_gene_chr_match
 #'
 #' @param gene_loc - dataframe of genes and their chromosome numbers and start/stop positions
+#' @param snp_loc - snp locations
+#'
 #'
 #' @return - a recursive list of gene with their relative snps that have the same chromosome number
 snp_gene_chr_match <- function(snp_loc, gene_loc){

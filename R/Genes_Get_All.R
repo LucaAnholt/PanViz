@@ -1,6 +1,5 @@
 #' Genes_Get_All
 #' @description This function constructs adjacency lists for genes and enzymes listed within the KEGG database
-#' @param directory Directory in which to save network data: "wd" (working directory - default), "choose" (manually choose directory).
 #' @param CPU The number of cores to use when making KEGGREST API Get requests (default = 2). If CPU > 1, parallel requests will be made.
 #' @param sleep The amount of sleep between a potential caught API error and the next attempt (default = 5).
 #' @return Rds files for all relevant adjacency lists

@@ -5,6 +5,7 @@
 #' @param ego This dictates what length order ego-centred network should be constructed. If set to 5 (default and recommended), an IMON with the first layer of the connected metabolome will be returned. If set above 5, the corresponding extra layer of the metabolome will be returned. If set to 0 (not recommended) the fully connected metabolome will be returned.
 #' @param save_file Boolean (default = FALSE) argument that indicates whether or not the user wants to save the graph as an exported file in their current working directory
 #' @param export_type  This dictates the network data structure saved in your working directory. By default this outputs an igraph object, however, you can choose to export and save an edge list, graphml or GML file.
+#' @param directory If set to "choose" this argument allows the user to interactively select the directory of their choice in which they wish to save the constructed IMON, else the file will be saved to the working directory "wd" by default
 #' @param colour_groups Boolean (default = FALSE) chooses whether or not to colour the whole network by grouping variables
 #'
 #' @return An igraph object containing the constructed IMON with coloured SNPs/and or whole network by selected grouping variable

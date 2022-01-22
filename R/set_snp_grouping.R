@@ -3,8 +3,10 @@
 #'
 #' @param G - igraph object containing IMON
 #' @param unique_group_names - vector containing unique grouping variable names
+#' @param unique_group_cols - vector containing unique grouping colours for each variable
+#' @param group_snps - snps split by each variable/group
 #'
-#' @return - igraoh object containing IMON with labelled and coloured snps by grouping variable
+#' @return - igraph object containing IMON with labelled and coloured snps by grouping variable
 set_snp_grouping <- function(G, unique_group_names, unique_group_cols, group_snps){
   for(i in seq_along(unique_group_names)){
     igraph::V(G)[which(igraph::V(G)$name %in% group_snps[[unique_group_names[[i]]]])]$group <- unique_group_names[[i]]
