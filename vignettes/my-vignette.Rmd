@@ -117,7 +117,7 @@ IMON <- PanViz::get_grouped_IMON(dataframe = snp_df, groupby = "studies", ego = 
 The get_IMON() and get_grouped_IMON() functions return igraph objects that can be further manipulated and visualised. The get_grouped_IMON() further has an argument colour_groups which when set TRUE will colour the network by the respectively chosen grouping categorical variable (either studies or traits) for pretty visualisations of the respective IMON groups. We can demonstrate this by plotting a graph using a custom Reingold Tilford tree algorithm, where we can see how the selected studies intersect and relate to one another.   
 
 
-```{r, fig.width=20, fig.height=24}
+```{r, fig.width=20, fig.height=25}
 ##creating an IMON again using the first 5 studies reported within the downloaded tsv file, grouping by studies and colouring the nodes/edges of the graph based on these groups:
 IMON <- PanViz::get_grouped_IMON(dataframe = snp_df, groupby = "studies", ego = 5, save_file = FALSE, colour_groups = TRUE, progress_bar = FALSE)
 ##creating custom igraph tree layout plotting from SNP downards to metabolite:
@@ -126,33 +126,31 @@ myformat <- function(IMON) {
 }
 ##setting format for igraph object:
 format <- myformat(IMON)
-layout(rbind(1,2), heights=c(7,1))  # put legend on bottom 1/8th of the chart
 ##plotting the IMON using the custom tree algorithm:
 plot(IMON,
-  vertex.label.cex = 0.5,
-  vertex.size = 5,
-  edge.arrow.size=.1,
-  vertex.label = NA,
-  vertex.color= adjustcolor(V(IMON)$col, alpha = 0.5),
-  edge.color = adjustcolor(E(IMON)$col, alpha = 0.5),
-  edge.width = 1.5,
-  layout = format,
-  vertex.frame.width = 0.001
+     vertex.label = V(IMON)$ID,
+     vertex.shape = "square",
+     vertex.label.color = "black",
+     vertex.label.cex = 1.5,
+     vertex.size = 5,
+     edge.arrow.size=.5,
+     vertex.color= adjustcolor(V(IMON)$col, alpha = 0.5),
+     edge.color = adjustcolor(E(IMON)$col, alpha = 0.5),
+     edge.width = 2,
+     layout = format,
+     vertex.frame.width = 0.001,
+     #asp = 0.35,
+     margin = -0.1
 )
-# setup for no margins on the legend
-par(mar=c(0, 0, 0, 0))
-plot.new()
 ##getting the unique group names and their respective colours from the IMON (and using them to create a legend)
 unique_group_names <- unique(V(IMON)$group)[!is.na(unique(V(IMON)$group))]
 unique_group_cols <- unique(V(IMON)[which(V(IMON)$group %in% unique_group_names)]$col)
 groupings <- factor(unique_group_names)
-legend('bottom',bty = "n",
+legdata <- legend("topleft", "legend", trace=TRUE,plot=FALSE)
+legend(bty = "n", x=legdata$rect$left,y=legdata$rect$top,
        legend=levels(groupings),
-       fill=unique_group_cols, border=NA, cex = 1.7)
+       fill=unique_group_cols, border=NA, cex = 1.8)
 ```
-
-
-
 
 
 This plot can be further edited using the various plot options and arguments offered by igraph, which can be seen [here](https://www.rdocumentation.org/packages/igraph/versions/0.2.1/topics/plot.igraph). Furthermore, various standard and commonly used graph layouts are available from igraph, which can be viewed [here](https://igraph.org/r/doc/layout_.html).

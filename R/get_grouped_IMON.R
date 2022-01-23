@@ -37,6 +37,14 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
   if(missing(progress_bar)){
     progress_bar <- TRUE
   }
+  if(missing(colour_groups)){
+    if(!missing(groupby)){
+      colour_groups <- TRUE
+    }
+    else{
+      colour_groups <- FALSE
+    }
+  }
   if(as.integer(groupby %in% c("studies", "trais")) == 0){
     stop("Unexpected groupby value. This should be either 'studies' or 'traits'")
   }
@@ -68,7 +76,7 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
     column_index <- 3
   }
   ##get the categorical group by names (either studies or traits):
-  unique_group_names <- unique(as.character(dataframe[,column_index]))
+  unique_group_names <- unique(dplyr::pull(dataframe, column_index))
   n <- length(unique_group_names) #get number of categories
   if(n > 50){
     stop('Exceeded the number of possible groups (50) - use PanViz::get_IMON() instead')
@@ -85,7 +93,7 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
   unique_group_cols <- sample(col_vector, n) #create vector with associated colours for each categorical group
   ##function for filtering dataframe for snps associated with given categorical group
   filter_snps_by_group <- function(value, dataframe, groupby){
-    snps <- dataframe[dataframe[,column_index] %in% value,]$snps
+    snps <- data.frame(dataframe)[data.frame(dataframe)[,column_index] %in% value,]$snps
     return(snps)
   }
   ##create hash recursive list for finding associated snps for each group

@@ -63,8 +63,6 @@ adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, g
   ##KEGG reaction pair attributes
   igraph::V(G)[grepl("C\\d{5}_C\\d{5}", igraph::V(G)$name)]$type <- "RP"
   ##set IDs of nodes:
-  # compound_names <- unname(compound_names_hash[igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$name])
-  # igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$ID <- compound_names
   index <- which(names(compound_names_hash) %in% igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$name)
   index <- index[order(match(names(compound_names_hash[index]),igraph::V(G)[grepl("METABOLITE", igraph::V(G)$type)]$name))]
   compound_names <- unname(unlist(compound_names_hash[index]))
