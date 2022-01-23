@@ -17,9 +17,9 @@ biblio-style: humannat
 abstract: >
   Over the past 10 years, Genome-Wide Association Studies (GWAS) have discovered a plethora of         statistical associations between single nucleotide polymorphisms (SNPs) and phenotypes of          interest, including a multitude of complex diseases. However, converting the found statistical     associations into biologically meaningful mechanisms that explain the phenotype of interest        remains a complex challenge in the post-GWAS era. Traditionally, GWAS summary-level data is       analysed via simple methods such as gene-set enrichment analysis and network integration, where    SNPs are mapped to gene sets and then paired with associated biological pathways. We present a     novel bioinformatics framework, PanViz, that integrates biochemical pathway data from the Kyoto    Encyclopaedia of Genes and Genomes (KEGG) database with summary-level GWAS data into 'integrated   multi-omics networks' (IMONs). This technique allows the systematic analysis of summary-level      GWAS data with genomic and metabolomic context, improving network integration techniques that aim   to further explain phenotypes using genotype information. 
 vignette: >
-  %\VignetteIndexEntry{PanViz}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}  
+    %\VignetteIndexEntry{PanViz}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8} 
 ---
 
 ```{r init, results='hide', echo=FALSE, warning=FALSE, message=FALSE}
@@ -56,7 +56,7 @@ pkgs_required <- pkgs[!pkgs %in% rownames(installed.packages())]
 BiocManager::install(pkgs_required)
 ```
 
-Load the PanViz library into the _R_ session
+Load the PanViz and other libraries into the _R_ session
 
 ```{r setup, message = FALSE}
 library(PanViz)
@@ -159,10 +159,10 @@ The igraph object of course can also be manipulated and visualised within other 
 ```{r}
 library(networkD3)
 ##convert the igraph object to a networkd3 object and group by the vertex colours:
-IMON_D3 <- igraph_to_networkD3(IMON, group =  V(IMON)$col)
+IMON_D3 <- networkD3::igraph_to_networkD3(IMON, group =  V(IMON)$col)
 
 # Create force directed network plot
-forceNetwork(Links = IMON_D3$links, Nodes = IMON_D3$nodes,
+networkD3::forceNetwork(Links = IMON_D3$links, Nodes = IMON_D3$nodes,
              Source = 'source', Target = 'target',
              NodeID = 'name', Group = 'group', zoom = TRUE, 
              bounded = TRUE, opacity = 1, opacityNoHover = 1)
@@ -185,5 +185,11 @@ The underlying biochemical and metabolic reaction network database that PanViz u
 PanViz::Get_Kegg_Data()
 ```
 
-# References 
+# Session info 
+```{r}
+utils::sessionInfo()
+```
 
+
+
+# References 

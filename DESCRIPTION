@@ -44,6 +44,10 @@ Imports:
 Depends: 
     R (>= 3.5.0)
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0), 
+    BiocStyle, 
+    knitr,
+    rmarkdown,
+    networkD3
 Config/testthat/edition: 3
-VignetteBuilder: utils
+VignetteBuilder: knitr
