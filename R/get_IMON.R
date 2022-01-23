@@ -1,7 +1,7 @@
 #' get_IMON
-#' @description This function constructs an IMON (Integrated Multi-Omic Network) for an inputted list of SNPs and exports an igraph file
+#' @description This function constructs an IMON (Integrated Multi-Omic Network) for an inputted vector of SNPs and exports an igraph file.
 #' @param snp_list A vector of SNPs (strings/characters) using standard NCBI dbSNP accession number naming convention (e.g. "rs185345278")
-#' @param ego This dictates what length order ego-centred network should be constructed. If set to 5 (default and recommended), an IMON with the first layer of the connected metabolome will be returned. If set above 5, the corresponding extra layer of the metabolome will be returned. If set to 0 (not recommended) the fully connected metabolome will be returned.
+#' @param ego This dictates what length order ego-centred network should be constructed. If set to 5 (default and recommended), an IMON with the first layer of the connected metabolome will be returned. If set above 5, the corresponding extra layer of the metabolome will be returned. If set to 0 (not recommended) the fully connected metabolome will be returned. Note, this cannot be set between 0 and 5.
 #' @param save_file Boolean (default = FALSE) argument that indicates whether or not the user wants to save the graph as an exported file in their current working directory
 #' @param export_type This dictates the network data structure saved in the chosen directory. By default this outputs an igraph object, however, you can choose to export and save an edge list, graphml or GML file.
 #' @param directory If set to "choose" this argument allows the user to interactively select the directory of their choice in which they wish to save the constructed IMON, else the file will be saved to the working directory "wd" by default
@@ -37,6 +37,10 @@ get_IMON <- function(snp_list, ego = 5, save_file = c(FALSE, TRUE), export_type 
   }
   else if(as.integer(export_type %in% c("igraph", "edge_list", "graphml", "gml")) == 0){
     stop('Unexpected export data type. export_type must be one of the following: "igraph", "edge_list", "graphml", "gml"')
+  }
+  if(ego < 5 & ego != 0){ ##reset ego if below 5 and not set to special case of zero
+    ego <- 5
+    warning("Warning: an ego below 5 (and not equal to zero) was provided, and thus was reset to the minimum and recommended value of 5 - see documentation for more information")
   }
   ##allow user to select which directory to save exported data file:
   if(missing(directory)){

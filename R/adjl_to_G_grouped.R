@@ -76,13 +76,7 @@ adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, g
   G <- ego_IMON(G, ego)
   ##check if network length is reasonable for colouring:
   if(length(igraph::V(G)) > 2000){
-    cat("IMON is too large to colour whole network by categorical levels\n")
-    colour_groups <- FALSE
-  }
-  ##check if all bioentities exist within supplied IMON:
-  if(length(unique(igraph::V(G)$type)) != 6){
-    cat("IMON is too small to colour whole network by categorical levels\n")
-    colour_groups <- FALSE
+    stop("IMON is too large to colour whole network by categorical levels")
   }
   ##colour graph by user selection
   if(colour_groups == TRUE){

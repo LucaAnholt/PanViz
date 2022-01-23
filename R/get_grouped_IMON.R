@@ -2,7 +2,7 @@
 #' @description This function constructs an IMON (Integrated Multi-Omic Network) with SNPs/or whole network coloured by selected categorical levels (either studies or phenotypes)
 #' @param dataframe A dataframe including 3 columns in the following order and with the following names: snps, studies, traits (all character vectors)
 #' @param groupby Choose whether to group SNP and or network colouring by either studies or traits
-#' @param ego This dictates what length order ego-centred network should be constructed. If set to 5 (default and recommended), an IMON with the first layer of the connected metabolome will be returned. If set above 5, the corresponding extra layer of the metabolome will be returned. If set to 0 (not recommended) the fully connected metabolome will be returned.
+#' @param ego This dictates what length order ego-centred network should be constructed. If set to 5 (default and recommended), an IMON with the first layer of the connected metabolome will be returned. If set above 5, the corresponding extra layer of the metabolome will be returned. An ego of zero can also be provided to ensure the entire metabolome is returned in the network, however, this is not recommended and this network cannot be coloured using the colour_groups argument.
 #' @param save_file Boolean (default = FALSE) argument that indicates whether or not the user wants to save the graph as an exported file in their current working directory
 #' @param export_type  This dictates the network data structure saved in your working directory. By default this outputs an igraph object, however, you can choose to export and save an edge list, graphml or GML file.
 #' @param directory If set to "choose" this argument allows the user to interactively select the directory of their choice in which they wish to save the constructed IMON, else the file will be saved to the working directory "wd" by default
@@ -45,6 +45,10 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
       colour_groups <- FALSE
     }
   }
+  if(ego < 5 & ego != 0){ ##reset ego if below 5 and not set to special case of zero
+    ego <- 5
+    warning("Warning: an ego below 5 (and not equal to zero) was provided, and thus was reset to the minimum and recommended value of 5 - see documentation for more information")
+  }
   if(as.integer(groupby %in% c("studies", "trais")) == 0){
     stop("Unexpected groupby value. This should be either 'studies' or 'traits'")
   }
@@ -74,6 +78,10 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
   }
   if(groupby == "traits"){
     column_index <- 3
+  }
+  if(ego == 0){ ##if ego is set to zero
+    warning("Cannot colour or group network when ego is set to zero.")
+    return(get_IMON(snp_list = dataframe$snps, ego = 0, save_file = save_file, export_type = export_type, directory = directory))
   }
   ##get the categorical group by names (either studies or traits):
   unique_group_names <- unique(dplyr::pull(dataframe, column_index))

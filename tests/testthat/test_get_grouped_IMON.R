@@ -9,4 +9,8 @@ testthat::test_that("tests that get_grouped_IMON produces an igraph object and t
   expect_error(object = PanViz::get_grouped_IMON(dataframe = df, groupby = "studies", ego = 5, save_file = FALSE), regexp =  "None of the supplied SNPs could be queried via dbSNP")
   df <- data.frame(snps = PanViz::er_snp_vector[1:2], studies = c("study1", "study2"), traits = c("trait1", "trait1"))
   expect_error(object = PanViz::get_grouped_IMON(dataframe = df, groupby = "studies", ego = 5, save_file = FALSE), regexp =  "None of the provided SNPs could be mapped to genes provided by the Kyoto Encyclopedia of Genes and Genomes")
+  df <- PanViz::GWAS_catalog_tsv_to_dataframe(file = system.file("extdata", "gwas-association-downloaded_2021-09-13-EFO_1000649.tsv", package="PanViz"))
+  expect_warning(object = PanViz::get_grouped_IMON(dataframe = df, groupby = "studies", ego = 3, save_file = FALSE, colour_groups = TRUE), regexp = "an ego below 5 (and not equal to zero) was provided, and thus was reset to the minimum and recommended value of 5 - see documentation for more information")
+  expect_warning(object = PanViz::get_grouped_IMON(dataframe = df, groupby = "studies", ego = 0, save_file = FALSE, colour_groups = TRUE), regexp = "Cannot colour or group network when ego is set to zero.")
+  expect_warning(object = PanViz::get_grouped_IMON(dataframe = df, groupby = "studies", ego = 0, save_file = FALSE), regexp = "Cannot colour or group network when ego is set to zero or below 5.")
 })
