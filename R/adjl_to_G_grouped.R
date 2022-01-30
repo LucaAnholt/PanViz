@@ -1,3 +1,16 @@
+#' Title
+#'
+#' @param adjl_G_S - adjacency list containing relevant adjacencies between inputted SNPs and genes from KEGG
+#' @param unique_group_names - a list of the unique group/variable names in the provided GWAS Catalog association file
+#' @param unique_group_cols - a list of unique colours for each unique group/variable in the provided GWAS Catalog association file
+#' @param group_snps - a recursive list containing the lists of SNPs belonging to each unique group/variable in the provided GWAS Catalog association file
+#' @param colour_groups - boolean: whether or not user has chosen to colour the network by the unique group/variables in the provided GWAS Catalog association file
+#' @param ego - the egocentric order (centred around the SNPs in the network) in which to build the network i.e. pathlength from SNPs downwards towards the metabolome
+#' @param progress_bar - boolean: whether or not user has decided to have a progress bar print to the console
+#'
+#' @return - an igraph object containing the IMON
+#'
+#' @examples
 adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, group_snps, colour_groups, ego, progress_bar){
   ##loading KEGG network data adjacency lists from working directory:
   cat("Generating IMON \n")
