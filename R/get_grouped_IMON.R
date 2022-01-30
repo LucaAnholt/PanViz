@@ -11,6 +11,14 @@
 #' @return An igraph object containing the constructed IMON with coloured SNPs/and or whole network by selected grouping variable
 #' @export
 #'
+#' @examples
+#' ##getting GWAS Catalog association tsv file and cleaning up using GWAS_catalog_tsv_to_dataframe function:
+#' df <- PanViz::GWAS_catalog_tsv_to_dataframe(file = system.file("extdata", "gwas-association-downloaded_2021-09-13-EFO_1000649.tsv", package="PanViz"))
+#' ##creating uncoloured IMON:
+#' G <- PanViz::get_grouped_IMON(dataframe = df, groupby = "studies", ego = 5, save_file = FALSE, colour_groups = FALSE)
+#' ##creating IMON where vertices/edges are coloured by the variable study:
+#' G <- PanViz::get_grouped_IMON(dataframe = df, groupby = "studies", ego = 5, save_file = FALSE, colour_groups = TRUE)
+#'
 get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 5, save_file = c(FALSE, TRUE), export_type = c("igraph", "edge_list", "graphml", "gml"), directory = c("wd", "choose"), colour_groups = c(FALSE,TRUE), progress_bar = c(TRUE,FALSE)){
   ##test dimensions of inputted dataframe:
   if(dim(dataframe)[2] != 3){

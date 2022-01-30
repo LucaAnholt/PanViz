@@ -1,5 +1,5 @@
 #' ego_IMON
-#' @description internal function for trimming IMON to ego-centred (centred around SNPs) to specified order (pathway length from SNPs)
+#' @description Internal function for trimming IMON to ego-centred (centred around SNPs) to specified order (pathway length from SNPs)
 #' @param G - igraph object representing IMON
 #' @param ego - the selected ego-centred path length
 #'
