@@ -4,6 +4,12 @@
 #'
 #' @return - igraph object containing coloured IMON
 #' @param progress_bar Boolean (default = TRUE) argument that controls whether or not a progress bar for calculations/KEGGREST API GET requests should be printed to the console
+#'
+#' @examples \dontrun{
+#' G <- colour_IMON(G, TRUE)
+#' }
+#'
+#'
 colour_IMON <- function(G, progress_bar){
   snp_index <- igraph::V(G)[grepl("SNP", igraph::V(G)$type)] #get graph indexes for snps
   snp_colours <- igraph::V(G)[snp_index]$col #get colours for each snp (coloured by selected categorical variable)

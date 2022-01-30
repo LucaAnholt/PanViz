@@ -1,9 +1,16 @@
 ##adjaceny lists to graph function:
 #' adj_to_G
 #'
-#' @param adjl_G_S - recursive list containing genes/snps data
+#' @description Internal function that constructs an IMON (Integrated Multi-Omic Network) for an inputted adjacency list containing adjacency information between KEGG genes and queried SNPs.
+#'
+#' @param adjl_G_S - adjacency list containing relevant adjacencies between inputted SNPs and genes from KEGG
 #'
 #' @return igraph object representing total IMON for inputted SNPs
+#'
+#' @examples \dontrun{
+#' G <- adjl_to_G(adjl_G_S)
+#' }
+#'
 adjl_to_G <- function(adjl_G_S){
   cat("Generating IMON\n")
   ##creating IMON network by building up networks from SNP IMON level downwards

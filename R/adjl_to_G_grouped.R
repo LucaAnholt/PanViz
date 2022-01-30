@@ -1,5 +1,5 @@
 #' adjl_to_G_grouped
-#'
+#' @description Internal function that constructs either a variable-coloured or uncoloured IMON (Integrated Multi-Omic Network) for an inputted adjacency list containing adjacency information between KEGG genes and queried SNPs.
 #' @param adjl_G_S - adjacency list containing relevant adjacencies between inputted SNPs and genes from KEGG
 #' @param unique_group_names - a list of the unique group/variable names in the provided GWAS Catalog association file
 #' @param unique_group_cols - a list of unique colours for each unique group/variable in the provided GWAS Catalog association file

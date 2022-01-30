@@ -1,5 +1,5 @@
 #' get_IMON
-#' @description This function constructs an IMON (Integrated Multi-Omic Network) for an inputted vector of SNPs and exports an igraph file.
+#' @description Internal function that constructs an IMON (Integrated Multi-Omic Network) for an inputted vector of SNPs and exports an igraph file.
 #' @param snp_list A vector of SNPs (strings/characters) using standard NCBI dbSNP accession number naming convention (e.g. "rs185345278")
 #' @param ego This dictates what length order ego-centred network should be constructed. If set to 5 (default and recommended), an IMON with the first layer of the connected metabolome will be returned. If set above 5, the corresponding extra layer of the metabolome will be returned. If set to 0 (not recommended) the fully connected metabolome will be returned. Note, this cannot be set between 0 and 5.
 #' @param save_file Boolean (default = FALSE) argument that indicates whether or not the user wants to save the graph as an exported file in their current working directory

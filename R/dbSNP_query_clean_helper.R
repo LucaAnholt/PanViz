@@ -1,9 +1,11 @@
-##dbSNP query clean up function
-#' Title
+#' dbSNP query clean up function
 #'
-#' @param query - dbSNP query
+#' @description Internal function clean up raw SNP data queried from NCBI dbSNP via Entrez API depending on whether or not it could be successfully queried
+#'
+#' @param query - raw dbSNP query object
 #'
 #' @return - dataframe of separate chromosome number, position and ID
+#'
 dbSNP_query_clean <- function(query){
   if(as.integer(is.null(query$chrpos)) == 0){ #checking if query is successful
     chrpos <- query$chrpos #get genomic location
