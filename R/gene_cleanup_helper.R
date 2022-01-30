@@ -1,9 +1,14 @@
-##function for cleaning up queried KEGG gene data:
-#' Title
+#' gene_cleanup
 #'
-#' @param queried_data queried kegg data
+#' @description Internal function for cleaning up queried KEGG gene data
 #'
-#' @return This function helps to cleans up queried KEGG gene recursive lists + filters by genes with adjacent enzymes
+#' @param queried_data queried KEGG gene data (recursive list as returned from KEGGREST)
+#'
+#' @return cleaned up queried KEGG gene recursive lists, filtered by genes with adjacent enzymes
+#'
+#' @examples \dontrun{
+#' Query_Genes_Data <- lapply(Query_Genes_Data, gene_cleanup)
+#' }
 #'
 gene_cleanup <- function(queried_data){
     ##deleting unnecessary data

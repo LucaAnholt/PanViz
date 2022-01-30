@@ -4,7 +4,9 @@
 #' @param sleep The amount of sleep between a potential caught API error and the next attempt (default = 5).
 #' @return Rds files for all relevant adjacency lists
 #' @importFrom foreach %dopar%
-#'
+#' @examples \dontrun{
+#' gene_data <- Genes_Get_All()
+#' }
 Genes_Get_All <- function(CPU = c(2,1), sleep = 5){
   time = proc.time()
   cat("Querying gene data from KEGG\n")

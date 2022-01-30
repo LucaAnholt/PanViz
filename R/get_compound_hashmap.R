@@ -1,10 +1,12 @@
-#' Create hashmap of associated KEGG IDs and compound/metabolite names
+#' get_compound_hashmap
 #' @description This function creates a hashmap of associated KEGG IDs and compound/metabolite names
 #' @param CPU The number of cores to use when making KEGGREST API Get requests (default = 2). If CPU > 1, parallel requests will be made.
 #' @param sleep The amount of sleep (seconds) between a potential caught API error and the next attempt (default = 5)
 #' @return hashmap/recursive list of associated KEGG IDs and compound/metabolite names
 #'
-#'
+#' @examples \dontrun{
+#' compound_hashmap <- get_compound_hashmap()
+#' }
 get_compound_hashmap <- function(CPU = c(2,1), sleep = 5){
   compounds_Raw_IDs <- KEGGREST::keggList("compound")
   ##cleaning up raw data:
