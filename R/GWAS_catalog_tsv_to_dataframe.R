@@ -6,7 +6,11 @@
 #'
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
-#'
+#' @examples
+#' ##getting directory path to GWAS Catalog associtation .tsv file:
+#' path = system.file("extdata", "gwas-association-downloaded_2021-09-13-EFO_1000649.tsv", package="PanViz")
+#' ##opening/cleaning data:
+#' df <- GWAS_catalog_tsv_to_dataframe(file = path)
 #'
 #' @export
 #'
