@@ -50,5 +50,5 @@ Suggests:
     networkD3
 Config/testthat/edition: 3
 VignetteBuilder: knitr
-BiocType: Software
-biocViews: Software
+BiocType: Software, ExperimentData
+biocViews: GenomeWideAssociation, Reactome, Metabolomics, SNP, GraphAndNetwork, Network, KEGG
