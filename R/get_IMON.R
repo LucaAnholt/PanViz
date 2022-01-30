@@ -7,9 +7,15 @@
 #' @param directory If set to "choose" this argument allows the user to interactively select the directory of their choice in which they wish to save the constructed IMON, else the file will be saved to the working directory "wd" by default
 #' @param progress_bar Boolean (default = TRUE) argument that controls whether or not a progress bar for calculations/KEGGREST API GET requests should be printed to the console
 #'
-#'
 #' @return An igraph object containing the constructed IMON
 #' @export
+#'
+#' @example
+#' ##getting vector of SNPs to query:
+#' data("er_snp_vector")
+#' ##build IMON using vector:
+#' G <- PanViz::get_IMON(snp_list = er_snp_vector, ego = 5, save_file = FALSE)
+#'
 get_IMON <- function(snp_list, ego = 5, save_file = c(FALSE, TRUE), export_type = c("igraph", "edge_list", "graphml", "gml"), directory = c("wd", "choose"), progress_bar = c(TRUE, FALSE)){
   ##test if given snp vector is a vector of strings:
   if(sum(as.integer(as.vector(sapply(snp_list, class)) %in% "character")) != length(snp_list)){
