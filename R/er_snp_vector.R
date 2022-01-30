@@ -7,4 +7,4 @@
 #' @name er_snp_vector
 #' @usage data(er_snp_vector)
 #' @format A vector with 110 elements
-NULL
+"er_snp_vector"

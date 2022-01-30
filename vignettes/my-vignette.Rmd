@@ -73,7 +73,8 @@ In the case where only a single vector of summary-level GWAS data is available f
 
 ```{r}
 ##importing the estrogen receptor positive breast cancer example SNP vector 
-snps <- PanViz::er_snp_vector
+data(er_snp_vector)
+snps <- er_snp_vector
 ##creating an IMON using this summary-level GWAS data
 IMON <- PanViz::get_IMON(snp_list = snps, ego = 5, save_file = FALSE, progress_bar = FALSE)
 ```
