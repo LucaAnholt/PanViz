@@ -2,19 +2,18 @@ Package: PanViz
 Type: Package
 Title: Integrating Multi-Omic Network Data With Summay-Level GWAS Data
 Version: 0.99.0
-Author: Luca Anholt <la1317@ic.ac.uk>
-Maintainer: Luca Anholt <la1317@ic.ac.uk>
+Authors@R: person("Luca", "Anholt", email=la1317@ic.ac.uk, role=c("cre", aut")).
 Description: This pacakge integrates data from the Kyoto Encyclopedia of Genes and Genomes (KEGG) 
     with summary-level genome-wide association (GWAS) data from the GWAS Catalog, in order to produce
-    biological networks, termed IMONs (Integrated Multi-Omic Networks).
+    biological networks, termed IMONs (Integrated Multi-Omic Networks). IMONs can be used to analyse
+    trait-specific polymorphic data within the context of biochemical and metabolic reaction networks, 
+    providing greater biological interpretability for GWAS data.
 License: Artistic-2.0
 Encoding: UTF-8
-LazyData: true
+LazyData: false
 RoxygenNote: 7.1.2
-biocViews: Software, ExperimentData
 BugReports: https://github.com/LucaAnholt/PanViz/issues
 URL: https://github.com/LucaAnholt/PanViz
-BiocType: Software
 Imports: 
     KEGGREST,
     tidyr,
@@ -51,3 +50,5 @@ Suggests:
     networkD3
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+BiocType: Software
+biocViews: Software
