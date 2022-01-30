@@ -10,6 +10,10 @@
 #'
 #' @return - an igraph object containing the IMON
 #'
+#' @examples \dontrun{
+#' adjl_to_G_grouped(adjl_G_S, unique_group_names, unique_group_cols, group_snps, TRUE, 5, TRUE)
+#' }
+#'
 adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, group_snps, colour_groups, ego, progress_bar){
   ##loading KEGG network data adjacency lists from working directory:
   cat("Generating IMON \n")
