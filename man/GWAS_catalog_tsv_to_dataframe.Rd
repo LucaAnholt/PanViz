@@ -15,3 +15,10 @@ A processed dataframe containing only the columns including GWAS studies, traits
 \description{
 GWAS Catalog tsv to cleaned dataframe
 }
+\examples{
+##getting directory path to GWAS Catalog associtation .tsv file:
+path = system.file("extdata", "gwas-association-downloaded_2021-09-13-EFO_1000649.tsv", package="PanViz")
+##opening/cleaning data:
+df <- GWAS_catalog_tsv_to_dataframe(file = path)
+
+}

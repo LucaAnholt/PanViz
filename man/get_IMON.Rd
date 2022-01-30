@@ -30,5 +30,5 @@ get_IMON(
 An igraph object containing the constructed IMON
 }
 \description{
-This function constructs an IMON (Integrated Multi-Omic Network) for an inputted vector of SNPs and exports an igraph file.
+Internal function that constructs an IMON (Integrated Multi-Omic Network) for an inputted vector of SNPs and exports an igraph file.
 }

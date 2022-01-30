@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_compound_hashmap.R
 \name{get_compound_hashmap}
 \alias{get_compound_hashmap}
-\title{Create hashmap of associated KEGG IDs and compound/metabolite names}
+\title{get_compound_hashmap}
 \usage{
 get_compound_hashmap(CPU = c(2, 1), sleep = 5)
 }
@@ -16,4 +16,9 @@ hashmap/recursive list of associated KEGG IDs and compound/metabolite names
 }
 \description{
 This function creates a hashmap of associated KEGG IDs and compound/metabolite names
+}
+\examples{
+\dontrun{
+compound_hashmap <- get_compound_hashmap()
+}
 }

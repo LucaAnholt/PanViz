@@ -17,3 +17,10 @@ colour_IMON(G, progress_bar)
 \description{
 colour network by categorical group levels
 }
+\examples{
+\dontrun{
+G <- colour_IMON(G, TRUE)
+}
+
+
+}

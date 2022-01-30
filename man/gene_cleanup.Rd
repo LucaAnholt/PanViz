@@ -2,16 +2,22 @@
 % Please edit documentation in R/gene_cleanup_helper.R
 \name{gene_cleanup}
 \alias{gene_cleanup}
-\title{Title}
+\title{gene_cleanup}
 \usage{
 gene_cleanup(queried_data)
 }
 \arguments{
-\item{queried_data}{queried kegg data}
+\item{queried_data}{queried KEGG gene data (recursive list as returned from KEGGREST)}
 }
 \value{
-This function helps to cleans up queried KEGG gene recursive lists + filters by genes with adjacent enzymes
+cleaned up queried KEGG gene recursive lists, filtered by genes with adjacent enzymes
 }
 \description{
-Title
+Internal function for cleaning up queried KEGG gene data
+}
+\examples{
+\dontrun{
+Query_Genes_Data <- lapply(Query_Genes_Data, gene_cleanup)
+}
+
 }

@@ -4,7 +4,7 @@
 \alias{ego_IMON_2}
 \title{ego_IMON}
 \usage{
-ego_IMON_2(G, ego)
+ego_IMON_2(G, ego, grouped)
 }
 \arguments{
 \item{G}{- igraph object representing IMON}
@@ -15,5 +15,5 @@ ego_IMON_2(G, ego)
 - ego-centred IMON set at desired path length
 }
 \description{
-ego_IMON
+internal function for trimming IMON to ego-centred (centred around SNPs) to specified order (pathway length from SNPs)
 }

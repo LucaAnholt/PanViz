@@ -7,11 +7,17 @@
 adjl_to_G(adjl_G_S)
 }
 \arguments{
-\item{adjl_G_S}{- recursive list containing genes/snps data}
+\item{adjl_G_S}{- adjacency list containing relevant adjacencies between inputted SNPs and genes from KEGG}
 }
 \value{
 igraph object representing total IMON for inputted SNPs
 }
 \description{
-adj_to_G
+Internal function that constructs an IMON (Integrated Multi-Omic Network) for an inputted adjacency list containing adjacency information between KEGG genes and queried SNPs.
+}
+\examples{
+\dontrun{
+G <- adjl_to_G(adjl_G_S)
+}
+
 }

@@ -33,7 +33,7 @@ adjl_to_G_grouped(
 - an igraph object containing the IMON
 }
 \description{
-adjl_to_G_grouped
+Internal function that constructs either a variable-coloured or uncoloured IMON (Integrated Multi-Omic Network) for an inputted adjacency list containing adjacency information between KEGG genes and queried SNPs.
 }
 \examples{
 \dontrun{

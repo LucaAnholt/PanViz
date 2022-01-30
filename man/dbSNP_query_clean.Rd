@@ -2,16 +2,16 @@
 % Please edit documentation in R/dbSNP_query_clean_helper.R
 \name{dbSNP_query_clean}
 \alias{dbSNP_query_clean}
-\title{Title}
+\title{dbSNP query clean up function}
 \usage{
 dbSNP_query_clean(query)
 }
 \arguments{
-\item{query}{- dbSNP query}
+\item{query}{- raw dbSNP query object}
 }
 \value{
 - dataframe of separate chromosome number, position and ID
 }
 \description{
-Title
+Internal function clean up raw SNP data queried from NCBI dbSNP via Entrez API depending on whether or not it could be successfully queried
 }

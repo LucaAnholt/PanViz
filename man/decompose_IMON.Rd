@@ -2,7 +2,7 @@
 % Please edit documentation in R/decompose_IMON.R
 \name{decompose_IMON}
 \alias{decompose_IMON}
-\title{IMON decomposer}
+\title{decompose_IMON}
 \usage{
 decompose_IMON(G)
 }
@@ -10,8 +10,13 @@ decompose_IMON(G)
 \item{G}{- igraph object containing non-fully connected IMON}
 }
 \value{
-- list of igraph objects containing fully connected IMONs
+- list of igraph objects, where each index contains a fully connected IMON
 }
 \description{
-IMON decomposer
+This function returns a list of fully connected IMONs from a single parent unconnected IMON.
+}
+\examples{
+\dontrun{
+G_list <- decompose_IMON(G)
+}
 }
