@@ -1,4 +1,4 @@
-#' Title
+#' adjl_to_G_grouped
 #'
 #' @param adjl_G_S - adjacency list containing relevant adjacencies between inputted SNPs and genes from KEGG
 #' @param unique_group_names - a list of the unique group/variable names in the provided GWAS Catalog association file
@@ -10,7 +10,6 @@
 #'
 #' @return - an igraph object containing the IMON
 #'
-#' @examples
 adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, group_snps, colour_groups, ego, progress_bar){
   ##loading KEGG network data adjacency lists from working directory:
   cat("Generating IMON \n")
