@@ -40,7 +40,7 @@ This function constructs an IMON (Integrated Multi-Omic Network) with SNPs/or wh
 }
 \examples{
 ##getting GWAS Catalog association tsv file and cleaning up using GWAS_catalog_tsv_to_dataframe function:
-df <- PanViz::GWAS_catalog_tsv_to_dataframe(file = system.file("extdata", "gwas-association-downloaded_2021-09-13-EFO_1000649.tsv", package="PanViz"))
+df <- PanViz::GWAS_data_reader(file = system.file("extdata", "gwas-association-downloaded_2021-09-13-EFO_1000649.tsv", package="PanViz"), snp_col = "SNPS", study_col = "STUDY", trait_col = "DISEASE/TRAIT")
 ##creating uncoloured IMON:
 G <- PanViz::get_grouped_IMON(dataframe = df, groupby = "studies", ego = 5, save_file = FALSE, colour_groups = FALSE)
 ##creating IMON where vertices/edges are coloured by the variable study:

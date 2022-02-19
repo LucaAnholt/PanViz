@@ -69,7 +69,7 @@ GWAS_data_reader <- function(file, snp_col, study_col, trait_col){
   file <- tidyr::separate_rows(file, all_of(snp_col), convert = T)
   ##check that standard dbSNP accession number naming convention exists within the snp column:
   ##first check if the standard acession naming exists at all:
-  if(!any(stringr::str_detect(string = as.character(file[,snp_col]), pattern = "rs")) == T){
+  if(!any(stringr::str_detect(string = as.character(file[[snp_col]]), pattern = "rs")) == T){
     stop("The file and SNP column identifier provided does not return the expected standard dbSNP accession number e.g. 'rs73370840'")
   }
   ##next check if it does exist, if there also exists unexpected non-standard naming too (if so filter only standard naming)

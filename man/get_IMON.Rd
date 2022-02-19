@@ -32,3 +32,10 @@ An igraph object containing the constructed IMON
 \description{
 Internal function that constructs an IMON (Integrated Multi-Omic Network) for an inputted vector of SNPs and exports an igraph file.
 }
+\examples{
+##getting vector of SNPs to query:
+data("er_snp_vector")
+##build IMON using vector:
+G <- PanViz::get_IMON(snp_list = er_snp_vector, ego = 5, save_file = FALSE)
+
+}
