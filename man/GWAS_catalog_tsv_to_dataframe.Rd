@@ -21,4 +21,5 @@ path = system.file("extdata", "gwas-association-downloaded_2021-09-13-EFO_100064
 ##opening/cleaning data:
 df <- GWAS_catalog_tsv_to_dataframe(file = path)
 
+
 }
