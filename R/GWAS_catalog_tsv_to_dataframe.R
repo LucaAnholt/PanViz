@@ -12,7 +12,6 @@
 #' ##opening/cleaning data:
 #' df <- GWAS_catalog_tsv_to_dataframe(file = path)
 #'
-#' @export
 #'
 GWAS_catalog_tsv_to_dataframe <- function(file){
   if(missing(file)){ ##check if user has provided file, if not send error
