@@ -10,7 +10,7 @@
 #' @return An igraph object containing the constructed IMON
 #' @export
 #'
-#' @example
+#' @examples
 #' ##getting vector of SNPs to query:
 #' data("er_snp_vector")
 #' ##build IMON using vector:
