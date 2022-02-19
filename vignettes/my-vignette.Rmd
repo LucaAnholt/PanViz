@@ -117,12 +117,11 @@ IMON <- PanViz::get_grouped_IMON(dataframe = snp_df, groupby = "studies", ego = 
 ## Handling summary-level GWAS .tsv files sourced from GWAS Central
 As above, in the case that summary-level GWAS data was downloaded from GWAS Central, users can use the GWAS_data_reader() function to parse the raw tsv file into an _R_ dataframe object. In this example, a tsv file containing the summary-level associations data for estrogen receptor-positive breast cancer (MeSH term: D001943) is used. Note, that here we change the column identifiers within the function to those used by the respective database (these can always be checked by opening the relevant data files in R or Microsoft Excel). To this end, a user could actually use the GWAS_data_reader() function for any data file, not necessarily one sourced from either GWAS Catalog or GWAS Central, that contains SNP, study and phenotype/trait information. 
 
-```{r}
+```{r, eval = FALSE}
 ##getting tsv file directory path from package data directory - this will be replaced with the users own tsv file path 
 path <- system.file("extdata", "GWASCentralMart_ERplusBC.tsv", package="PanViz")
 ##parsing tsv file into dataframe object
 snp_df <- PanViz::GWAS_data_reader(file = path, snp_col = "Source Marker Accession", study_col = "Study Name", trait_col = "Annotation Name")
-head(snp_df)
 ```
 
 
