@@ -30,11 +30,11 @@ BiocStyle::markdown()
 
 
 # Introduction
-  The purpose of the PanViz package is to provide researchers with a novel method for analysing summary-level Genome-Wide Association Study (GWAS) data, such as that provided by the GWAS Catalog database [@Buniello2019], within the context of the genome and metabolome via integration with biochemical networks queried from the Kyoto Encyclopaedia of Genes and Genomes (KEGG) [@Kanehisa2000]. See Figure 1 below for an overview of the methodology used by PanViz. 
+  The purpose of the PanViz package is to provide researchers with a novel method for analysing summary-level Genome-Wide Association Study (GWAS) data, such as that provided by the GWAS Catalog [@Buniello2019], or GWAS Central [@Beck2014] databases, or their own study data, within the context of the genome and metabolome via integration with biochemical networks queried from the Kyoto Encyclopaedia of Genes and Genomes (KEGG) [@Kanehisa2000]. See Figure 1 below for an overview of the methodology used by PanViz. 
 
-```{r,echo=FALSE, fig.cap="\\label{fig:figs}PanViz methodology. 1) Biochemical reaction network data (capturing multi-omic adjacencies) was queried from the Kyoto Encyclopaedia of Genes and Genomes (KEGG) database. A capture of this data (captured in August 2021) is stored locally in compressed adjacency lists so that no KEGG queries have to be made whilst using the package, in order to improve computation speeds. However, users can choose to update the local database at any point in order to use the most up-to-date KEGG database using the get_kegg_data() function - see Section X. 2) Precise genomic locations for the genes present within the KEGG biochemical reaction networks were queried via the NCBI Gene databse. Similarly, a capture of this data is stored locally, however, this can also be updated along with the KEGG database using the get_kegg_data() function. 3) Genome-wide Association study (GWAS) summary-level data (such as that provided by the GWAS Catalog database) is inputted by the user. 4) The precise chromosome locations for the single nucleotide polymorphisms (SNPs) present within the inputted summary-level GWAS data are queried via the NCBI dbSNP databse. 5) Once SNP locations are queried, SNPs can be mapped onto KEGG genes if they fall within a 1Mb range upstream or downstream of a gene location, and thus the SNPs can be integrated into the KEGG biochemical reaction networks, producing an 'integrated multi-omic network' or IMON."}
+```{r,echo=FALSE, fig.cap="\\label{fig:figs}PanViz methodology. 1) Biochemical reaction network data (capturing multi-omic adjacencies) was queried from the Kyoto Encyclopaedia of Genes and Genomes (KEGG) database. A capture of this data (captured in August 2021) is stored locally in compressed adjacency lists so that no KEGG queries have to be made whilst using the package, in order to improve computation speeds. However, users can choose to update the local database at any point in order to use the most up-to-date KEGG database using the get_kegg_data() function - see Section X. 2) Precise genomic locations for the genes present within the KEGG biochemical reaction networks were queried via the NCBI Gene databse. Similarly, a capture of this data is stored locally, however, this can also be updated along with the KEGG database using the get_kegg_data() function. 3) Genome-wide Association study (GWAS) summary-level data (such as that provided by the GWAS Catalog or GWAS Central databases) is inputted by the user. 4) The precise chromosome locations for the single nucleotide polymorphisms (SNPs) present within the inputted summary-level GWAS data are queried via the NCBI dbSNP databse. 5) Once SNP locations are queried, SNPs can be mapped onto KEGG genes if they fall within a 1Mb range upstream or downstream of a gene location, and thus the SNPs can be integrated into the KEGG biochemical reaction networks, producing an 'integrated multi-omic network' or IMON."}
 # Small fig.width
-include_graphics("IMON_method_edit.png")
+include_graphics("IMON_method.png")
 ```
 
 
@@ -96,13 +96,13 @@ IMON <- PanViz::get_IMON(snp_list = snps, ego = 5, save_file = TRUE, export_type
 Note that when the argument directory = "wd" (default), the exported file is saved within the user's current working directory, whereas setting directory = "choose" enables a user to select a directory in which to save the graph file via an interactive interface. 
 
 ## Handling summary-level GWAS .tsv files sourced from GWAS Catalog: get_grouped_IMON() 
-In the case that a summary-level associations tsv file was downloaded from the GWAS Catalog, users can use the GWAS_catalog_tsv_to_dataframe() function to parse the raw tsv file into an _R_ dataframe object. In this example, a tsv file containing the summary-level associations data for estrogen receptor-positive breast cancer (EFO_1000649) is used. 
+In the case that a summary-level associations tsv file was downloaded from the GWAS Catalog, users can use the GWAS_data_reader() function to parse the raw tsv file into an _R_ dataframe object. In this example, a tsv file containing the summary-level associations data for estrogen receptor-positive breast cancer (EFO_1000649) is used. 
 
 ```{r}
 ##getting tsv file directory path from package data directory - this will be replaced with the users own tsv file path 
 path <- system.file("extdata", "gwas-association-downloaded_2021-09-13-EFO_1000649.tsv", package="PanViz")
 ##parsing tsv file into dataframe object
-snp_df <- PanViz::GWAS_catalog_tsv_to_dataframe(path)
+snp_df <- PanViz::GWAS_data_reader(file = path, snp_col = "SNPS", study_col = "STUDY", trait_col = "DISEASE/TRAIT")
 head(snp_df)
 ```
 
