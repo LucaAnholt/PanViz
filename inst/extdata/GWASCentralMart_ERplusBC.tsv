@@ -1,0 +1,96 @@
+GC Study Identifier	Study Name	Source Marker Accession	Chromosome	Annotation Name	Phenotype Annotation Identifier	-log p-value
+HGVST1927	GWAS of Breast cancer	rs992531	8	Breast Neoplasms	D001943	6.699
+HGVST1927	GWAS of Breast cancer	rs2314686	8	Breast Neoplasms	D001943	7.699
+HGVST1927	GWAS of Breast cancer	rs4996307	8	Breast Neoplasms	D001943	6.699
+HGVST1927	GWAS of Breast cancer	rs7701292	5	Breast Neoplasms	D001943	7.699
+HGVST3198	GWAS of Survival in endocrine treated breast cancer	rs8113308	19	Breast Neoplasms	D001943	6.222
+HGVST3268	GWAS of Breast cancer	rs13074711	3	Breast Neoplasms	D001943	7.699
+HGVST3268	GWAS of Breast cancer	rs10069690	5	Breast Neoplasms	D001943	9.699
+HGVST3268	GWAS of Breast cancer	rs12998806	2	Breast Neoplasms	D001943	7.699
+HGVST3268	GWAS of Breast cancer	rs13074711	3	Breast Neoplasms	D001943	5.699
+HGVST3268	GWAS of Breast cancer	rs10069690	5	Breast Neoplasms	D001943	5.301
+HGVST3710	GWAS of Breast cancer	rs2981579	10	Breast Neoplasms	D001943	6.301
+HGVST3710	GWAS of Breast cancer	rs2981579	10	Breast Neoplasms	D001943	6.398
+HGVST3710	GWAS of Breast cancer	rs4784227	16	Breast Neoplasms	D001943	5.155
+HGVST3767	GWAS of Breast cancer mortality	rs5970218	X	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs10684290	1	Breast Neoplasms	D001943	6
+HGVST3767	GWAS of Breast cancer mortality	rs72761829	1	Breast Neoplasms	D001943	5.398
+HGVST3767	GWAS of Breast cancer mortality	rs4525697	2	Breast Neoplasms	D001943	5.222
+HGVST3767	GWAS of Breast cancer mortality	rs79539148	2	Breast Neoplasms	D001943	5.301
+HGVST3767	GWAS of Breast cancer mortality	rs57297613	2	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs6738070	2	Breast Neoplasms	D001943	5.222
+HGVST3767	GWAS of Breast cancer mortality	rs376045897	2	Breast Neoplasms	D001943	6.046
+HGVST3767	GWAS of Breast cancer mortality	rs2030217	3	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs4462981	3	Breast Neoplasms	D001943	5.398
+HGVST3767	GWAS of Breast cancer mortality	rs77465470	4	Breast Neoplasms	D001943	5.222
+HGVST3767	GWAS of Breast cancer mortality	rs115988318	4	Breast Neoplasms	D001943	5.398
+HGVST3767	GWAS of Breast cancer mortality	rs1295683	5	Breast Neoplasms	D001943	6.222
+HGVST3767	GWAS of Breast cancer mortality	rs12199978	6	Breast Neoplasms	D001943	5.155
+HGVST3767	GWAS of Breast cancer mortality	rs9689308	6	Breast Neoplasms	D001943	5.222
+HGVST3767	GWAS of Breast cancer mortality	rs5875324	6	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs370332736	6	Breast Neoplasms	D001943	6.699
+HGVST3767	GWAS of Breast cancer mortality	rs2784888	6	Breast Neoplasms	D001943	5.398
+HGVST3767	GWAS of Breast cancer mortality	rs4720945	7	Breast Neoplasms	D001943	5.155
+HGVST3767	GWAS of Breast cancer mortality	rs10282989	8	Breast Neoplasms	D001943	5.301
+HGVST3767	GWAS of Breast cancer mortality	rs199600662	9	Breast Neoplasms	D001943	5.301
+HGVST3767	GWAS of Breast cancer mortality	rs10998765	10	Breast Neoplasms	D001943	5.398
+HGVST3767	GWAS of Breast cancer mortality	rs10906806	10	Breast Neoplasms	D001943	6
+HGVST3767	GWAS of Breast cancer mortality	rs71392427	10	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs2442690	11	Breast Neoplasms	D001943	5.398
+HGVST3767	GWAS of Breast cancer mortality	rs139983808	11	Breast Neoplasms	D001943	5.398
+HGVST3767	GWAS of Breast cancer mortality	rs112319461	11	Breast Neoplasms	D001943	6
+HGVST3767	GWAS of Breast cancer mortality	rs111310676	11	Breast Neoplasms	D001943	5.523
+HGVST3767	GWAS of Breast cancer mortality	rs113811441	14	Breast Neoplasms	D001943	5.155
+HGVST3767	GWAS of Breast cancer mortality	rs61755581	14	Breast Neoplasms	D001943	6
+HGVST3767	GWAS of Breast cancer mortality	rs34877263	14	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs12892107	14	Breast Neoplasms	D001943	5.222
+HGVST3767	GWAS of Breast cancer mortality	rs9807667	18	Breast Neoplasms	D001943	6
+HGVST3767	GWAS of Breast cancer mortality	rs61731483	19	Breast Neoplasms	D001943	5.155
+HGVST3767	GWAS of Breast cancer mortality	rs35523860	20	Breast Neoplasms	D001943	5.398
+HGVST3767	GWAS of Breast cancer mortality	rs62237615	22	Breast Neoplasms	D001943	5.398
+HGVST3767	GWAS of Breast cancer mortality	rs6628643	X	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs1223809	1	Breast Neoplasms	D001943	6.222
+HGVST3767	GWAS of Breast cancer mortality	rs79991130	1	Breast Neoplasms	D001943	5.523
+HGVST3767	GWAS of Breast cancer mortality	rs1809591	2	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs1895136	2	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs146081883	2	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs12617237	2	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs139805484	4	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs6837069	4	Breast Neoplasms	D001943	6
+HGVST3767	GWAS of Breast cancer mortality	rs111896170	4	Breast Neoplasms	D001943	6
+HGVST3767	GWAS of Breast cancer mortality	rs113232387	5	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs28716841	5	Breast Neoplasms	D001943	5.523
+HGVST3767	GWAS of Breast cancer mortality	rs2937080	5	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs147254607	5	Breast Neoplasms	D001943	6.301
+HGVST3767	GWAS of Breast cancer mortality	rs67918676	7	Breast Neoplasms	D001943	7
+HGVST3767	GWAS of Breast cancer mortality	rs6475992	9	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs117212863	10	Breast Neoplasms	D001943	6
+HGVST3767	GWAS of Breast cancer mortality	rs72804888	10	Breast Neoplasms	D001943	6.097
+HGVST3767	GWAS of Breast cancer mortality	rs117521942	10	Breast Neoplasms	D001943	5.523
+HGVST3767	GWAS of Breast cancer mortality	rs184731128	11	Breast Neoplasms	D001943	6
+HGVST3767	GWAS of Breast cancer mortality	rs146768547	14	Breast Neoplasms	D001943	6.097
+HGVST3767	GWAS of Breast cancer mortality	rs11846015	14	Breast Neoplasms	D001943	5.523
+HGVST3767	GWAS of Breast cancer mortality	rs2074885	15	Breast Neoplasms	D001943	6
+HGVST3767	GWAS of Breast cancer mortality	rs213667	16	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs35557655	16	Breast Neoplasms	D001943	6.097
+HGVST3767	GWAS of Breast cancer mortality	rs111410779	20	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs2825231	21	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs12505589	4	Breast Neoplasms	D001943	5.398
+HGVST3767	GWAS of Breast cancer mortality	rs79116769	4	Breast Neoplasms	D001943	6.222
+HGVST3767	GWAS of Breast cancer mortality	rs11289719	5	Breast Neoplasms	D001943	5.523
+HGVST3767	GWAS of Breast cancer mortality	rs6938753	6	Breast Neoplasms	D001943	6
+HGVST3767	GWAS of Breast cancer mortality	rs587150	6	Breast Neoplasms	D001943	6
+HGVST3767	GWAS of Breast cancer mortality	rs4717568	7	Breast Neoplasms	D001943	7
+HGVST3767	GWAS of Breast cancer mortality	rs375468501	7	Breast Neoplasms	D001943	5.523
+HGVST3767	GWAS of Breast cancer mortality	rs55686336	9	Breast Neoplasms	D001943	5.523
+HGVST3767	GWAS of Breast cancer mortality	rs204517	9	Breast Neoplasms	D001943	5.523
+HGVST3767	GWAS of Breast cancer mortality	rs7082321	10	Breast Neoplasms	D001943	6
+HGVST3767	GWAS of Breast cancer mortality	rs11251942	10	Breast Neoplasms	D001943	6.301
+HGVST3767	GWAS of Breast cancer mortality	rs7160316	14	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs149479659	15	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs140538758	16	Breast Neoplasms	D001943	6.222
+HGVST3767	GWAS of Breast cancer mortality	rs12938141	17	Breast Neoplasms	D001943	6.301
+HGVST3767	GWAS of Breast cancer mortality	rs118021774	17	Breast Neoplasms	D001943	5.398
+HGVST3767	GWAS of Breast cancer mortality	rs73370840	21	Breast Neoplasms	D001943	6.046
+HGVST3767	GWAS of Breast cancer mortality	rs62237617	22	Breast Neoplasms	D001943	5.699
+HGVST3767	GWAS of Breast cancer mortality	rs62235635	22	Breast Neoplasms	D001943	6
