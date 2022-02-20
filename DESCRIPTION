@@ -22,9 +22,6 @@ Imports:
     dplyr,
     tibble,
     magrittr,
-    devtools,
-    svMisc,
-    stringi,
     futile.logger,
     utils,
     doSNOW,
@@ -33,7 +30,6 @@ Imports:
     rentrez,
     igraph,
     RColorBrewer,
-    hash,
     data.table,
     colorspace,
     grDevices,
@@ -42,7 +38,7 @@ Imports:
     methods,
     usethis
 Depends: 
-    R (>= 3.5.0)
+    R (>= 4.1.0)
 Suggests: 
     testthat (>= 3.0.0), 
     BiocStyle, 

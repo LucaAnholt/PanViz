@@ -66,14 +66,14 @@ GWAS_data_reader <- function(file, snp_col, study_col, trait_col){
     trait_col <- colnames(file)[[trait_col]]
   }
   ##separating SNP rows, if necessary:
-  file <- tidyr::separate_rows(file, all_of(snp_col), convert = T)
+  file <- tidyr::separate_rows(file, all_of(snp_col), convert = TRUE)
   ##check that standard dbSNP accession number naming convention exists within the snp column:
   ##first check if the standard acession naming exists at all:
-  if(!any(stringr::str_detect(string = as.character(file[[snp_col]]), pattern = "rs")) == T){
+  if(!any(stringr::str_detect(string = as.character(file[[snp_col]]), pattern = "rs")) == TRUE){
     stop("The file and SNP column identifier provided does not return the expected standard dbSNP accession number e.g. 'rs73370840'")
   }
   ##next check if it does exist, if there also exists unexpected non-standard naming too (if so filter only standard naming)
-  if(!any(stringr::str_detect(string = as.character(file[[snp_col]]), pattern = "rs")) == F & all(stringr::str_detect(string = as.character(file[[snp_col]]), pattern = "rs")) == FALSE){
+  if(!any(stringr::str_detect(string = as.character(file[[snp_col]]), pattern = "rs")) == FALSE & all(stringr::str_detect(string = as.character(file[[snp_col]]), pattern = "rs")) == FALSE){
     file <- dplyr::filter(file, stringr::str_detect(string = as.character(file[[snp_col]]), pattern = "rs"))
   }
   ##select and rename required columns:
