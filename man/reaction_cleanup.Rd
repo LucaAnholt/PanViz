@@ -9,6 +9,9 @@ reaction_cleanup(queried_data)
 \arguments{
 \item{queried_data}{- input queried KEGG reaction data}
 }
+\value{
+Trimmed recursive lists containing queried KEGG reaction data
+}
 \description{
 This function helps to cleans up queried KEGG reaction recursive lists + separates compound/metabolite and reaction pair data into new sections
 }

@@ -14,12 +14,15 @@ retry(
 \arguments{
 \item{expr}{This is the function you want to catch and handle errors from}
 
-\item{isError}{Define the error}
+\item{isError}{Function for evaluating if provided expression is throwing an error}
 
 \item{maxErrors}{The maximum number of errrors it should handle from the function}
 
 \item{sleep}{The amount of sleep between a caught error and the next attempt}
 }
+\value{
+The expression that has been either successfully ran or retried maximum number of times
+}
 \description{
-Retry function
+Internal function for handling errors when accessing APIs
 }

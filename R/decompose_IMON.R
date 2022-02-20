@@ -6,9 +6,11 @@
 #'
 #' @return - list of igraph objects, where each index contains a fully connected IMON
 #' @export
-#' @examples \dontrun{
+#' @examples
+#' data("er_snp_vector")
+#' G <- PanViz::get_IMON(snp_list = er_snp_vector, ego = 5, save_file = FALSE)
 #' G_list <- decompose_IMON(G)
-#' }
+#'
 decompose_IMON <- function(G){
   ##check if user has provided IMON (igraph object)
   if(missing(G)){

@@ -16,7 +16,8 @@ decompose_IMON(G)
 This function returns a list of fully connected IMONs from a single parent unconnected IMON.
 }
 \examples{
-\dontrun{
+data("er_snp_vector")
+G <- PanViz::get_IMON(snp_list = er_snp_vector, ego = 5, save_file = FALSE)
 G_list <- decompose_IMON(G)
-}
+
 }

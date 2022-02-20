@@ -2,6 +2,7 @@
 #' reaction_cleanup
 #' @description This function helps to cleans up queried KEGG reaction recursive lists + separates compound/metabolite and reaction pair data into new sections
 #' @param queried_data - input queried KEGG reaction data
+#' @return Trimmed recursive lists containing queried KEGG reaction data
 reaction_cleanup <- function(queried_data){
   ##deleting unnecessary data
   queried_data$DEFINITION <- NULL
