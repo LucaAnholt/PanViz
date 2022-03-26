@@ -21,7 +21,7 @@ NCBI_Gene_Locations <- function(Gene_Enterez_IDs){
   raw_data <- unlist(raw_data_list, recursive = FALSE)
   ##removing any genes that are not listed in the NCBI database
   raw_data <- lapply(raw_data, NCBI_clean)
-  raw_data <- raw_data[!sapply(raw_data, function(x) all(is.na(x)))]
+  raw_data <- raw_data[!vapply(X = raw_data, FUN = function(x) all(is.na(x)), FUN.VALUE = as.logical(1))]
   ##accessing the genomic location data:
   raw_data <- lapply(raw_data, NCBI_clean_2)
   ##organising genomic information as dataframe:
