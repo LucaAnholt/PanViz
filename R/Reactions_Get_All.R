@@ -6,8 +6,6 @@
 #' @return Rds files for all relevant adjacency lists
 #'
 Reactions_Get_All <- function(CPU = c(2,1), sleep = 5){
-  time = proc.time() #time process
-  cat("Querying metabolite, reaction and enzyme data from KEGG\n")
   ##pulling reaction IDs from KEGG:
   Reaction_Raw_IDs <- KEGGREST::keggList("reaction")
   ##cleaning up raw data:
@@ -50,9 +48,6 @@ Reactions_Get_All <- function(CPU = c(2,1), sleep = 5){
   names(adjl_R_E) <- reaction_names
   ##removing any reactions with no associated enzymes:
   adjl_R_E <- adjl_R_E[!vapply(X = adjl_RP_E, FUN = function(x) all(is.na(x)), FUN.VALUE = as.logical(1))]
-  ##saving adjacency lists to selected directory:
-  cat("Metabolite, reaction and enzyme adjacencies successfully queried - time elsapsed: ", (proc.time() - time)[[3]]/60, " minutes")
-  cat("\n")
   return(list(adjl_R_E, adjl_RP_C, adjl_RP_R))
 }
 

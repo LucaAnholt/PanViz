@@ -7,7 +7,6 @@
 NCBI_Gene_Locations <- function(Gene_Enterez_IDs){
   split_data <- split(Gene_Enterez_IDs, ceiling(seq_along(Gene_Enterez_IDs)/100))
   #Getting gene locations:
-  cat("Querying gene locations from NCBI\n")
   pb <- utils::txtProgressBar(max = length(split_data), style = 3)
   raw_data_list <- list()
   genomic_data <- list()

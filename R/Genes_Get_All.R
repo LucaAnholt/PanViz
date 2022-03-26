@@ -5,8 +5,6 @@
 #' @return Rds files for all relevant adjacency lists
 #' @importFrom foreach %dopar%
 Genes_Get_All <- function(CPU = c(2,1), sleep = 5){
-  time = proc.time()
-  cat("Querying gene data from KEGG\n")
   ##querying all human gene IDs from KEGG:
   all_Genes <- KEGGREST::keggList("hsa")
   ##Cleaning up the queried data:
@@ -41,7 +39,5 @@ Genes_Get_All <- function(CPU = c(2,1), sleep = 5){
   gene_ID <- gsub("hsa: ", "", gene_ID)
   ##Getting gene locations:
   Gene_Locations <- NCBI_Gene_Locations(Gene_Enterez_IDs = gene_ID)
-  cat("gene adjacencies and locations successfully queried - time elsapsed: ", (proc.time() - time)[[3]]/60, " minutes")
-  cat("\n")
   return(list(adjl_G_E, Gene_Locations))
 }

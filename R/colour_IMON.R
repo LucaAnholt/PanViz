@@ -66,7 +66,6 @@ colour_IMON <- function(G, progress_bar){
     cols1@coords[, "L"] <- as.vector(cols1@coords[, "L"]) * as.vector(node_distances)
     return(colorspace::hex(cols1))
   }
-  cat("Colouring metabolome - this might take a few momoments\n")
   ##get colours of first layer of RPs (directly connected to reactions/snps):
   RPs_colours <- unlist(colour_list[RPs_index])
   ##set metabolite node colours based on reachable RPs directlty connected to SNPs:
@@ -108,7 +107,6 @@ colour_IMON <- function(G, progress_bar){
   ##set node colour attributes:
   colour_vector <- unlist(colour_list)
   igraph::V(G)$col <- colour_vector
-  cat("Colouring all network edges\n")
   if(progress_bar == TRUE){
     ##get out incident edge for nodes and colour by node colour:
     pb <- utils::txtProgressBar(max = length(igraph::V(G)), style = 3)

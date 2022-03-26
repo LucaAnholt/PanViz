@@ -13,7 +13,6 @@
 #'
 adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, group_snps, colour_groups, ego, progress_bar){
   G <- adj_list_to_igraph(adjl_G_S)
-  cat("Setting IMON attributes \n")
   ##setting graph attributes:
   ##SNP attributes:
   igraph::V(G)[grepl("rs", igraph::V(G)$name)]$type <- "SNP"

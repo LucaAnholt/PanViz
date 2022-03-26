@@ -8,7 +8,6 @@
 NCBI_dbSNP_query <- function(snp_list, progress_bar){
   snp_list <- unique(gsub("rs", "", snp_list)) #remove rs from ID to query NCBI dbSNP
   split_data <- split(snp_list, ceiling(seq_along(snp_list)/100)) #split data for efficient query via NCBI Entrez API
-  cat("Querying SNP locations from NCBI dbSNP \n")
   if(progress_bar == TRUE){
     pb <- utils::txtProgressBar(max = length(split_data), style = 3)
     raw_data_list <- list() #pre-initialise vector to capture raw dbSNP summary output

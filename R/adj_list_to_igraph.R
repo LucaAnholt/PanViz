@@ -4,8 +4,6 @@
 #'
 #' @examples
 adj_list_to_igraph <- function(adjl_G_S){
-  ##loading KEGG network data adjacency lists from working directory:
-  cat("Generating IMON \n")
   ##creating IMON network by building up networks from SNP IMON level downwards
   ##creating edgelist dataframe for G_S (SNP -> gene):
   G_S <- utils::stack(adjl_G_S)

@@ -19,5 +19,4 @@ Get_Kegg_Data <- function(CPU = c(2,1), sleep = 5){
   compound_names_hash <- retry(get_compound_hashmap(CPU = CPU, sleep = sleep), maxErrors = 3, sleep = sleep)
   #save to internal sys data:
   usethis::use_data(adjl_G_E, adjl_R_E, adjl_RP_C, adjl_RP_R, Gene_Locations, compound_names_hash, internal = TRUE, overwrite = TRUE)
-  cat("Done! KEGG database successfully updated")
 }

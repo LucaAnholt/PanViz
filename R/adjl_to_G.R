@@ -9,7 +9,6 @@
 #'
 adjl_to_G <- function(adjl_G_S){
   G <- adj_list_to_igraph(adjl_G_S)
-  cat("Setting IMON attributes \n")
   ##setting graph attributes:
   pal <- RColorBrewer::brewer.pal(n = 8, "Dark2") #getting colour palette for node colouring
   ##SNP attributes:

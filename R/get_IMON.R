@@ -82,7 +82,6 @@ get_IMON <- function(snp_list, ego = 5, save_file = c(FALSE, TRUE), export_type 
   ##retrieving KEGG gene locations from sys data:
   gene_loc <- Gene_Locations
   row.names(gene_loc) <- NULL #remove indexing in row names
-  cat("Mapping inputted SNPs to KEGG genes\n")
   ##finding matches between chromosome numbers (in SNPs and genes) and creating adjacency list:
   adjl_G_S <- snp_gene_map(gene_loc, snp_loc)
   if(length(adjl_G_S) == 0){

@@ -133,7 +133,6 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
   snp_loc$chr_pos <- as.numeric(as.character(snp_loc$chr_pos))
   ##retrieving KEGG gene locations from sys data:
   row.names(Gene_Locations) <- NULL #remove indexing in row names
-  cat("Mapping inputted SNPs to KEGG genes\n")
   ##finding matches between chromosome numbers (in SNPs and genes) and creating adjacency list:
   adjl_G_S <- snp_gene_map(Gene_Locations, snp_loc)
   if(length(adjl_G_S) == 0){ ##catch if no snps can be mapped to genes in database
