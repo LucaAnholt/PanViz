@@ -106,13 +106,13 @@ colour_IMON <- function(G, progress_bar){
   }
   ##set node colour attributes:
   colour_vector <- unlist(colour_list)
-  igraph::V(G)$col <- colour_vector
+  igraph::V(G)$color <- colour_vector
   if(progress_bar == TRUE){
     ##get out incident edge for nodes and colour by node colour:
     pb <- utils::txtProgressBar(max = length(igraph::V(G)), style = 3)
     for(i in seq_along(igraph::V(G))){
       node_colour <- igraph::V(G)[i]$col
-      igraph::E(G)[from(igraph::V(G)[i])]$col <- node_colour
+      igraph::E(G)[from(igraph::V(G)[i])]$color <- node_colour
       pctg <- paste(round(i/length(igraph::V(G)) *100, 0), "% completed")
       utils::setTxtProgressBar(pb, i, label = pctg)
     }
@@ -121,8 +121,8 @@ colour_IMON <- function(G, progress_bar){
   else if(progress_bar == FALSE){
     ##get out incident edge for nodes and colour by node colour:
     for(i in seq_along(igraph::V(G))){
-      node_colour <- igraph::V(G)[i]$col
-      igraph::E(G)[from(igraph::V(G)[i])]$col <- node_colour
+      node_colour <- igraph::V(G)[i]$color
+      igraph::E(G)[from(igraph::V(G)[i])]$color <- node_colour
     }
   }
   return(G) #return network with coloured attributes

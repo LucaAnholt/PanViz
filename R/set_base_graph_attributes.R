@@ -11,12 +11,12 @@ set_base_graph_attributes <- function(G, colour_groups){
   ##setting graph attributes:
   if(colour_groups == FALSE){
     pal <- RColorBrewer::brewer.pal(n = 8, "Dark2") #getting colour palette for node colouring
-    igraph::V(G)[grepl("rs", igraph::V(G)$name)]$col <- pal[1]
-    igraph::V(G)[grepl("C\\d{5}", igraph::V(G)$name)]$col <- pal[2]
-    igraph::V(G)[grepl("R\\d{5}", igraph::V(G)$name)]$col <- pal[3]
-    igraph::V(G)[grepl("EC:", igraph::V(G)$name)]$col = pal[4]
-    igraph::V(G)[grepl("hsa:", igraph::V(G)$name)]$col = pal[7]
-    igraph::V(G)[grepl("C\\d{5}_C\\d{5}", igraph::V(G)$name)]$col = pal[8]
+    igraph::V(G)[grepl("rs", igraph::V(G)$name)]$color <- pal[1]
+    igraph::V(G)[grepl("C\\d{5}", igraph::V(G)$name)]$color <- pal[2]
+    igraph::V(G)[grepl("R\\d{5}", igraph::V(G)$name)]$color <- pal[3]
+    igraph::V(G)[grepl("EC:", igraph::V(G)$name)]$color = pal[4]
+    igraph::V(G)[grepl("hsa:", igraph::V(G)$name)]$color = pal[7]
+    igraph::V(G)[grepl("C\\d{5}_C\\d{5}", igraph::V(G)$name)]$color = pal[8]
   }
   ##SNP attributes:
   igraph::V(G)[grepl("rs", igraph::V(G)$name)]$type <- "SNP"

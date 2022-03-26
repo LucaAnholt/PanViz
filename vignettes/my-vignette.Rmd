@@ -146,8 +146,8 @@ plot(IMON,
      vertex.label.cex = 1.5,
      vertex.size = 5,
      edge.arrow.size=.5,
-     vertex.color= adjustcolor(V(IMON)$col, alpha = 0.5),
-     edge.color = adjustcolor(E(IMON)$col, alpha = 0.5),
+     vertex.color= adjustcolor(V(IMON)$color, alpha = 0.5),
+     edge.color = adjustcolor(E(IMON)$color, alpha = 0.5),
      edge.width = 2,
      layout = format,
      vertex.frame.width = 0.001,
@@ -156,7 +156,7 @@ plot(IMON,
 )
 ##getting the unique group names and their respective colours from the IMON (and using them to create a legend)
 unique_group_names <- unique(V(IMON)$group)[!is.na(unique(V(IMON)$group))]
-unique_group_cols <- unique(V(IMON)[which(V(IMON)$group %in% unique_group_names)]$col)
+unique_group_cols <- unique(V(IMON)[which(V(IMON)$group %in% unique_group_names)]$color)
 groupings <- factor(unique_group_names)
 legdata <- legend("topleft", "legend", trace=TRUE,plot=FALSE)
 legend(bty = "n", x=legdata$rect$left,y=legdata$rect$top,
@@ -171,7 +171,7 @@ The igraph object of course can also be manipulated and visualised within other 
 ```{r}
 library(networkD3)
 ##convert the igraph object to a networkd3 object and group by the vertex colours:
-IMON_D3 <- networkD3::igraph_to_networkD3(IMON, group =  V(IMON)$col)
+IMON_D3 <- networkD3::igraph_to_networkD3(IMON, group =  V(IMON)$color)
 
 # Create force directed network plot
 networkD3::forceNetwork(Links = IMON_D3$links, Nodes = IMON_D3$nodes,
