@@ -17,8 +17,3 @@ Rds files for all relevant adjacency lists
 \description{
 This function constructs adjacency lists for genes and enzymes listed within the KEGG database
 }
-\examples{
-\dontrun{
-gene_data <- Genes_Get_All()
-}
-}

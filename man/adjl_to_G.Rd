@@ -15,9 +15,3 @@ igraph object representing total IMON for inputted SNPs
 \description{
 Internal function that constructs an IMON (Integrated Multi-Omic Network) for an inputted adjacency list containing adjacency information between KEGG genes and queried SNPs.
 }
-\examples{
-\donttest{
-G <- adjl_to_G(adjl_G_S)
-}
-
-}

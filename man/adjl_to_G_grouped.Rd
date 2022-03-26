@@ -35,9 +35,3 @@ adjl_to_G_grouped(
 \description{
 Internal function that constructs either a variable-coloured or uncoloured IMON (Integrated Multi-Omic Network) for an inputted adjacency list containing adjacency information between KEGG genes and queried SNPs.
 }
-\examples{
-\dontrun{
-adjl_to_G_grouped(adjl_G_S, unique_group_names, unique_group_cols, group_snps, TRUE, 5, TRUE)
-}
-
-}

@@ -15,9 +15,3 @@ cleaned up queried KEGG gene recursive lists, filtered by genes with adjacent en
 \description{
 Internal function for cleaning up queried KEGG gene data
 }
-\examples{
-\dontrun{
-Query_Genes_Data <- lapply(Query_Genes_Data, gene_cleanup)
-}
-
-}

@@ -17,10 +17,3 @@ colour_IMON(G, progress_bar)
 \description{
 colour network by categorical group levels
 }
-\examples{
-\donttest{
-G <- colour_IMON(G, FALSE)
-}
-
-
-}

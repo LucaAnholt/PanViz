@@ -17,8 +17,3 @@ hashmap/recursive list of associated KEGG IDs and compound/metabolite names
 \description{
 This function creates a hashmap of associated KEGG IDs and compound/metabolite names
 }
-\examples{
-\dontrun{
-compound_hashmap <- get_compound_hashmap()
-}
-}

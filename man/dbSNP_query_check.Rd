@@ -15,9 +15,3 @@ dbSNP_query_check(query)
 \description{
 dbSNP_query_check
 }
-\examples{
-\dontrun{
-errors <- unname(unlist(lapply(raw_data, dbSNP_query_check)))
-}
-
-}

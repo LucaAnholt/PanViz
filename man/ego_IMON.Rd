@@ -17,9 +17,3 @@ ego_IMON(G, ego)
 \description{
 Internal function for trimming IMON to ego-centred (centred around SNPs) to specified order (pathway length from SNPs)
 }
-\examples{
-\dontrun{
-G <- ego_IMON(G, 5)
-}
-
-}

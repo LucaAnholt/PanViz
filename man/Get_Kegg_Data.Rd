@@ -17,8 +17,3 @@ Rds files containing adjacency lists for all KEGG network data
 \description{
 This function pulls the latest version of the KEGG database
 }
-\examples{
-\dontrun{
-Get_Kegg_Data()
-}
-}
