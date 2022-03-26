@@ -5,9 +5,6 @@
 #' @return Rds files containing adjacency lists for all KEGG network data
 #' @importFrom usethis use_data
 #' @export
-#' @examples \dontrun{
-#' Get_Kegg_Data()
-#' }
 Get_Kegg_Data <- function(CPU = c(2,1), sleep = 5){
   ##Querying KEGG for metabolite, reaction and enzyme data:
   data <- retry(Reactions_Get_All(CPU = CPU, sleep = sleep), maxErrors = 3, sleep = sleep)

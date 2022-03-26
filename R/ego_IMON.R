@@ -2,11 +2,6 @@
 #' @description Internal function for trimming IMON to ego-centred (centred around SNPs) to specified order (pathway length from SNPs)
 #' @param G - igraph object representing IMON
 #' @param ego - the selected ego-centred path length
-#'
-#' @examples \dontrun{
-#' G <- ego_IMON(G, 5)
-#' }
-#'
 #' @return - ego-centred IMON set at desired path length
 ego_IMON <- function(G, ego){
   ##get vertex indexes for inputted SNPs:

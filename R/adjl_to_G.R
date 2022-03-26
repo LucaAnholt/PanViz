@@ -6,9 +6,6 @@
 #'
 #' @return igraph object representing total IMON for inputted SNPs
 #'
-#' @examples \dontrun{
-#' G <- adjl_to_G(adjl_G_S)
-#' }
 #'
 adjl_to_G <- function(adjl_G_S){
   cat("Generating IMON\n")

@@ -6,10 +6,6 @@
 #'
 #' @return cleaned up queried KEGG gene recursive lists, filtered by genes with adjacent enzymes
 #'
-#' @examples \dontrun{
-#' Query_Genes_Data <- lapply(Query_Genes_Data, gene_cleanup)
-#' }
-#'
 gene_cleanup <- function(queried_data){
     ##deleting unnecessary data
     queried_data$DEFINITION <- NULL

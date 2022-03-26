@@ -18,8 +18,8 @@ colour_IMON(G, progress_bar)
 colour network by categorical group levels
 }
 \examples{
-\dontrun{
-G <- colour_IMON(G, TRUE)
+\donttest{
+G <- colour_IMON(G, FALSE)
 }
 
 

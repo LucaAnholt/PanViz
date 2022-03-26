@@ -4,9 +4,6 @@
 #' @param sleep The amount of sleep (seconds) between a potential caught API error and the next attempt (default = 5)
 #' @return hashmap/recursive list of associated KEGG IDs and compound/metabolite names
 #'
-#' @examples \dontrun{
-#' compound_hashmap <- get_compound_hashmap()
-#' }
 get_compound_hashmap <- function(CPU = c(2,1), sleep = 5){
   compounds_Raw_IDs <- KEGGREST::keggList("compound")
   ##cleaning up raw data:
