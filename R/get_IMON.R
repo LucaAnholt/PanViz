@@ -28,10 +28,6 @@ get_IMON <- function(snp_list, ego = 5, save_file = c(FALSE, TRUE), export_type 
   if(missing(save_file)){
     save_file <- FALSE
   }
-  ##test if given export_type argument is correct:
-  if(save_file == FALSE){#ignore export_type argument if save_file is set to false
-    invisible()
-  }
   if(missing(export_type)){
     export_type <- "igraph"
   }

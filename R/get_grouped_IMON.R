@@ -35,10 +35,6 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
   if(missing(save_file)){
     save_file <- FALSE
   }
-  ##test if given export_type argument is correct:
-  if(save_file == FALSE){#ignore export_type argument if save_file is set to false
-    invisible()
-  }
   if(missing(export_type)){
     export_type <- "igraph"
   }
