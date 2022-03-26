@@ -3,7 +3,8 @@
 \docType{data}
 \name{er_snp_vector}
 \alias{er_snp_vector}
-\title{Summary-level GWAS data vector for estrogen-receptor positive breast cancer (EFO_1000649)}
+\title{Summary-level GWAS data vector for estrogen-receptor positive breast cancer
+(EFO_1000649)}
 \format{
 A vector with 110 elements
 }
@@ -11,6 +12,8 @@ A vector with 110 elements
 data(er_snp_vector)
 }
 \description{
-A dataset containing a vector of SNPs (summary-level GWAS data) associated with estrogen-receptor positive breast cancer (EFO_1000649), collated by the GWAS Catalog.
+A dataset containing a vector of SNPs (summary-level GWAS data) associated
+with estrogen-receptor positive breast cancer (EFO_1000649), collated by the
+GWAS Catalog.
 }
 \keyword{datasets}
