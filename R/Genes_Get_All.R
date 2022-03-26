@@ -21,7 +21,7 @@ Genes_Get_All <- function(CPU = c(2,1), sleep = 5){
   progress <- function(n) utils::setTxtProgressBar(pb, n)
   opts <- list(progress = progress)
   i <- NULL
-  Query_Genes_Data <- foreach::foreach(i = 1:length(split_data), .combine = 'c', .export = c("retry"),.options.snow = opts) %dopar% {
+  Query_Genes_Data <- foreach::foreach(i = seq_along(split_data), .combine = 'c', .export = c("retry"),.options.snow = opts) %dopar% {
     Output <- c()
     retry(KEGGREST::keggGet(split_data[[i]]), maxErrors = 5, sleep = sleep)
   }

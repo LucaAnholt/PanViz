@@ -116,6 +116,6 @@ adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, g
     igraph::V(G)[grepl("RP", igraph::V(G)$type)]$ID <- igraph::V(G)[grepl("RP", igraph::V(G)$type)]$name
   }
   ##set edge ID attribute:
-  igraph::E(G)$ID = 1:length(igraph::E(G))
+  igraph::E(G)$ID = seq_along(igraph::E(G))
   return(G)
 }

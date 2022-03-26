@@ -11,7 +11,7 @@ NCBI_Gene_Locations <- function(Gene_Enterez_IDs){
   pb <- utils::txtProgressBar(max = length(split_data), style = 3)
   raw_data_list <- list()
   genomic_data <- list()
-  for(i in 1:length(split_data)){
+  for(i in seq_along(split_data)){
     raw_data_list[[i]] <- rentrez::entrez_summary(db = "gene", id = split_data[[i]])
     pctg <- paste(round(i/length(split_data) *100, 0), "% completed")
     utils::setTxtProgressBar(pb, i, label = pctg)

@@ -23,7 +23,7 @@ Reactions_Get_All <- function(CPU = c(2,1), sleep = 5){
   progress <- function(n) utils::setTxtProgressBar(pb, n)
   opts <- list(progress = progress)
   i <- NULL
-  Query_Reaction_Data <- foreach::foreach(i = 1:length(split_data), .combine = 'c',.export = c("retry"),.options.snow = opts) %dopar% {
+  Query_Reaction_Data <- foreach::foreach(i = seq_along(split_data), .combine = 'c',.export = c("retry"),.options.snow = opts) %dopar% {
     retry(KEGGREST::keggGet(split_data[[i]]), maxErrors = 5, sleep = sleep)
   }
   parallel::stopCluster(cluster)
@@ -49,7 +49,7 @@ Reactions_Get_All <- function(CPU = c(2,1), sleep = 5){
   ##applying reaction names to adjl:
   names(adjl_R_E) <- reaction_names
   ##removing any reactions with no associated enzymes:
-  adjl_R_E <-  adjl_R_E[!vapply(X = adjl_RP_E, FUN = function(x) all(is.na(x)), FUN.VALUE = as.logical(1))]
+  adjl_R_E <- adjl_R_E[!vapply(X = adjl_RP_E, FUN = function(x) all(is.na(x)), FUN.VALUE = as.logical(1))]
   ##saving adjacency lists to selected directory:
   cat("Metabolite, reaction and enzyme adjacencies successfully queried - time elsapsed: ", (proc.time() - time)[[3]]/60, " minutes")
   cat("\n")
