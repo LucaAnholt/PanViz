@@ -118,6 +118,9 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
   snp_list <- dataframe$snps
   raw_data <- NCBI_dbSNP_query(snp_list, progress_bar)
   ##checking if all SNPs have been successfully queried:
+  if(is.null(raw_data)){
+    stop("None of the supplied SNPs could be queried via dbSNP")
+  }
   if(length(snp_list) > 1){ ##deal with vectorised input
     errors <- unname(unlist(lapply(raw_data, dbSNP_query_check)))
   }

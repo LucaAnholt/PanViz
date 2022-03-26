@@ -41,7 +41,7 @@ get_IMON <- function(snp_list, ego = 5, save_file = c(FALSE, TRUE), export_type 
   if(missing(snp_list)){
     stop("Please input a vector characters representing SNPs using the standard NCBI dbSNP accession naming convention, e.g. c('rs185345278', 'rs101')")
   }
-  else if(as.integer(export_type %in% c("igraph", "edge_list", "graphml", "gml")) == 0){
+  if(as.integer(export_type %in% c("igraph", "edge_list", "graphml", "gml")) == 0){
     stop('Unexpected export data type. export_type must be one of the following: "igraph", "edge_list", "graphml", "gml"')
   }
   if(ego < 5 & ego != 0){ ##reset ego if below 5 and not set to special case of zero
@@ -66,6 +66,9 @@ get_IMON <- function(snp_list, ego = 5, save_file = c(FALSE, TRUE), export_type 
   }
   raw_data <- NCBI_dbSNP_query(snp_list, progress_bar)
   ##checking if all SNPs have been successfully queried:
+  if(is.null(raw_data)){
+    stop("None of the supplied SNPs could be queried via dbSNP")
+  }
   if(length(snp_list) > 1){ ##deal with vectorised input
     errors <- unname(unlist(lapply(raw_data, dbSNP_query_check)))
   }
