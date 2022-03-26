@@ -18,7 +18,7 @@
 #'
 get_IMON <- function(snp_list, ego = 5, save_file = c(FALSE, TRUE), export_type = c("igraph", "edge_list", "graphml", "gml"), directory = c("wd", "choose"), progress_bar = c(TRUE, FALSE)){
   ##test if given snp vector is a vector of strings:
-  if(sum(as.integer(as.vector(vapply(X = snp_list, FUN = class, FUN.VALUE = as.character(1), USE.NAMES = F)) %in% "character")) != length(snp_list)){
+  if(sum(as.integer(as.vector(vapply(X = snp_list, FUN = class, FUN.VALUE = as.character(1), USE.NAMES = FALSE)) %in% "character")) != length(snp_list)){
     stop("Unexpected SNP vector. Inputted SNP vector must be supplied as character class")
   }
   ##test if given snp vector contains correct dbSNP accession number naming convention:

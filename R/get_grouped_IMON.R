@@ -25,7 +25,7 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
     stop("Unexpected number of columns in dataframe. Dataframe must only include 3 columns: snps, studies and traits (in that order and naming convention)")
   }
   ##test if given snp vector is a vector of strings:
-  if(sum(as.integer(as.vector(vapply(X = dataframe$snps, FUN = class, FUN.VALUE = as.character(1), USE.NAMES = F)) %in% "character")) != length(dataframe$snps)){
+  if(sum(as.integer(as.vector(vapply(X = dataframe$snps, FUN = class, FUN.VALUE = as.character(1), USE.NAMES = FALSE)) %in% "character")) != length(dataframe$snps)){
     stop("Unexpected SNP vector. Inputted SNP vector must be supplied as character class")
   }
   ##test if given snp vector contains correct dbSNP accession number naming convention:
