@@ -13,7 +13,7 @@ NCBI_dbSNP_query <- function(snp_list, progress_bar){
     pb <- utils::txtProgressBar(max = length(split_data), style = 3)
     raw_data_list <- list() #pre-initialise vector to capture raw dbSNP summary output
     for(i in seq_along(split_data)){ #query NCBI dbSNP API
-      raw_data_list[[i]] <- suppressWarnings(rentrez::entrez_summary(db = "snp", id = split_data[[i]]))
+      tryCatch(raw_data_list[[i]] <- rentrez::entrez_summary(db = "snp", id = split_data[[i]]), warning = function(w){})
       pctg <- paste(round(i/length(split_data) *100, 0), "% completed")
       utils::setTxtProgressBar(pb, i, label = pctg)
     }
@@ -22,10 +22,13 @@ NCBI_dbSNP_query <- function(snp_list, progress_bar){
   else{
     raw_data_list <- list() #pre-initialise vector to capture raw dbSNP summary output
     for(i in seq_along(split_data)){ #query NCBI dbSNP API
-      raw_data_list[[i]] <- suppressWarnings(rentrez::entrez_summary(db = "snp", id = split_data[[i]]))
+      tryCatch(raw_data_list[[i]] <- rentrez::entrez_summary(db = "snp", id = split_data[[i]]), warning = function(w){})
     }
   }
   ##removing recursion in list:
   raw_data <- unlist(raw_data_list, recursive = FALSE)
   return(raw_data)
 }
+
+
+

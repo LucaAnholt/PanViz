@@ -94,7 +94,7 @@ adjl_to_G_grouped <- function(adjl_G_S, unique_group_names, unique_group_cols, g
   ##colour graph by user selection
   if(colour_groups == TRUE){
     G <- set_snp_grouping(G, unique_group_names, unique_group_cols, group_snps) #if is fully connected colour IMON
-    G <- suppressWarnings(colour_IMON(G, progress_bar))
+    tryCatch(G <- colour_IMON(G, progress_bar), warning = function(w){})
   }
   else{
     G <- set_snp_grouping(G, unique_group_names, unique_group_cols, group_snps) #if is fully connected colour IMON
