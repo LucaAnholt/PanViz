@@ -1,8 +1,8 @@
 #' adj_list_to_igraph
 #' @description internal function that assembles all the KEGG data into a network/graph
+#' @param adjl_G_S adjacency list containing relevant adjacent SNPs/KEGG genes
 #' @return an igraph object, containing a network representing all the KEGG data
 #'
-#' @examples
 adj_list_to_igraph <- function(adjl_G_S){
   ##creating IMON network by building up networks from SNP IMON level downwards
   ##creating edgelist dataframe for G_S (SNP -> gene):
