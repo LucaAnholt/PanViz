@@ -10,14 +10,13 @@
 #' were applied:
 #'
 #' - Under "Filter", a filter for meSH/HPO Phenotype Identifier D001943 was applied,
-#' corresponding to estrogen postive breast cancer.
+#' corresponding to estrogen positive breast cancer.
 #' - Under "Attributes", "Study Name" and "Annotation Name" was selected in STUDY
 #' INFORMATION and HGNC Gene Symbol selected under ASSOCIATION RESULTS
-#'
 #'
 #' @docType data
 #' @keywords external dataset
 #' @references https://mart.gwascentral.org/
 #' @usage PanViz::GWAS_data_reader(file = system.file("extdata", "GWASCentralMart_ERplusBC.tsv", package="PanViz"), snp_col = "Source Marker Accession", study_col = "Study Name", trait_col = "Annotation Name")
-#' @format A tab separated file with 112 rows and 38 columns
+#' @format A tab separated file with 95 rows and 7 columns
 "GWASCentralMart_ERplusBC.tsv"
