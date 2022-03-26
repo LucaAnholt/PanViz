@@ -3,7 +3,8 @@
 #'
 #' A dataset containing a table of SNPs (summary-level GWAS data) associated
 #' with estrogen-receptor positive breast cancer (EFO_1000649), and various other
-#' study information, collated by the GWAS Catalog.
+#' study information, collated by the GWAS Catalog. This was downloaded via the
+#' "Download Catalog data" link at https://www.ebi.ac.uk/gwas/efotraits/EFO_1000649.
 #'
 #' @docType data
 #' @keywords external dataset
