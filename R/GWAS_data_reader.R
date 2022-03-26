@@ -6,12 +6,12 @@
 #'
 #' @param snp_col - Character (string) reflecting the column name containing
 #' the SNP (standard dbSNP accession number, e.g. rs992531) data. In data sourced
-#' from the GWAS Catalog, this column will typically be named "STUDY" and in GWAS
+#' from the GWAS Catalog, this column will typically be named "SNPS" and in GWAS
 #' Central this will typically be "Source Marker Accession".
 #'
 #' @param study_col - Character (string) reflecting the column name containing
 #' the study names associated with each SNP. In data sourced from the GWAS Catalog,
-#' this column will typically be named "SNPS" and in GWAS Central this will typically
+#' this column will typically be named "STUDY" and in GWAS Central this will typically
 #' be "Study Name".
 #'
 #' @param trait_col - Character (string) reflecting the column name containing
