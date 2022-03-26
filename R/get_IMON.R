@@ -46,7 +46,6 @@ get_IMON <- function(snp_list, ego = 5, save_file = c(FALSE, TRUE), export_type 
   }
   if(ego < 5 & ego != 0){ ##reset ego if below 5 and not set to special case of zero
     ego <- 5
-    warning("Warning: an ego below 5 (and not equal to zero) was provided, and thus was reset to the minimum and recommended value of 5 - see documentation for more information")
   }
   ##allow user to select which directory to save exported data file:
   if(missing(directory)){

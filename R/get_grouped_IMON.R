@@ -55,7 +55,6 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
   }
   if(ego < 5 & ego != 0){ ##reset ego if below 5 and not set to special case of zero
     ego <- 5
-    warning("Warning: an ego below 5 (and not equal to zero) was provided, and thus was reset to the minimum and recommended value of 5 - see documentation for more information")
   }
   if(as.integer(groupby %in% c("studies", "trais")) == 0){
     stop("Unexpected groupby value. This should be either 'studies' or 'traits'")
