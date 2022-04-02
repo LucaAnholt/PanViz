@@ -8,7 +8,7 @@
 #' @return Rds files containing adjacency lists for all KEGG network data
 #' @importFrom usethis use_data
 #' @export
-Get_Kegg_data <- function(CPU = 1, sleep = 5){
+get_Kegg_data <- function(CPU = 1, sleep = 5){
   if(CPU > 2){
     stop("Can only use a maximum of 2 workers")
   }
