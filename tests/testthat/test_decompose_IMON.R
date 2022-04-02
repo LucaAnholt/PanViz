@@ -1,8 +1,7 @@
 library(PanViz)
 
 testthat::test_that("tests that decompose_IMON returns list object and throws correct errors on bad inputs", {
-  data("er_snp_vector")
-  G <- PanViz::get_IMON(snp_list = er_snp_vector, progress_bar = F)
+  G <- readRDS("tests/data/testIMON.Rds")
   G_list <- PanViz::decompose_IMON(G = G)
   expect_equal(class(G_list), "list")
   expect_equal(length(G_list), 14)
