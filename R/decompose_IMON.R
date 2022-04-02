@@ -1,10 +1,12 @@
 #' decompose_IMON
 #'
-#' @description This function returns a list of fully connected IMONs from a single parent unconnected IMON.
+#' @description This function returns a list of fully connected IMONs from a
+#' single parent unconnected IMON.
 #'
 #' @param G - igraph object containing non-fully connected IMON
 #'
-#' @return - list of igraph objects, where each index contains a fully connected IMON
+#' @return - list of igraph objects, where each index contains a fully connected
+#' IMON
 #' @export
 #' @examples
 #' data("er_snp_vector")
