@@ -2,6 +2,9 @@
 #' @description This function constructs adjacency lists for compounds, reactions and enzymes listed within the KEGG database
 #' @param CPU The number of cores to use when making KEGGREST API Get requests (default = 2). If CPU > 1, parallel requests will be made.
 #' @param sleep The amount of sleep between a potential caught API error and the next attempt (default = 5)
+#' @param progress_bar Boolean (default = TRUE) argument that controls whether or
+#' not a progress bar for calculations/KEGGREST API GET requests should be printed
+#' to the console
 #' @importFrom foreach %dopar%
 #' @return Rds files for all relevant adjacency lists
 #'
