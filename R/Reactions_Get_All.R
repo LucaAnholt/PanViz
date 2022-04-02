@@ -10,6 +10,10 @@ Reactions_Get_All <- function(CPU = c(2,1), sleep = 5){
   Reaction_Raw_IDs <- KEGGREST::keggList("reaction")
   ##cleaning up raw data:
   Clean_Reactions <- attr(Reaction_Raw_IDs, "names")
+  ##only query reactions that aren't in database
+  Clean_Reactions <- gsub(pattern = "rn:", replacement = "", x = Clean_Reactions)
+  Clean_Reactions <- setdiff(Clean_Reactions, names(adjl_RP_R))
+  Clean_Reactions <- paste0("rn:", Clean_Reactions)
   ##using raw reaction IDs to query KEGG:
   Query_Reaction_Data <- c()
   ##splitting data into chunks of 10 (max KEGG API search)
@@ -47,7 +51,7 @@ Reactions_Get_All <- function(CPU = c(2,1), sleep = 5){
   ##applying reaction names to adjl:
   names(adjl_R_E) <- reaction_names
   ##removing any reactions with no associated enzymes:
-  adjl_R_E <- adjl_R_E[!vapply(X = adjl_RP_E, FUN = function(x) all(is.na(x)), FUN.VALUE = as.logical(1))]
+  adjl_R_E <- adjl_R_E[!vapply(X = adjl_R_E, FUN = function(x) all(is.na(x)), FUN.VALUE = as.logical(1))]
   return(list(adjl_R_E, adjl_RP_C, adjl_RP_R))
 }
 
