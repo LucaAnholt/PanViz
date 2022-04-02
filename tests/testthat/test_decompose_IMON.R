@@ -1,7 +1,7 @@
 library(PanViz)
 
 testthat::test_that("tests that decompose_IMON returns list object and throws correct errors on bad inputs", {
-  G <- readRDS("tests/data/testIMON.Rds")
+  G <- readRDS(system.file("tests/data", "testIMON.Rds", package="PanViz"))
   G_list <- PanViz::decompose_IMON(G = G)
   expect_equal(class(G_list), "list")
   expect_equal(length(G_list), 14)
