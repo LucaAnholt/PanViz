@@ -14,23 +14,37 @@ get_IMON(
 )
 }
 \arguments{
-\item{snp_list}{A vector of SNPs (strings/characters) using standard NCBI dbSNP accession number naming convention (e.g. "rs185345278")}
+\item{snp_list}{A vector of SNPs (strings/characters) using standard NCBI dbSNP
+accession number naming convention (e.g. "rs185345278")}
 
-\item{ego}{This dictates what length order ego-centred network should be constructed. If set to 5 (default and recommended), an IMON with the first layer of the connected metabolome will be returned. If set above 5, the corresponding extra layer of the metabolome will be returned. If set to 0 (not recommended) the fully connected metabolome will be returned. Note, this cannot be set between 0 and 5.}
+\item{ego}{This dictates what length order ego-centred network should be constructed.
+If set to 5 (default and recommended), an IMON with the first layer of the connected
+metabolome will be returned. If set above 5, the corresponding extra layer of the
+metabolome will be returned. If set to 0 (not recommended) the fully connected
+metabolome will be returned. Note, this cannot be set between 0 and 5.}
 
-\item{save_file}{Boolean (default = FALSE) argument that indicates whether or not the user wants to save the graph as an exported file in their current working directory}
+\item{save_file}{Boolean (default = FALSE) argument that indicates whether or
+not the user wants to save the graph as an exported file in their current working
+directory}
 
-\item{export_type}{This dictates the network data structure saved in the chosen directory. By default this outputs an igraph object, however, you can choose to export and save an edge list, graphml or GML file.}
+\item{export_type}{This dictates the network data structure saved in the chosen
+directory. By default this outputs an igraph object, however, you can choose to
+export and save an edge list, graphml or GML file.}
 
-\item{directory}{If set to "choose" this argument allows the user to interactively select the directory of their choice in which they wish to save the constructed IMON, else the file will be saved to the working directory "wd" by default}
+\item{directory}{If set to "choose" this argument allows the user to interactively
+select the directory of their choice in which they wish to save the constructed
+IMON, else the file will be saved to the working directory "wd" by default}
 
-\item{progress_bar}{Boolean (default = TRUE) argument that controls whether or not a progress bar for calculations/KEGGREST API GET requests should be printed to the console}
+\item{progress_bar}{Boolean (default = TRUE) argument that controls whether or
+not a progress bar for calculations/KEGGREST API GET requests should be printed
+to the console}
 }
 \value{
 An igraph object containing the constructed IMON
 }
 \description{
-Internal function that constructs an IMON (Integrated Multi-Omic Network) for an inputted vector of SNPs and exports an igraph file.
+Internal function that constructs an IMON (Integrated Multi-Omic Network)
+for an inputted vector of SNPs and exports an igraph file.
 }
 \examples{
 ##getting vector of SNPs to query:

@@ -2,7 +2,8 @@
 % Please edit documentation in R/get_grouped_IMON.R
 \name{get_grouped_IMON}
 \alias{get_grouped_IMON}
-\title{get IMON with SNP and or all network vertices coloured by group variables (either studies or phenotypes)}
+\title{get IMON with SNP and or all network vertices coloured by group variables
+(either studies or phenotypes)}
 \usage{
 get_grouped_IMON(
   dataframe,
@@ -16,27 +17,46 @@ get_grouped_IMON(
 )
 }
 \arguments{
-\item{dataframe}{A dataframe including 3 columns in the following order and with the following names: snps, studies, traits (all character vectors)}
+\item{dataframe}{A dataframe including 3 columns in the following order and
+with the following names: snps, studies, traits (all character vectors)}
 
-\item{groupby}{Choose whether to group SNP and or network colouring by either studies or traits}
+\item{groupby}{Choose whether to group SNP and or network colouring by either
+studies or traits}
 
-\item{ego}{This dictates what length order ego-centred network should be constructed. If set to 5 (default and recommended), an IMON with the first layer of the connected metabolome will be returned. If set above 5, the corresponding extra layer of the metabolome will be returned. If set to 0 (not recommended) the fully connected metabolome will be returned. Note, this cannot be set between 0 and 5.}
+\item{ego}{This dictates what length order ego-centred network should be
+constructed. If set to 5 (default and recommended), an IMON with the first
+layer of the connected metabolome will be returned. If set above 5, the
+corresponding extra layer of the metabolome will be returned. If set to 0
+(not recommended) the fully connected metabolome will be returned. Note, this
+cannot be set between 0 and 5.}
 
-\item{save_file}{Boolean (default = FALSE) argument that indicates whether or not the user wants to save the graph as an exported file in their current working directory}
+\item{save_file}{Boolean (default = FALSE) argument that indicates whether or
+not the user wants to save the graph as an exported file in their current
+working directory}
 
-\item{export_type}{This dictates the network data structure saved in your working directory. By default this outputs an igraph object, however, you can choose to export and save an edge list, graphml or GML file.}
+\item{export_type}{This dictates the network data structure saved in your
+working directory. By default this outputs an igraph object, however, you can
+choose to export and save an edge list, graphml or GML file.}
 
-\item{directory}{If set to "choose" this argument allows the user to interactively select the directory of their choice in which they wish to save the constructed IMON, else the file will be saved to the working directory "wd" by default}
+\item{directory}{If set to "choose" this argument allows the user to interactively
+select the directory of their choice in which they wish to save the constructed
+IMON, else the file will be saved to the working directory "wd" by default}
 
-\item{colour_groups}{Boolean (default = FALSE) chooses whether or not to colour the whole network by grouping variables}
+\item{colour_groups}{Boolean (default = FALSE) chooses whether or not to colour
+the whole network by grouping variables}
 
-\item{progress_bar}{Boolean (default = TRUE) argument that controls whether or not a progress bar for calculations/KEGGREST API GET requests should be printed to the console}
+\item{progress_bar}{Boolean (default = TRUE) argument that controls whether or
+not a progress bar for calculations/KEGGREST API GET requests should be printed
+to the console}
 }
 \value{
-An igraph object containing the constructed IMON with coloured SNPs/and or whole network by selected grouping variable
+An igraph object containing the constructed IMON with coloured SNPs/and
+or whole network by selected grouping variable
 }
 \description{
-This function constructs an IMON (Integrated Multi-Omic Network) with SNPs/or whole network coloured by selected categorical levels (either studies or phenotypes)
+This function constructs an IMON (Integrated Multi-Omic Network)
+with SNPs/or whole network coloured by selected categorical levels (either
+studies or phenotypes)
 }
 \examples{
 ##getting GWAS Catalog association tsv file and cleaning up using GWAS_catalog_tsv_to_dataframe function:

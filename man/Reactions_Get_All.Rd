@@ -4,12 +4,16 @@
 \alias{Reactions_Get_All}
 \title{Reactions_Get_All}
 \usage{
-Reactions_Get_All(CPU = c(2, 1), sleep = 5)
+Reactions_Get_All(CPU = c(2, 1), sleep = 5, progress_bar)
 }
 \arguments{
 \item{CPU}{The number of cores to use when making KEGGREST API Get requests (default = 2). If CPU > 1, parallel requests will be made.}
 
 \item{sleep}{The amount of sleep between a potential caught API error and the next attempt (default = 5)}
+
+\item{progress_bar}{Boolean (default = TRUE) argument that controls whether or
+not a progress bar for calculations/KEGGREST API GET requests should be printed
+to the console}
 }
 \value{
 Rds files for all relevant adjacency lists

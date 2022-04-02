@@ -10,10 +10,12 @@ decompose_IMON(G)
 \item{G}{- igraph object containing non-fully connected IMON}
 }
 \value{
-- list of igraph objects, where each index contains a fully connected IMON
+- list of igraph objects, where each index contains a fully connected
+IMON
 }
 \description{
-This function returns a list of fully connected IMONs from a single parent unconnected IMON.
+This function returns a list of fully connected IMONs from a
+single parent unconnected IMON.
 }
 \examples{
 data("er_snp_vector")
