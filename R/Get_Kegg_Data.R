@@ -10,12 +10,12 @@
 #' @export
 #' @example
 #' get_Kegg_data(CPU = 2, sleep = 5)
-get_Kegg_data <- function(CPU = 1, sleep = 5){
+get_Kegg_data <- function(CPU = 1, sleep = 5, progress_bar = c(TRUE, FALSE)){
   if(CPU > 2){
     stop("Can only use a maximum of 2 workers")
   }
   ##Querying KEGG for metabolite, reaction and enzyme data:
-  data <- retry(Reactions_Get_All(CPU = CPU, sleep = sleep), maxErrors = 3, sleep = sleep)
+  data <- retry(Reactions_Get_All(CPU = CPU, sleep = sleep, progress_bar), maxErrors = 3, sleep = sleep)
   adjl_R_E <- append(data[[1]], adjl_R_E)
   adjl_RP_C <- append(data[[2]], adjl_RP_C)
   adjl_RP_R <- append(data[[3]], adjl_RP_R)

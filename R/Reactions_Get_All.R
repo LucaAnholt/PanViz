@@ -5,7 +5,7 @@
 #' @importFrom foreach %dopar%
 #' @return Rds files for all relevant adjacency lists
 #'
-Reactions_Get_All <- function(CPU = c(2,1), sleep = 5){
+Reactions_Get_All <- function(CPU = c(2,1), sleep = 5, progress_bar){
   ##pulling reaction IDs from KEGG:
   Reaction_Raw_IDs <- KEGGREST::keggList("reaction")
   ##cleaning up raw data:
@@ -21,15 +21,20 @@ Reactions_Get_All <- function(CPU = c(2,1), sleep = 5){
   ##Making parallel requests to KEGGREST API:
   cluster = parallel::makeCluster(CPU) #creating clusters
   doSNOW::registerDoSNOW(cluster)
-  pb <- utils::txtProgressBar(max = length(split_data), style = 3)
-  progress <- function(n) utils::setTxtProgressBar(pb, n)
-  opts <- list(progress = progress)
+  if(progress_bar == TRUE){
+    pb <- utils::txtProgressBar(max = length(split_data), style = 3)
+    progress <- function(n) utils::setTxtProgressBar(pb, n)
+    opts <- list(progress = progress)
+  }
+  else{
+    opts <- list()
+  }
   i <- NULL
   Query_Reaction_Data <- foreach::foreach(i = seq_along(split_data), .combine = 'c',.export = c("retry"),.options.snow = opts) %dopar% {
     retry(KEGGREST::keggGet(split_data[[i]]), maxErrors = 5, sleep = sleep)
   }
   parallel::stopCluster(cluster)
-  close(pb)
+  if(progress_bar == TRUE){close(pb)}
   ##Cleaning up queried data and separating reaction pair data from compound data::
   Query_Reaction_Data <- lapply(Query_Reaction_Data, reaction_cleanup)
   ##Unlisting reaction pair IDs:
