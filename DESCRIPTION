@@ -36,7 +36,8 @@ Imports:
     foreach,
     rlang, 
     methods,
-    usethis
+    usethis,
+    fs
 Depends: 
     R (>= 4.2.0)
 Suggests: 
