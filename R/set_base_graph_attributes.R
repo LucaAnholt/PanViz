@@ -5,7 +5,7 @@
 #' the network by categorical variable i.e. study or trait/phenotype (only available
 #' via PanViz::get_grouped_IMON())
 #'
-#' @return
+#' @return igraph object with node attributes set
 #'
 set_base_graph_attributes <- function(G, colour_groups){
   ##setting graph attributes:
