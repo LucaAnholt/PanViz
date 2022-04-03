@@ -1,4 +1,4 @@
-#' GWAS Catalog tsv to cleaned dataframe
+#' GWAS_data_reader
 #'
 #' @param file - Character (string) containing the directory path to a .tsv or
 #' .csv file containing summary level GWAS data, typically this can be sourced
