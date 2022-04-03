@@ -30,7 +30,7 @@ get_Kegg_data <- function(CPU = 1, sleep = 5, progress_bar = c(TRUE, FALSE)){
   ##save to internal sys data:
   paths <- system.file("/R", "sysdata.rda", package="PanViz")
   if(paths == "" | is.null(paths)){
-    paths <- fs:::path("PanViz/R", "sysdata.rda")
+    paths <- fs::path("PanViz/R", "sysdata.rda")
   }
   save(adjl_G_E, adjl_R_E, adjl_RP_C, adjl_RP_R, Gene_Locations, compound_names_hash, file = paths, compress='xz')
   ##note, cannot use usethis::use_data() as this fails R CMD check
