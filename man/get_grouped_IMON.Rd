@@ -59,7 +59,8 @@ with SNPs/or whole network coloured by selected categorical levels (either
 studies or phenotypes)
 }
 \examples{
-##getting GWAS Catalog association tsv file and cleaning up using GWAS_catalog_tsv_to_dataframe function:
+##getting GWAS Catalog association tsv file and cleaning up using
+##GWAS_catalog_tsv_to_dataframe function:
 path <- system.file("extdata",
   "gwas-association-downloaded_2021-09-13-EFO_1000649.tsv",
    package="PanViz")

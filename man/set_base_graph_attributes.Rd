@@ -14,7 +14,7 @@ the network by categorical variable i.e. study or trait/phenotype (only availabl
 via PanViz::get_grouped_IMON())}
 }
 \value{
-
+igraph object with node attributes set
 }
 \description{
 set_base_graph_attributes

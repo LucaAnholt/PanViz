@@ -2,7 +2,7 @@
 % Please edit documentation in R/GWAS_data_reader.R
 \name{GWAS_data_reader}
 \alias{GWAS_data_reader}
-\title{GWAS Catalog tsv to cleaned dataframe}
+\title{GWAS_data_reader}
 \usage{
 GWAS_data_reader(file, snp_col, study_col, trait_col)
 }
@@ -32,7 +32,7 @@ traits/phenotypes and relevant SNPs in NCBI standard accession number naming
 convention
 }
 \description{
-GWAS Catalog tsv to cleaned dataframe
+GWAS_data_reader
 }
 \examples{
 ##getting directory path to GWAS Catalog association .tsv file:
