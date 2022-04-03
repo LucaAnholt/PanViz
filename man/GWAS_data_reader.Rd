@@ -36,12 +36,21 @@ GWAS Catalog tsv to cleaned dataframe
 }
 \examples{
 ##getting directory path to GWAS Catalog association .tsv file:
-path = system.file("extdata", "gwas-association-downloaded_2021-09-13-EFO_1000649.tsv", package="PanViz")
+path = system.file("extdata",
+  "gwas-association-downloaded_2021-09-13-EFO_1000649.tsv",
+  package="PanViz")
 ##opening/cleaning data:
-df <- PanViz::GWAS_data_reader(file = path, snp_col = "SNPS", study_col = "STUDY", trait_col = "DISEASE/TRAIT")
+df <- PanViz::GWAS_data_reader(file = path,
+  snp_col = "SNPS",
+  study_col = "STUDY",
+  trait_col = "DISEASE/TRAIT")
 ##getting directory path to GWAS Central association .tsv file:
-path = system.file("extdata", "GWASCentralMart_ERplusBC.tsv", package="PanViz")
+path = system.file("extdata", "GWASCentralMart_ERplusBC.tsv",
+  package="PanViz")
 ##opening/cleaning data:
-df <- PanViz::GWAS_data_reader(file = path, snp_col = "Source Marker Accession", study_col = "Study Name", trait_col = "Annotation Name")
+df <- PanViz::GWAS_data_reader(file = path,
+  snp_col = "Source Marker Accession",
+  study_col = "Study Name",
+  trait_col = "Annotation Name")
 
 }
