@@ -1,0 +1,11 @@
+testIMON.Rds is an igraph IMON object created via inputting the Summary-level
+GWAS data vector for estrogen-receptor positive breast cancer (EFO_1000649),
+stored as an R data object. This data object is used purely for unit testing.
+
+It was created by running the following:
+library(PanViz)
+data("er_snp_vector")
+PanViz::get_IMON(snp_list = er_snp_vector,
+                 progress_bar = F,
+                 save_file = TRUE,
+                 export_type = "igraph")
