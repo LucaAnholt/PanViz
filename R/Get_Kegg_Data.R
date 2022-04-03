@@ -17,6 +17,9 @@ get_Kegg_data <- function(CPU = 1, sleep = 5, progress_bar = c(TRUE, FALSE)){
   if(CPU > 2){
     stop("Can only use a maximum of 2 workers")
   }
+  if(missing(progress_bar)){
+    progress_bar <- TRUE
+  }
   ##Querying KEGG for metabolite, reaction and enzyme data:
   data <- retry(Reactions_Get_All(CPU = CPU, sleep = sleep, progress_bar), maxErrors = 3, sleep = sleep)
   adjl_R_E <- append(data[[1]], adjl_R_E)
@@ -29,7 +32,7 @@ get_Kegg_data <- function(CPU = 1, sleep = 5, progress_bar = c(TRUE, FALSE)){
   if(paths == "" | is.null(paths)){
     paths <- fs:::path("PanViz/R", "sysdata.rda")
   }
-  save(adjl_G_E, adjl_R_E, adjl_RP_C, adjl_RP_R, Gene_Locations, compound_names_hash, file = paths)
+  save(adjl_G_E, adjl_R_E, adjl_RP_C, adjl_RP_R, Gene_Locations, compound_names_hash, file = paths, compress='xz')
   ##note, cannot use usethis::use_data() as this fails R CMD check
   ##see https://github.com/r-lib/usethis/issues/789
 }
