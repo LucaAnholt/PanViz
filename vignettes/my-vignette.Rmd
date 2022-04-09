@@ -187,16 +187,6 @@ Additionally, both the get_IMON() and get_grouped_IMON() functions offer various
 PanViz::get_IMON(snp_list = snps, ego = 5, save_file = TRUE, export_type = "graphml", directory = "choose")
 ```
 
-
-# Updating the PanViz database:
-
-The underlying biochemical and metabolic reaction network database that PanViz uses to construct IMONs is queried from the Kyoto Encyclopedia of Genes and Genomes (KEGG) database (see Figure 1 and 2). As of this package being developed, the database was last pulled on the 15th January 2022. However, if users require the latest image of the KEGG database, we have included a convenience function in order to update the underlying PanViz databases. It should be noted that this can take a while in order to complete and the download speed is dependent on the user's own network speed and the KEGG RESTFUL API service. Users can opt to use more than one worker to simultaneously query the KEGGREST API for a modest performance gain. However, it should be noted that simultaneously querying the KEGG API can result in your service being temporarily blocked or limited, so in such a case, using 1 worker by setting CPU = 1 is recommended. Here, the sleep argument determines how many seconds to wait in-between KEGGREST API get requests.
-
-```{r, eval=FALSE}
-##updating the underlying PanViz metabolic/reaction network database:
-PanViz::get_KEGG_reaction_data(CPU = 1, sleep = 5, progress_bar = FALSE)
-```
-
 # Session info
 ```{r}
 utils::sessionInfo()
