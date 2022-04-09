@@ -189,10 +189,6 @@ get_grouped_IMON <- function(dataframe, groupby = c("studies", "traits"), ego = 
     if(export_type == "gml"){
       igraph::write_graph(G, file = paste0(directory, "/", filename, ".gml"), format = "gml")
     }
-    cat(paste0("Done! IMON saved in ", directory, " as ", "'",filename,".",export_type,"'","\n"))
-  }
-  else{
-    cat("Done!")
   }
   return(G) #returning IMON as igraph object for R manipulation/visualizations
 }

@@ -12,7 +12,7 @@ adj_list_to_igraph <- function(adjl_G_S){
   ##creating edgelist dataframe for G_E (gene -> enzyme):
   G_E <- utils::stack(adjl_G_E)
   G_E <- G_E[, c(2,1)] #swap columns
-  G_E$values = gsub("\\[|\\]","",G_E$values) #ensure naming conventions match between levels
+  G_E$values <- gsub("\\[|\\]","",G_E$values) #ensure naming conventions match between levels
   ##find which genes that are mapped to snps are also mapped to enzymes
   G_E_clean <- G_E[which(G_E$ind %in% G_S$values),]
   ##creating edgelist dataframe for R_E (enzyme -> reaction):

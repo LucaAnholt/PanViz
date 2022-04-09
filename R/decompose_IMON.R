@@ -19,19 +19,19 @@ decompose_IMON <- function(G){
     stop("Please provide an unnconnected graph (IMON)")
   }
   ##attempt decompose using igraph:
-  d = igraph::decompose(G) #decompose graph
+  d <- igraph::decompose(G) #decompose graph
   ##if the network is already fully connected, show error:
   if(length(d) == 1){
     stop("The IMON you provided is already fully connected! Cannot decompose!")
   }
   ##if the network is not fully connected, separate the networks into a list of fully connected networks that fit IMON definition:
   for(i in seq_along(d)){
-    len = length(igraph::V(d[[i]])[grepl("SNP", igraph::V(d[[i]])$type)]$name) #remove any decomposed subgraph that doesn't contains snps
+    len <- length(igraph::V(d[[i]])[grepl("SNP", igraph::V(d[[i]])$type)]$name) #remove any decomposed subgraph that doesn't contains snps
     if(len == 0){
       d[[i]] <- NA
     }
   }
   ##remove any potential NA values:
-  d = d[!is.na(d)]
+  d <- d[!is.na(d)]
   return(d)
 }
