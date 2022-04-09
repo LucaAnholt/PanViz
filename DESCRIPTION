@@ -16,7 +16,6 @@ RoxygenNote: 7.1.2
 BugReports: https://github.com/LucaAnholt/PanViz/issues
 URL: https://github.com/LucaAnholt/PanViz
 Imports: 
-    KEGGREST,
     tidyr,
     stringr,
     dplyr,
@@ -24,8 +23,6 @@ Imports:
     magrittr,
     futile.logger,
     utils,
-    doSNOW,
-    parallel,
     easycsv,
     rentrez,
     igraph,
@@ -33,11 +30,8 @@ Imports:
     data.table,
     colorspace,
     grDevices,
-    foreach,
     rlang, 
-    methods,
-    usethis,
-    fs
+    methods
 Depends: 
     R (>= 4.2.0)
 Suggests: 
@@ -45,7 +39,7 @@ Suggests:
     BiocStyle, 
     knitr,
     rmarkdown,
-    networkD3
+    networkD3,
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 BiocType: Software
