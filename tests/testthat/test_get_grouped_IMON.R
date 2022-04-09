@@ -2,7 +2,6 @@ library(PanViz)
 
 
 testthat::test_that("tests that get_grouped_IMON produces an igraph object and throws correct errors on bad inputs", {
-  utils::globalVariables(c("from", "all_of"))
   df <- PanViz::GWAS_data_reader(file = system.file("extdata", "gwas-association-downloaded_2021-09-13-EFO_1000649.tsv", package="PanViz"), snp_col = "SNPS", study_col = "STUDY", trait_col = "DISEASE/TRAIT")
   expect_equal(class(PanViz::get_grouped_IMON(dataframe = df, groupby = "studies", ego = 5, save_file = FALSE, colour_groups = FALSE)), "igraph")
   expect_equal(class(PanViz::get_grouped_IMON(dataframe = df, groupby = "studies", ego = 5, save_file = FALSE, colour_groups = TRUE)), "igraph")
