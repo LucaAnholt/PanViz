@@ -3,7 +3,7 @@
 export(GWAS_data_reader)
 export(decompose_IMON)
 export(get_IMON)
-export(get_Kegg_data)
+export(get_KEGG_reaction_data)
 export(get_grouped_IMON)
 importFrom(foreach,"%dopar%")
 importFrom(magrittr,"%>%")
