@@ -1,4 +1,4 @@
-#' get_Kegg_data
+#' get_KEGG_reaction_data
 #' @description This function pulls the latest version of the KEGG database
 #' @param CPU The number of cores to use when making KEGGREST API Get requests
 #' (default = 2). If CPU > 1, parallel requests will be made. Note, a maximum
@@ -12,8 +12,8 @@
 #' @importFrom usethis use_data
 #' @export
 #' @examples
-#' PanViz::get_Kegg_data(CPU = 1, sleep = 5, progress_bar = FALSE)
-get_Kegg_data <- function(CPU = 1, sleep = 5, progress_bar = c(TRUE, FALSE)){
+#' PanViz::get_KEGG_reaction_data(CPU = 1, sleep = 5, progress_bar = FALSE)
+get_KEGG_reaction_data <- function(CPU = 1, sleep = 5, progress_bar = c(TRUE, FALSE)){
   if(CPU > 2){
     stop("Can only use a maximum of 2 workers")
   }
@@ -28,11 +28,13 @@ get_Kegg_data <- function(CPU = 1, sleep = 5, progress_bar = c(TRUE, FALSE)){
   ##Querying compound names as hash:
   compound_names_hash <- get_compound_hashmap()
   ##save to internal sys data:
+  ##usethis::use_data(adjl_G_E, adjl_R_E, adjl_RP_C, adjl_RP_R, Gene_Locations, compound_names_hash, internal = TRUE, overwrite = TRUE)
   paths <- system.file("/R", "sysdata.rda", package="PanViz")
   if(paths == "" | is.null(paths)){
     paths <- fs::path("PanViz/R", "sysdata.rda")
   }
-  save(adjl_G_E, adjl_R_E, adjl_RP_C, adjl_RP_R, Gene_Locations, compound_names_hash, file = paths, compress='xz')
+  PanVizEnvironment <- new.env()
+  save(adjl_G_E, adjl_R_E, adjl_RP_C, adjl_RP_R, Gene_Locations, compound_names_hash, file = paths, compress='xz', envir = PanVizEnvironment)
   ##note, cannot use usethis::use_data() as this fails R CMD check
   ##see https://github.com/r-lib/usethis/issues/789
 }
