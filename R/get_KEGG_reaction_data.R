@@ -28,7 +28,6 @@ get_KEGG_reaction_data <- function(CPU = 1, sleep = 5, progress_bar = c(TRUE, FA
   ##Querying compound names as hash:
   compound_names_hash <- get_compound_hashmap()
   ##save to internal sys data:
-  ##usethis::use_data(adjl_G_E, adjl_R_E, adjl_RP_C, adjl_RP_R, Gene_Locations, compound_names_hash, internal = TRUE, overwrite = TRUE)
   paths <- system.file("/R", "sysdata.rda", package="PanViz")
   if(paths == "" | is.null(paths)){
     paths <- fs::path("PanViz/R", "sysdata.rda")
