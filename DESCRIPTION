@@ -1,7 +1,7 @@
 Package: PanViz
 Type: Package
 Title: Integrating Multi-Omic Network Data With Summay-Level GWAS Data
-Version: 0.99.1
+Version: 0.99.2
 Authors@R: person("Luca", "Anholt", email = "la1317@ic.ac.uk", role=c("cre", "aut"))
 Description: This pacakge integrates data from the Kyoto Encyclopedia of Genes and Genomes (KEGG) 
     with summary-level genome-wide association (GWAS) data, such as that provided by the 
